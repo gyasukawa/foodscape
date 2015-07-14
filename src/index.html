@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html ng-app="ngBoilerplate" ng-controller="AppCtrl">
+  <head>
+    <title ng-bind="pageTitle"></title>
+
+    <!-- social media tags -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@joshdmiller">
+    <meta name="twitter:title" content="ngBoilerplate">
+    <meta name="twitter:description" content="Non-Trivial AngularJS Made Easy: Everything you need to kickstart AngularJS projects: a best-practice directory structure, an intelligent build system, and the best web design libraries around.">
+    <meta name="twitter:creator" content="@joshdmiller">
+    <meta name="twitter:image:src" content="https://a248.e.akamai.net/assets.github.com/images/modules/logos_page/Octocat.png?1366128846">
+    <meta property="og:title" content="ngBoilerplate" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="http://bit.ly/ngBoilerplate" />
+    <meta property="og:image" content="https://a248.e.akamai.net/assets.github.com/images/modules/logos_page/Octocat.png?1366128846" />
+    <meta property="og:description" content="Non-Trivial AngularJS Made Easy: Everything you need to kickstart AngularJS projects: a best-practice directory structure, an intelligent build system, and the best web design libraries around.">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- font awesome from BootstrapCDN -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+
+    <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
+    <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
+
+    <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
+    <script type="text/javascript" src="<%= file %>"></script><% }); %>
+
+    <!-- it's stupid to have to load it here, but this is for the +1 button -->
+    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
+      { "parsetags": "explicit" }
+    </script>
+  </head>
+  <body>
+    <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" ng-init="menuCollapsed = true"
+            ng-click="menuCollapsed = ! menuCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <div class="navbar-brand">
+            <a ui-sref="app.home" class="logo"></a>
+          </div>
+        </div>
+
+        <div class="collapse navbar-collapse" collapse="menuCollapsed">
+          <ul class="nav navbar-nav">
+            <li>
+              <a ng-click="howLink()">
+                How It Works
+              </a>
+            </li>
+            <li>
+              <a ng-click="faqLink()">
+                FAQ
+              </a>
+            </li>
+            <li>
+              <a ng-click="communityLink()">
+                Our Community
+              </a>
+            </li>
+            <li>
+              <a ui-sref="app.login">
+                Login
+              </a>
+            </li>
+            <li class="orange-link">
+              <a ui-sref="app.started">
+                Get Started
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div ui-view="main"></div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer-inner">
+          <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+              <div class="link-list">
+                <div class="link">
+                  <a href="">About Scape</a>
+                </div>
+                <div class="link">
+                  <a href="">Jobs</a>
+                </div>
+                <div class="link">
+                  <a href="">Terms</a>
+                </div>
+                <div class="link">
+                  <a href="">Contact Us</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+              <div class="link-list social-list">
+                <div class="link">
+                  <i class="fa fa-twitter"></i>
+                  <a href="">Twitter</a>
+                </div>
+                <div class="link">
+                  <i class="fa fa-facebook"></i>
+                  <a href="">Facebook</a>
+                </div>
+                <div class="link">
+                  <i class="fa fa-instagram"></i>
+                  <a href="">Instagram</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 mailing-list">
+              <h4 class="text">No need for garden help now? Join our mailing list for garden advice, recipes, promotions and more!</h4>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="copyright">Scape &copy; 2015</div>
+    </footer>
+  </body>
+</html>
