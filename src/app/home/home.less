@@ -27,10 +27,6 @@
 
         .button-container {
           margin-top: 40px;
-
-          button {
-            width: 70%;
-          }
         }
       }
     }
@@ -42,6 +38,7 @@
     color: #FFF;
 
     .section-title {
+      font-weight: 600;
       color: #FFF;
       text-transform: uppercase;
       margin-bottom: 40px;
@@ -55,10 +52,6 @@
     
     .button-container {
       margin-top: 30px;
-
-      button {
-        width: 300px;
-      }
     }    
   }
 
@@ -67,21 +60,32 @@
     background-image: url('images/patterns/veggies.png');
 
     .section-title {
+      font-weight: 600;
       color: black;
       text-transform: uppercase;
     }
 
     .button-container {
       margin-top: 30px;
-
-      button {
-        width: 300px;
-      }
     }
 
     .columns {
       .col-title {
-        h3 {
+        position: relative;
+
+        .num {
+          margin: 0;
+          position: absolute;
+          top: 0;
+          left: 0;
+          color: @orange;
+          font-size: 60px;
+          line-height: 110%;
+        }
+
+        .title {
+          padding-left: 45px;
+          line-height: 130%;
           color: @orange;
         }
       }
@@ -117,11 +121,13 @@
     background-image: url('images/patterns/veggies-orange.png');
 
     .section-title {
+      font-weight: 600;
       color: #FFF;
       text-transform: uppercase;
     }
 
     .banner-image {
+      margin-top: 50px;
       width: 100%;
       height: 300px;
       border-radius: 5px;
@@ -130,10 +136,6 @@
 
     .button-container {
       margin-top: 30px;
-
-      button {
-        width: 300px;
-      }
     }
 
     .columns {

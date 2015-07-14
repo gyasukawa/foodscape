@@ -2,11 +2,8 @@
 
 @import '../../vendor/bootstrap/less/bootstrap.less';
 
-@font-face {
-  font-family: 'Roboto';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Roboto Regular'), local('Roboto-Regular'), url(fonts/Roboto-Regular.woff) format('woff');
+* {
+  font-family: 'PT Sans', sans-serif;
 }
 
 code, pre, .pre {
@@ -39,11 +36,12 @@ h2 {
   color: #666;
 }
 
-
 .navbar {
   background: #FFF;
   border: none;
   margin: 0;
+  font-weight: 600;
+  text-transform: uppercase;
 }
 
 .footer {
@@ -94,6 +92,27 @@ h2 {
         }
       }
     }
+  }
+}
+
+// Get Started Button
+.btn.get-started-btn {
+  border-radius: 4px;
+  background: @orange;
+  border: 0;
+  text-transform: uppercase;
+  padding: 15px;
+  border-bottom: 8px solid @dark-orange;
+  width: 400px;
+
+  .transition(all);
+
+  &:hover {
+
+  }
+
+  &:focus {
+    outline: none;
   }
 }
 
