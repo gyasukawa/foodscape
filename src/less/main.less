@@ -1,5 +1,4 @@
 @import 'variables.less';
-
 @import '../../vendor/bootstrap/less/bootstrap.less';
 
 * {
@@ -23,19 +22,14 @@ pre {
   padding: 5px;
 }
 
-.page-header {
-  margin-top: 60px;
-
-  &:first-child {
-    margin-top: 20px;
+// Input
+input, button, textarea {
+  &:focus {
+    outline: none;
   }
 }
 
-h2 {
-  margin: 20px 0;
-  color: #666;
-}
-
+// Header
 .navbar {
   background: #FFF;
   border: none;
@@ -44,6 +38,7 @@ h2 {
   text-transform: uppercase;
 }
 
+// Footer
 .footer {
   background: @purple;
   position: relative;
@@ -98,6 +93,7 @@ h2 {
 // Get Started Button
 .btn.get-started-btn {
   border-radius: 4px;
+  color: #FFF;
   background: @orange;
   border: 0;
   text-transform: uppercase;
@@ -136,3 +132,5 @@ h2 {
 }
 
 @import '../app/home/home.less';
+@import '../app/signup/signup.less';
+@import '../app/new-garden/new-garden.less';
