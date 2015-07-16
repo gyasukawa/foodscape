@@ -1,15 +1,21 @@
-.new-garden-page {
+.garden-page {
   .image {
     width: 100%;
     height: 120px;
     border-radius: 3px;
-    background: #EFEFEF;
+    background: #F6F6F6;
     margin-top: 10px;
     margin-bottom: 20px;
   }
 
   .question {
+    font-weight: 600;
     margin-top: 50px;
+
+    &.border-top {
+      border-top: 1px solid @orange;
+      padding-top: 40px;
+    }
   }
 
   .input-container {
@@ -25,6 +31,26 @@
     .btn.get-started-btn {
       width: 130px;
       margin-left: 20px;
+    }
+  }
+
+  .caption-images {
+    margin-top: 15px;
+    margin-bottom: 0;
+
+    h5.caption {
+      text-align: center;
+    }
+
+    .img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .upload-button-container {
+    .btn.get-started-btn {
+      width: 100px;
     }
   }
 }
