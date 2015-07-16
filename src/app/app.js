@@ -5,6 +5,7 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.signup',
   'ngBoilerplate.login',
   'ngBoilerplate.new-garden',
+  'ngBoilerplate.existing-garden',
   'ui.router'
 ])
 
