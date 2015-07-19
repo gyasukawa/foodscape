@@ -29,11 +29,6 @@
 
     <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
     <script type="text/javascript" src="<%= file %>"></script><% }); %>
-
-    <!-- it's stupid to have to load it here, but this is for the +1 button -->
-    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-      { "parsetags": "explicit" }
-    </script>
   </head>
   <body>
     <div class="navbar navbar-default">
@@ -126,6 +121,18 @@
             </div>
             <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 mailing-list">
               <h4 class="text">No need for garden help now? Join our mailing list for garden advice, recipes, promotions and more!</h4>
+
+              <div class="row newsletter-row">
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <input type="text" class="form-control" placeholder="First Name" />
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
+                  <input type="email" class="form-control" placeholder="E-Mail" />
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <button class="btn btn-block get-started-btn">Sign Up</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

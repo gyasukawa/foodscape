@@ -1,0 +1,40 @@
+.garden-page.existing-garden-page {
+	.stages-container {
+		position: relative;
+		margin-bottom: 40px;
+
+		.line {
+			  height: 2px;
+			  width: 100%;
+			  position: absolute;
+			  bottom: 25px;
+			  left: 0;
+			  right: 0;
+			  background-color: #888;
+		}
+	}
+
+	.text {
+		text-align: center;
+	}
+
+	.circle {
+		width: 50px;
+		height: 50px;
+		margin: 0 auto;
+		border-radius: 50%;
+		background: #F6F6F6;
+		color: black;
+		text-align: center;
+		font-size: 18px;
+		line-height: 50px;
+		cursor: pointer;
+
+		.transition(all);
+
+		&.orange {
+			color: #FFF;
+			background: @orange;
+		}
+	}
+}
