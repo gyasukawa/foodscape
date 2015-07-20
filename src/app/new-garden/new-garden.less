@@ -50,7 +50,26 @@
     }
   }
 
+  .statement {
+    margin-top: 20px;
+
+    .bolder {
+      font-weight: 600;
+      color: @orange;
+      width: 130px;
+      display: inline-block;
+    }
+  }
+
+  .tip {
+    font-style: italic;
+    font-size: 12px;
+    line-height: 100%;
+    margin-top: 5px;
+  }
+
   .input-container {
+    margin-bottom: 10px;
     textarea {
       resize: none;
       min-height: 100px;
@@ -63,6 +82,15 @@
     .btn.get-started-btn {
       width: 130px;
       margin-left: 20px;
+    }
+
+    .btn.back-btn {
+      background: transparent;
+      border-color: transparent;
+      color: @orange;
+      float: left;
+      padding-left: 0;
+      width: auto;
     }
   }
 
@@ -84,6 +112,13 @@
       &.selected {
         border-color: #CCCC00;
       }
+    }
+  }
+
+  .radio {
+    .bolder {
+      font-weight: 600;
+      color: @orange;
     }
   }
 

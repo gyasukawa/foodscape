@@ -18,7 +18,32 @@ angular.module( 'ngBoilerplate.existing-garden', [
 })
 
 .controller( 'ExistingGardenCtrl', function ExistingGardenCtrl( $scope ) {
+  $scope.selectedSection = 1;
+  $scope.backButtonVisible = false;
+  $scope.submitButtonText = "Continue"
 
+  $scope.chooseSection = function(num) {
+    if(num == 3)
+      $scope.submitButtonText = "Book";
+    else
+      $scope.submitButtonText = "Continue";
+
+    if(num == 1)
+      $scope.backButtonVisible = false;
+    else
+      $scope.backButtonVisible = true;
+
+    $scope.selectedSection = num;
+  }
+
+  $scope.backButtonClicked = function() {
+    $scope.chooseSection($scope.selectedSection - 1);
+  }
+
+  $scope.continueButtonClicked = function() {
+    if($scope.selectedSection < 3)
+      $scope.chooseSection($scope.selectedSection + 1);
+  }
 })
 
 ;
