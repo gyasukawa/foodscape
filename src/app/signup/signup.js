@@ -1,6 +1,5 @@
 angular.module( 'ngBoilerplate.signup', [
   'ui.router',
-  'placeholders',
   'ui.bootstrap'
 ])
 

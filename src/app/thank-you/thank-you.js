@@ -1,6 +1,5 @@
 angular.module( 'ngBoilerplate.thank-you', [
   'ui.router',
-  'placeholders',
   'ui.bootstrap'
 ])
 

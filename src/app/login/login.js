@@ -1,6 +1,5 @@
 angular.module( 'ngBoilerplate.login', [
   'ui.router',
-  'placeholders',
   'ui.bootstrap'
 ])
 

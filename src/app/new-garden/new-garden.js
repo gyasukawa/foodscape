@@ -1,6 +1,5 @@
 angular.module( 'ngBoilerplate.new-garden', [
   'ui.router',
-  'placeholders',
   'ui.bootstrap'
 ])
 
