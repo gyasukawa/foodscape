@@ -1,8 +1,12 @@
 @import 'variables.less';
 @import '../../vendor/bootstrap/less/bootstrap.less';
 
-* {
+h1, h2, h3 {
   font-family: 'PT Sans', sans-serif;
+}
+
+* {
+  font-family: 'Muli', sans-serif;
 }
 
 code, pre, .pre {
@@ -45,10 +49,15 @@ input, button, textarea {
   .navbar-nav > li > a {
     line-height: 70px;
     color: #333;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 16px;
   }
 
-  .btn.get-started-btn {
-    width: 140px;
+  .navbar-nav > li.orange-link {
+    a {
+      color: @orange;
+      font-weight: 600;
+    }
   }
 }
 
@@ -84,6 +93,8 @@ input, button, textarea {
         padding: 5px;
         border-width: 5px;
         width: 100%;
+        background-color: #f5a623;
+        border-color: #B57812;
       }
     }
 
@@ -122,8 +133,10 @@ input, button, textarea {
   border: 0;
   text-transform: uppercase;
   padding: 15px;
+  padding-bottom: 10px;
   border-bottom: 8px solid @dark-orange;
   width: 400px;
+  font-family: 'PT Sans', sans-serif;
 
   .transition(all);
 
