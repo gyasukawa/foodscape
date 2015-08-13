@@ -1,6 +1,6 @@
 # The `src/less` Directory
 
-This folder is actually fairly self-explanatory: it contains your LESS/CSS files to be compiled during the build. 
+This folder is actually fairly self-explanatory: it contains your LESS/CSS files to be compiled during the build.
 The only important thing to note is that *only* `main.less` will be processed during the build, meaning that all
 other stylesheets must be *imported* into that one.
 
