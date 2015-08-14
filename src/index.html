@@ -29,6 +29,12 @@
 
     <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
     <script type="text/javascript" src="<%= file %>"></script><% }); %>
+
+    <!-- angular-carousel scripts for image carousel -->
+    <link href="../vendor/angular-carousel/dist/angular-carousel.css" rel="stylesheet" type="text/css" />
+    <script src="../vendor/angular/angular.js"></script>
+    <script src="../vendor/angular-touch/angular-touch.js"></script>
+    <script src="../vendor/angular-carousel/dist/angular-carousel.js"></script>
   </head>
   <body>
     <div class="navbar navbar-default">

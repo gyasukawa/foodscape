@@ -8,7 +8,8 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.existing-garden',
   'ngBoilerplate.thank-you',
   'ngBoilerplate.show-garden',
-  'ui.router'
+  'ui.router',
+  'angular-carousel'
 ])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {

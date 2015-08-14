@@ -19,6 +19,8 @@ angular.module( 'ngBoilerplate.show-garden', [
 
 .controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope ) {
 
+  $scope.foobar = "Hello from the show-garden.js";
+
 })
 
 ;
