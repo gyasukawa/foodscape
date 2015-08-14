@@ -5,8 +5,8 @@
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <!-- Green bar at the top -->
         <div class="profile-bar">
-          <h2> Mary's Foodscape </h2>
-          <p>{{foobar}}</p>
+          <h2> {{scapeName}} </h2>
+          <p>{{status}}</p>
 
           <!-- These buttons show up when the user has not followed this person's page or is not logged in -->
           <!-- <button class="btn get-started-btn">Follow</button>
@@ -31,7 +31,9 @@
             <div class="profile-pic">
               ?
             </div>
+            {{username}}
             <!-- <img src="#" width="100px"> -->
+            <!-- This button shows up when this is somebody else's page -->
             <button class="btn message-btn">Message</button>
           </div>
           <div class="col-xs-9 col-md-9 col-sm-9 col-lg-9">
@@ -49,18 +51,23 @@
                 <div class="box-container">
                   <!-- Use ng-bind to bind each of the elements under the divs to their appropriate data -->
                   <div class="info-title">Location</div>
-                  Some stuff goes here!
+                  {{location}}
                   <div class="info-title">Produce</div>
-                  Some stuff goes here!
+                  {{produce}}
 
                   <div class="info-title">Goals/Needs</div>
-                  Some stuff goes here!
+                  {{goalsAndNeeds}}
 
                   <div class="info-title">Other Details</div>
-                  Some stuff goes here!
+                  {{otherDetails}}
 
                   <div class="info-title">Updates</div>
-                  Some stuff goes here!
+                  <div ng-repeat="update in updates">
+                    <div class="updateDate"> {{update.date}}</div>
+                    <div class="updateContent">{{update.content}}</div>
+                  </div>
+                  <textarea></textarea>
+                  <button class="btn message-btn update-btn">Add Update</button>
                   <!-- Use ng-repeat here to put the date and content of each message -->
 
                 </div>
