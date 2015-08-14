@@ -21,6 +21,8 @@ angular.module( 'ngBoilerplate.show-garden', [
 
   $scope.foobar = "Hello from the show-garden.js";
 
+  $scope.gardenImages = ["assets/images/community-2.png","assets/images/community-1.jpeg","assets/images/community-3.jpeg"]
+
 })
 
 ;
