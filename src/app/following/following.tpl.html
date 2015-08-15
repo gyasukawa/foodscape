@@ -1,0 +1,33 @@
+
+<div class="signup-page garden-page new-garden-page">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <!-- Green bar at the top -->
+        <div class="profile-bar follow-page">
+          <h2> Foodscapes I'm Following </h2>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <!-- This is so that it's squished into the center -->
+      <div class="col-xs-10 col-xs-offset-1 profile-info">
+        <div ng-repeat="foodscape in foodscapes" class="box-container">
+          <div class="col-xs-4"><img class="followed-image" src="{{foodscape.img}}"></div>
+          <div class="col-xs-5">
+	          <div class="followed-garden"><h2>{{foodscape.title}}</h2></div>
+	          <div class="followed-location">{{foodscape.location}}</div>
+	          <div class="recent-status">{{foodscape.status}}</div>
+	      </div>
+	      <div class="col-xs-3">
+	          <button class="btn get-started-btn update-btn">Message</button>
+	          <br>
+	          <button class="btn get-started-btn update-btn">Unfollow</button>
+	      </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
