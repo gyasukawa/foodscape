@@ -15,6 +15,7 @@ angular.module( 'ngBoilerplate.following', [
     },
     data:{ pageTitle: 'Following' }
   });
+
 })
 
 .controller( 'FollowingCtrl', function FollowingCtrl( $scope ) {
@@ -30,6 +31,12 @@ angular.module( 'ngBoilerplate.following', [
 						,"status":"Just dug a big hole"
 						,"img":"./assets/images/community-3.jpeg"
 						}];
+
+  // Lightbox stuff -- there a custom directive for the lightbox in app.js
+  $scope.modalShown = false;
+    $scope.toggleModal = function() {
+      $scope.modalShown = !$scope.modalShown;
+  };
 
 })
 

@@ -1,6 +1,14 @@
 
 <div class="signup-page garden-page new-garden-page">
   <div class="container-fluid">
+    <!-- This is the message box that pops up when you click message -->
+    <modal-dialog show='modalShown'>
+    <h1>Send a message to {{scapeName}}!</h1>
+    <textarea>Write a message here.</textarea>
+    <button class="btn get-started-btn">Send</button>
+  </modal-dialog>
+  <!-- end message box -->
+
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
         <!-- Green bar at the top -->
@@ -22,7 +30,7 @@
 	          <div class="recent-status">{{foodscape.status}}</div>
 	      </div>
 	      <div class="col-xs-3">
-	          <button class="btn get-started-btn update-btn">Message</button>
+	          <button ng-click='toggleModal()' class="btn get-started-btn update-btn">Message</button>
 	          <br>
 	          <button class="btn get-started-btn update-btn">Unfollow</button>
 	      </div>
