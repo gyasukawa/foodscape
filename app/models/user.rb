@@ -1,4 +1,9 @@
 class User < ActiveRecord::Base
+  has_many :foodscapes, foreign_key: 'host_id'
+
+  has_many :subscriptions
+  has_many :foodscapes, through: :subscriptions
+
   before_filter :intercept_html_requests
   layout false
   respond_to :json
