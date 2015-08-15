@@ -1,0 +1,2 @@
+module FoodscapeHelper
+end

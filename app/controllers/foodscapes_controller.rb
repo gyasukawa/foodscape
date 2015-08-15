@@ -1,0 +1,2 @@
+class FoodscapesController < ApplicationController
+end
