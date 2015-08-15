@@ -18,7 +18,7 @@ angular.module( 'ngBoilerplate.show-garden', [
 })
 
 .controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope ) {
-  
+
 
   // Profile page info
   $scope.scapeName = "Mary's Foodscape";
@@ -37,7 +37,7 @@ angular.module( 'ngBoilerplate.show-garden', [
                     ,{
                       "date": "5/30/15"
                     , "content": "I planted tomatoes!"
-                    }]
+                    }];
 
 })
 
