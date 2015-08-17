@@ -3,10 +3,16 @@
   <div class="container-fluid">
     <!-- This is the message box that pops up when you click message -->
     <modal-dialog show='modalShown'>
-    <h1>Send a message to {{scapeName}}!</h1>
-    <textarea>Write a message here.</textarea>
-    <button class="btn get-started-btn">Send</button>
-  </modal-dialog>
+      <div ng-hide="sent" class="message-box">
+        <h1>Send a message to {{scapeName}}!</h1>
+        <textarea>Write a message here.</textarea>
+        <button ng-click="send()" class="btn get-started-btn">Send</button>
+      </div>
+      <div ng-show="sent" class="thank-box">
+        <h1>Thank you!</h1>
+        <p> Your message to {{username}} has been sent. </p>
+      </div>
+    </modal-dialog>
   <!-- end message box -->
 
     <div class="row">
@@ -37,9 +43,10 @@
       <div class="col-xs-10 col-xs-offset-1 profile-info">
         <div class="row">
           <div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
-            <div class="profile-pic">
-              ?
-            </div>
+            <!-- <div class="profile-pic"> -->
+              <!-- ? -->
+              <img class="profile-pic" ng-src="{{profilePix}}">
+            <!-- </div> -->
             {{username}}
             <!-- <img src="#" width="100px"> -->
             <!-- This button shows up when this is somebody else's page -->

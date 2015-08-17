@@ -19,14 +19,24 @@ angular.module( 'ngBoilerplate.show-garden', [
 
 .controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope ) {
 
+  // for the message box
+  $scope.sent = false;
+  $scope.send = function(){
+    $scope.sent = true;
+  }
 
   // Lightbox stuff -- there a custom directive for the lightbox in app.js
   $scope.modalShown = false;
     $scope.toggleModal = function() {
       $scope.modalShown = !$scope.modalShown;
   };
-
+  var defaultProfilePhotos = ["assets/images/default_profile_pix/profileicon-watermelon.png",
+                              "assets/images/default_profile_pix/profileicon-lemon.png",
+                              "assets/images/default_profile_pix/profileicon-eggplant.png",
+                              "assets/images/default_profile_pix/profileicon-carrot.png"];
+  var randomNum = Math.floor((Math.random() * 4));
   // Profile page info
+  $scope.profilePix = defaultProfilePhotos[randomNum];
   $scope.scapeName = "Mary's Foodscape";
   $scope.status = "Hello from the show-garden.js. This will be a status message.";
   $scope.username = "Mary L.";
