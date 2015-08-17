@@ -1,12 +1,18 @@
 
 <div class="signup-page garden-page new-garden-page">
   <div class="container-fluid">
-    <!-- This is the message box that pops up when you click message -->
+<!-- This is the message box that pops up when you click message -->
     <modal-dialog show='modalShown'>
-    <h1>Send a message to {{scapeName}}!</h1>
-    <textarea>Write a message here.</textarea>
-    <button class="btn get-started-btn">Send</button>
-  </modal-dialog>
+      <div ng-hide="sent" class="message-box">
+        <h1>Send a message to {{scapeName}}!</h1>
+        <textarea>Write a message here.</textarea>
+        <button ng-click="send()" class="btn get-started-btn">Send</button>
+      </div>
+      <div ng-show="sent" class="thank-box">
+        <h1>Thank you!</h1>
+        <p> Your message to {{username}} has been sent. </p>
+      </div>
+    </modal-dialog>
   <!-- end message box -->
 
     <div class="row">
@@ -28,12 +34,12 @@
 	          <div class="followed-garden"><h2>{{foodscape.title}}</h2></div>
 	          <div class="followed-location">{{foodscape.location}}</div>
 	          <div class="recent-status">{{foodscape.status}}</div>
-	      </div>
-	      <div class="col-xs-3">
+	        </div>
+	        <div class="col-xs-3">
 	          <button ng-click='toggleModal()' class="btn get-started-btn update-btn">Message</button>
 	          <br>
 	          <button class="btn get-started-btn update-btn">Unfollow</button>
-	      </div>
+	        </div>
         </div>
       </div>
     </div>

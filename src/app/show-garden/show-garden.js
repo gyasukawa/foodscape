@@ -19,17 +19,60 @@ angular.module( 'ngBoilerplate.show-garden', [
 
 .controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope ) {
 
-  // for the message box
+
+// All to do with modals
   $scope.sent = false;
+  $scope.showFollow = false;
+  $scope.showMessage = false;
+  $scope.showFollow = false;
+  $scope.unfollowConfirmBox = false;
+  $scope.unfollowedMessage = false;
+
+
+/////// This is for when you want to send a message
+  $scope.message = function(){
+    $scope.toggleModal();
+    $scope.showMessage = true;
+    console.log("show message ", $scope.showMessage);
+  }
+    // for the message box to show the already sent thank you message
   $scope.send = function(){
+    $scope.showMessage = false;
     $scope.sent = true;
   }
+////// This shows up to confirm that you've followed someone
+  $scope.follow = function (){
+    $scope.toggleModal();
+    $scope.showFollow = true;
+  }
 
-  // Lightbox stuff -- there a custom directive for the lightbox in app.js
+  //////// This shows up to ask if you're sure you want to unfollow someone
+  $scope.unfollowConfirm = function(){
+    $scope.toggleModal();
+    $scope.unfollowConfirmBox = true;
+  }
+////////// This confirms that you have actually unfollowed them.
+  $scope.unfollow = function(){
+    $scope.unfollowConfirmBox = false;
+    $scope.unfollowedMessage = true;
+  }
+
+
+ // Lightbox stuff -- there is a custom directive for the lightbox in app.js
   $scope.modalShown = false;
-    $scope.toggleModal = function() {
-      $scope.modalShown = !$scope.modalShown;
+  $scope.toggleModal = function() {
+    console.log("toggling modal");
+    $scope.modalShown = !$scope.modalShown;
+    $scope.sent = false;
+    $scope.showFollow = false;
+    $scope.showMessage = false;
+    $scope.unfollowConfirmBox = false;
+    $scope.unfollowedMessage = false;
   };
+
+  //  End modals!
+
+
   var defaultProfilePhotos = ["assets/images/default_profile_pix/profileicon-watermelon.png",
                               "assets/images/default_profile_pix/profileicon-lemon.png",
                               "assets/images/default_profile_pix/profileicon-eggplant.png",

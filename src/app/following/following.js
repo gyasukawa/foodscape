@@ -32,11 +32,19 @@ angular.module( 'ngBoilerplate.following', [
 						,"img":"./assets/images/community-3.jpeg"
 						}];
 
-  // Lightbox stuff -- there a custom directive for the lightbox in app.js
+  // Lightbox stuff -- there is a custom directive for the lightbox in app.js
   $scope.modalShown = false;
-    $scope.toggleModal = function() {
+  $scope.toggleModal = function() {
       $scope.modalShown = !$scope.modalShown;
+      $scope.sent = false;
   };
+
+  // for the message box to show the already sent thank you message
+  $scope.sent = false;
+  $scope.send = function(){
+    console.log("message sent!");
+    $scope.sent = true;
+  }
 
 })
 

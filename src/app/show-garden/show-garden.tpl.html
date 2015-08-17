@@ -3,7 +3,7 @@
   <div class="container-fluid">
     <!-- This is the message box that pops up when you click message -->
     <modal-dialog show='modalShown'>
-      <div ng-hide="sent" class="message-box">
+      <div ng-show="showMessage" class="message-box">
         <h1>Send a message to {{scapeName}}!</h1>
         <textarea>Write a message here.</textarea>
         <button ng-click="send()" class="btn get-started-btn">Send</button>
@@ -11,6 +11,21 @@
       <div ng-show="sent" class="thank-box">
         <h1>Thank you!</h1>
         <p> Your message to {{username}} has been sent. </p>
+        <button ng-click="toggleModal()" class="btn get-started-btn">Okay</button>
+      </div>
+      <div ng-show="showFollow" class="follow-confirm">
+        <h1> You are now following {{scapeName}}. </h1>
+        <button ng-click="toggleModal()" class="btn get-started-btn">Okay</button>
+      </div>
+      <div ng-show="unfollowConfirmBox" class="follow-confirm">
+        <h1> Are you sure you want to unfollow {{scapeName}}? </h1>
+        <p> You will no longer get updates from {{scapName}} and will not be able to view {{scapeName}} without a direct link. </p>
+        <button ng-click="unfollow()" class="btn get-started-btn">Yes</button>
+        <button ng-click="toggleModal()" class="btn get-started-btn">Cancel</button>
+      </div>
+      <div ng-show="unfollowedMessage" class="follow-confirm">
+        <h1> You are no longer following {{scapeName}}. </h1>
+        <button ng-click="toggleModal()" class="btn get-started-btn">Okay</button>
       </div>
     </modal-dialog>
   <!-- end message box -->
@@ -27,7 +42,7 @@
           <button class="btn message-btn">Share Profile</button> -->
 
           <!-- This button shows up when the user is following this person already...ask if there needs to be a share button here, too -->
-          <button class="btn get-started-btn">Follow</button>
+          <button ng-click='follow()' class="btn get-started-btn">Follow</button>
 
           <!-- These buttons show up when this this is the user's page and they are logged in -->
           <!-- <button class="btn get-started-btn">Share</button>
@@ -50,7 +65,7 @@
             {{username}}
             <!-- <img src="#" width="100px"> -->
             <!-- This button shows up when this is somebody else's page -->
-            <button ng-click='toggleModal()' class="btn message-btn">Message</button>
+            <button ng-click='message()' class="btn message-btn">Message</button>
           </div>
           <div class="col-xs-9 col-md-9 col-sm-9 col-lg-9">
             <!-- <img src="assets/images/community-2.png" width="100%"> -->
@@ -93,11 +108,11 @@
               <div class="col-xs-5 col-xs-offset-7">
 
                 <!-- This button shows up when this is someone else's profile -->
-                <button ng-click='toggleModal()' class="btn message-btn">Message</button>
+                <button ng-click='message()' class="btn message-btn">Message</button>
 
 
                 <!-- This button shows up if the user follows this person -->
-                <button class="btn get-started-btn">Unfollow</button>
+                <button ng-click="unfollowConfirm()" class="btn get-started-btn">Unfollow</button>
 
                 <!-- This button shows up if the user does not follow this person -->
                <!--  <button class="btn get-started-btn">Follow</button>
