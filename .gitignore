@@ -6,6 +6,6 @@ log/
 tmp/
 db/*.sqlite3
 
-# bower puts its stuff here??
+# bower puts its stuff here, see .bowerrc for enlightenment
 vendor/
 

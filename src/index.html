@@ -16,8 +16,13 @@
     <meta property="og:image" content="https://a248.e.akamai.net/assets.github.com/images/modules/logos_page/Octocat.png?1366128846" />
     <meta property="og:description" content="Non-Trivial AngularJS Made Easy: Everything you need to kickstart AngularJS projects: a best-practice directory structure, an intelligent build system, and the best web design libraries around.">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Google Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=PT+Sans:400,700|Muli:400,400italic' rel='stylesheet' type='text/css'>
+
     <!-- font awesome from BootstrapCDN -->
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.css" rel="stylesheet">
+    <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
 
     <!-- compiled CSS --><% styles.forEach( function ( file ) { %>
     <link rel="stylesheet" type="text/css" href="<%= file %>" /><% }); %>
@@ -25,84 +30,120 @@
     <!-- compiled JavaScript --><% scripts.forEach( function ( file ) { %>
     <script type="text/javascript" src="<%= file %>"></script><% }); %>
 
-    <!-- it's stupid to have to load it here, but this is for the +1 button -->
-    <script type="text/javascript" src="https://apis.google.com/js/plusone.js">
-      { "parsetags": "explicit" }
-    </script>
+    <link href="/UI/vendor/angular-carousel/dist/angular-carousel.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <div class="container">
-      <div class="masthead">
-        <h3 class="muted">ng-boilerplate <small><a
-              href="http://github.com/joshdmiller/ng-boilerplate/blob/master/CHANGELOG.md">v<%= version %></a></small></h3>
-        <div class="navbar">
-          <div class="navbar-inner">
-            <div class="container">
-              <ul class="nav">
-                <li ui-route="/home" ng-class="{active:$uiRoute}">
-                  <a href="#/home">
-                    <i class="icon-home"></i>
-                    Home
-                  </a>
-                </li>
-                <li ui-route="/about" ng-class="{active:$uiRoute}">
-                  <a href="#/about">
-                    <i class="icon-info-sign"></i>
-                    What is it?
-                  </a>
-                </li>
-                <li>
-                  <a href="https://github.com/joshdmiller/ng-boilerplate#readme">
-                    <i class="icon-book"></i>
-                    Read the Docs
-                  </a>
-                </li>
-                <li>
-                  <a href="https://github.com/joshdmiller/ng-boilerplate">
-                    <i class="icon-github-alt"></i>
-                    Github
-                  </a>
-                </li>
-                <li>
-                  <a href="https://github.com/joshdmiller/ng-boilerplate/issues">
-                    <i class="icon-comments"></i>
-                    Support
-                  </a>
-                </li>
-              </ul>
-            </div>
+    <div class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" ng-init="menuCollapsed = true"
+            ng-click="menuCollapsed = ! menuCollapsed">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <div class="navbar-brand">
+            <a ui-sref="app.home" class="logo">
+              <img src="assets/images/Foodscape_header_2.png" width="auto" height="150%" />
+            </a>
           </div>
+        </div>
+
+        <div class="collapse navbar-collapse" collapse="menuCollapsed">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a ng-click="howLink()">
+                How It Works
+              </a>
+            </li>
+            <li>
+              <a ng-click="faqLink()">
+                FAQ
+              </a>
+            </li>
+            <li>
+              <a ng-click="communityLink()">
+                Our Community
+              </a>
+            </li>
+            <li>
+              <a ui-sref="login">
+                Login
+              </a>
+            </li>
+            <li class="orange-link">
+              <a ui-sref="signup">
+                Get Started
+              </a>
+            </li>
+          </ul>
         </div>
       </div>
     </div>
 
-    <div class="container" ui-view="main"></div>
+    <div ui-view="main"></div>
 
     <footer class="footer">
       <div class="container">
         <div class="footer-inner">
-          <ul class="social">
-            <li><a target="_blank" href="http://gplus.to/joshdmiller"><i class="icon-google-plus-sign"></i></a></li>
-            <li><a target="_blank" href="http://twitter.com/joshdmiller"><i class="icon-twitter-sign"></i></a></li>
-            <li><a target="_blank" href="http://linkedin.com/in/joshdmiller"><i class="icon-linkedin-sign"></i></a></li>
-            <li><a target="_blank" href="http://github.com/joshdmiller/ng-boilerplate"><i class="icon-github-sign"></i></a></li>
-          </ul>
-          
+          <div class="row">
+            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+              <div class="link-list">
+                <div class="link">
+                  <a href="">About Foodscape</a>
+                </div>
+                <div class="link">
+                  <a href="">Jobs</a>
+                </div>
+                <div class="link">
+                  <a href="">Find a Foodscape</a>
+                </div>
+                <div class="link">
+                  <a href="">Terms</a>
+                </div>
+                <div class="link">
+                  <a href="">Contact Us</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-3 col-xs-12">
+              <div class="link-list social-list">
+                <div class="link">
+                  <i class="fa fa-twitter"></i>
+                  <a href="">Twitter</a>
+                </div>
+                <div class="link">
+                  <i class="fa fa-facebook"></i>
+                  <a href="">Facebook</a>
+                </div>
+                <div class="link">
+                  <i class="fa fa-instagram"></i>
+                  <a href="">Instagram</a>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-8 col-md-6 col-sm-6 col-xs-12 mailing-list">
+              <h4 class="text">Join our mailing list for garden advice, recipes, promotions and more!</h4>
 
-          <p>
-            (c) 2013 Josh David Miller. 
-            <a href="http://github.com/joshdmiller/ng-boilerplate/fork_select">Fork this</a>
-            to kickstart your next project.
-            <br />
-            ng-boilerplate is based on
-            <a href="http://www.angularjs.org">AngularJS</a>,
-            <a href="http://getbootstrap.com">Bootstrap</a>, 
-            <a href="http://angular-ui.github.com/bootstrap">UI Bootstrap</a>,
-            and 
-            <a href="http://fortawesome.github.com/Font-Awesome">Font Awesome</a>.        
-          </p>
+              <div class="row newsletter-row">
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <input type="text" class="form-control" placeholder="First Name" />
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-4 col-xs-12">
+                  <input type="email" class="form-control" placeholder="E-Mail" />
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+                  <button class="btn btn-block get-started-btn">Sign Up</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
+      <div class="copyright">Foodscape &copy; 2015</div>
     </footer>
   </body>
 </html>

@@ -1,0 +1,1 @@
+In order to make the garden pages RESTful and correct according to the setup of ng-boilerplate, I'm going to restructure the files such that there's one large directory called "garden" which will contain all the views that pertain to the gardens, such as new-garden (new), show-garden (show), and edit-garden (edit). For now, this is going here until we connect everything.

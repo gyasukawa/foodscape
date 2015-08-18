@@ -1,13 +1,12 @@
 {
   "name": "ng-boilerplate",
   "version": "0.3.2",
-  "dependencies": {
-    "angular": "~1.0.7",
-    "bootstrap": "~2.3.2",
-    "angular-bootstrap": "~0.3.0",
-    "angular-ui-router": "~0.0.1",
-    "angular-ui-utils": "~0.0.3",
-    "angular-carousel": "~0.3.12"
+  "devDependencies": {
+    "angular": "~1.4",
+    "bootstrap": "~3.1",
+    "angular-carousel": "~0.3.12",
+    "angular-bootstrap": "~0.10.0",
+    "angular-ui-router": "~0.2"
   },
-  "devDependencies": {}
+  "dependencies": {}
 }

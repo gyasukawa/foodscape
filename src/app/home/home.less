@@ -1,38 +1,188 @@
-.jumbotron {
-  margin: 40px 0 80px 0;
-  text-align: center;
+.home-page {
+  .top-section {
+    height: 400px;
+    background-image: url('images/home.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
 
-  h1 {
-    margin-bottom: 20px;
-    font-size: 55px;
-    line-height: 1;
+    .overlay {
+      height: 100%;
+      width: 100%;
+      background: rgba(0,0,0,0.3);
+      color: #FFF;
+      text-align: center;
+
+      .text-container {
+        max-width: 600px;
+        margin: 0 auto;
+
+        .title {
+          color: #FFF;
+        }
+
+        .subtitle {
+          margin-top: 15px;
+          line-height: 130%;
+        }
+
+        .button-container {
+          margin-top: 40px;
+        }
+      }
+    }
   }
 
-  .lead {
-    font-size: 24px;
-    line-height: 1.25;
+  .faq-section {
+    padding: 40px 0;
+    background: @green;
+    color: #FFF;
+
+    .section-title {
+      font-weight: 600;
+      color: #FFF;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    .list {
+      .item {
+        margin-bottom: 30px;
+      }
+    }
+    
+    .button-container {
+      margin-top: 30px;
+    }    
   }
 
-  .btn {
-    font-size: 21px;
-    padding: 14px 24px;
+  .how-section {
+    padding: 40px 0;
+    background-image: url('images/patterns/veggies.png');
+
+    .section-title {
+      font-weight: 600;
+      color: black;
+      text-transform: uppercase;
+    }
+
+    .button-container {
+      margin-top: 30px;
+    }
+
+    .columns {
+      .col-title {
+        position: relative;
+
+        .num {
+          margin: 0;
+          position: absolute;
+          top: 0;
+          left: 0;
+          color: @orange;
+          font-size: 60px;
+          line-height: 110%;
+        }
+
+        .title {
+          padding-left: 45px;
+          line-height: 130%;
+          color: @orange;
+        }
+      }
+
+      .col-image {
+        border-radius: 5px;
+        width: 100%;
+        height: 220px;
+        background: #F6F6F6;
+        margin: 30px 0;
+
+        &.image-1 {
+          background-image: url('images/howitworks-1.jpg'); background-size: cover;
+        }
+
+        &.image-2 {
+          background-image: url('images/howitworks-2.jpg'); background-size: cover;
+        }
+
+        &.image-3 {
+          background-image: url('images/howitworks-3.jpeg'); background-size: cover;
+        }
+      }
+
+      .white-section {
+        border-radius: 5px;
+        padding: 15px;
+        background: #FFF;
+
+        p {
+          margin-bottom: 0;
+        }
+
+        .highlighted {
+          color: @orange;
+          font-style: italic;
+          margin-bottom: 15px;
+        }
+      }
+    }
+  }
+
+  .community-section {
+    padding: 40px 0;
+    background-image: url('images/patterns/veggies-orange.png');
+
+    .section-title {
+      font-weight: 600;
+      color: #FFF;
+      text-transform: uppercase;
+    }
+
+    .banner-image {
+      margin-top: 50px;
+      width: 100%;
+      height: 300px;
+      border-radius: 5px;
+      background-color: #F6F6F6;      
+      background-image: url('images/community.jpg');
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center center;
+    }
+
+    .button-container {
+      margin-top: 30px;
+    }
+
+    .columns {
+      .col-image {
+        border-radius: 5px;
+        width: 100%;
+        height: 220px;
+        background-color: #F6F6F6;      
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center center;
+        margin: 30px 0 20px 0;
+
+        &.image-1 {
+          background-image: url('images/community-1.jpeg');
+        }
+
+        &.image-2 {
+          background-image: url('images/community-2.png');
+        }
+
+        &.image-3 {
+          background-image: url('images/community-3.jpeg');
+        }
+      }
+
+      p {
+        padding: 15px;
+        font-style: italic;
+      }
+    }
   }
 }
-
-.marketing {
-  .row {
-    margin-bottom: 10px;
-  }
-
-  .row:last-child {
-    margin-bottom: 0;
-  }
-  
-  h4 [class*=" icon-"], h4 [class^="icon-"] {
-    margin-right: 5px;
-    vertical-align: -10%;
-    font-size: 28px;
-    line-height: 1;
-  }
-}
-
