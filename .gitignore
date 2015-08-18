@@ -2,7 +2,10 @@
 *~
 build/
 node_modules/
-# bower puts its stuff here??
-vendor/
 log/
 tmp/
+db/*.sqlite3
+
+# bower puts its stuff here??
+vendor/
+
