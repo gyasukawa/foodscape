@@ -1,6 +1,6 @@
 *.sw*
 *~
 build/
-bin/
 node_modules/
+# bower puts its stuff here??
 vendor/
