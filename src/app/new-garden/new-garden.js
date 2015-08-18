@@ -18,6 +18,27 @@ angular.module( 'ngBoilerplate.new-garden', [
 
 .controller( 'NewGardenCtrl', function NewGardenCtrl( $scope ) {
 
+  $scope.plants = [{
+                      "type":"Veggies"
+                      ,"img":"assets/images/forms/veggies.png"
+                    }
+                    ,{
+                      "type":"Herbs"
+                      ,"img":"assets/images/forms/herbs.png"
+                    }
+                    ,{
+                      "type":"Fruit"
+                      ,"img":"assets/images/forms/fruit.png"
+                    }
+                    ,{
+                      "type":"Flowers"
+                      ,"img":"assets/images/forms/flowers.png"
+                    }
+                    ,{
+                      "type":"Other"
+                    ,"img":"assets/images/forms/other.png"
+                    }];
+                  console.log($scope.plants);
 })
 
 ;

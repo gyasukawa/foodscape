@@ -1,0 +1,131 @@
+
+<div class="signup-page garden-page new-garden-page">
+  <div class="container-fluid">
+    <!-- This is the message box that pops up when you click message -->
+    <modal-dialog show='modalShown'>
+      <div ng-show="showMessage" class="message-box">
+        <h1>Send a message to {{scapeName}}!</h1>
+        <textarea>Write a message here.</textarea>
+        <button ng-click="send()" class="btn get-started-btn">Send</button>
+      </div>
+      <div ng-show="sent" class="thank-box">
+        <h1>Thank you!</h1>
+        <p> Your message to {{username}} has been sent. </p>
+        <button ng-click="toggleModal()" class="btn get-started-btn">Okay</button>
+      </div>
+      <div ng-show="showFollow" class="follow-confirm">
+        <h1> You are now following {{scapeName}}. </h1>
+        <button ng-click="toggleModal()" class="btn get-started-btn">Okay</button>
+      </div>
+      <div ng-show="unfollowConfirmBox" class="follow-confirm">
+        <h1> Are you sure you want to unfollow {{scapeName}}? </h1>
+        <p> You will no longer get updates from {{scapName}} and will not be able to view {{scapeName}} without a direct link. </p>
+        <button ng-click="unfollow()" class="btn get-started-btn">Yes</button>
+        <button ng-click="toggleModal()" class="btn get-started-btn">Cancel</button>
+      </div>
+      <div ng-show="unfollowedMessage" class="follow-confirm">
+        <h1> You are no longer following {{scapeName}}. </h1>
+        <button ng-click="toggleModal()" class="btn get-started-btn">Okay</button>
+      </div>
+    </modal-dialog>
+  <!-- end message box -->
+
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+        <!-- Green bar at the top -->
+        <div class="profile-bar">
+          <h2> {{scapeName}} </h2>
+          <p>{{status}}</p>
+
+          <!-- These buttons show up when the user has not followed this person's page or is not logged in -->
+          <!-- <button class="btn get-started-btn">Follow</button>
+          <button class="btn message-btn">Share Profile</button> -->
+
+          <!-- This button shows up when the user is following this person already...ask if there needs to be a share button here, too -->
+          <button ng-click='follow()' class="btn get-started-btn">Follow</button>
+
+          <!-- These buttons show up when this this is the user's page and they are logged in -->
+          <!-- <button class="btn get-started-btn">Share</button>
+          <button class="btn message-btn">Edit Page</button> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <!-- This is so that it's squished into the center -->
+      <div class="col-xs-10 col-xs-offset-1 profile-info">
+        <div class="row">
+          <div class="col-xs-3 col-md-3 col-sm-3 col-lg-3">
+            <!-- <div class="profile-pic"> -->
+              <!-- ? -->
+              <img class="profile-pic" ng-src="{{profilePix}}">
+            <!-- </div> -->
+            {{username}}
+            <!-- <img src="#" width="100px"> -->
+            <!-- This button shows up when this is somebody else's page -->
+            <button ng-click='message()' class="btn message-btn">Message</button>
+          </div>
+          <div class="col-xs-9 col-md-9 col-sm-9 col-lg-9">
+            <!-- <img src="assets/images/community-2.png" width="100%"> -->
+            <ul rn-carousel rn-carousel-controls class="car-image">
+              <li ng-repeat="image in gardenImages">
+                <div class="layer">
+                  <!-- max-width="100%" width="100%" max-height="100%" -->
+                  <img  class="car-img" ng-src="{{ image }}">
+                </div>
+              </li>
+            </ul>
+            <div class="row">
+              <div class="col-xs-12">
+                <div class="box-container">
+                  <!-- Use ng-bind to bind each of the elements under the divs to their appropriate data -->
+                  <div class="info-title">Location</div>
+                  {{location}}
+                  <div class="info-title">Produce</div>
+                  {{produce}}
+
+                  <div class="info-title">Goals/Needs</div>
+                  {{goalsAndNeeds}}
+
+                  <div class="info-title">Other Details</div>
+                  {{otherDetails}}
+
+                  <div class="info-title">Updates</div>
+                  <div ng-repeat="update in updates">
+                    <div class="updateDate"> {{update.date}}</div>
+                    <div class="updateContent">{{update.content}}</div>
+                  </div>
+                  <textarea></textarea>
+                  <button class="btn message-btn update-btn">Add Update</button>
+                  <!-- Use ng-repeat here to put the date and content of each message -->
+
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-5 col-xs-offset-7">
+
+                <!-- This button shows up when this is someone else's profile -->
+                <button ng-click='message()' class="btn message-btn">Message</button>
+
+
+                <!-- This button shows up if the user follows this person -->
+                <button ng-click="unfollowConfirm()" class="btn get-started-btn">Unfollow</button>
+
+                <!-- This button shows up if the user does not follow this person -->
+               <!--  <button class="btn get-started-btn">Follow</button>
+ -->
+                <!-- No buttons if this is the user's page -->
+
+
+              </div>
+            </div>
+            <br>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -149,6 +149,32 @@ input, button, textarea {
   }
 }
 
+// Message Button
+.btn.message-btn {
+  border-radius: 4px;
+  color: @orange;
+  background: #FFF;
+  border: 0;
+  text-transform: uppercase;
+  padding: 10px;
+  padding-bottom: 10px;
+  border-bottom: 8px solid #e7dec0;
+  height: 40px;
+  width: 100%;
+  max-width: 200px;
+  font-family: 'PT Sans', sans-serif;
+
+  .transition(all);
+
+  &:hover {
+
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
 // Upgrading Grid
 @media (min-width: 1200px) {
   .container {
@@ -171,5 +197,7 @@ input, button, textarea {
 @import '../app/home/home.less';
 @import '../app/signup/signup.less';
 @import '../app/new-garden/new-garden.less';
+@import '../app/show-garden/show-garden.less';
+@import '../app/following/following.less';
 @import '../app/existing-garden/existing-garden.less';
 @import '../app/thank-you/thank-you.less';

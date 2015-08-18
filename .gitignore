@@ -1,6 +1,11 @@
 *.sw*
 *~
 build/
-bin/
 node_modules/
+log/
+tmp/
+db/*.sqlite3
+
+# bower puts its stuff here, see .bowerrc for enlightenment
 vendor/
+
