@@ -567,7 +567,7 @@ module.exports = function ( grunt ) {
     'less:compile', 'copy:compile_assets', 'ngmin', 'concat:compile_js', 'uglify', 'index:compile'
   ]);
 
-  grunt.registerTask('heroku', 'clean less mincss');
+  // grunt.registerTask('heroku:development', 'clean less mincss');
 
   /**
    * A utility function to get all app JavaScript sources.
