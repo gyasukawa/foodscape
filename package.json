@@ -51,6 +51,6 @@
     "karma": "^0.12.9"
   },
   "scripts": {
-    "postinstall": "echo postinstall time; ./node_modules/grunt-cli/bin/grunt --force"
+    "postinstall": "echo postinstall time; ./node_modules/grunt-cli/bin/grunt"
   }
 }
