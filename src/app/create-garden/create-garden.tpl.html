@@ -4,7 +4,7 @@
     <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
       <div class="content-box">
         <div class="box-container">
-          <h2 class="title">Tell us about your foodscape{{foo}} !!!!</h2>
+          <h2 class="title">Tell us about your foodscape{{foo}}</h2>
 
           <!-- <a ui-sref="existing-garden" class="link">Wait! I don't have a foodscape. Help me find local foodscapes to support.</a> -->
           
@@ -52,11 +52,11 @@
 
           <div class="row caption-images">
             <!-- This section will automatically place the icon/checkboxes ...once the angular starts working on this page -->
-<!--             <div ng-repeat="plant in plants" class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
-              <img class="img selected" ng-src="{{ plant.img }}" />
+            <div ng-repeat="plant in plants" class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+              <img class="img" ng-click="toggleClass($index)" ng-class="isSelected[$index]" ng-src="{{ plant.img }}" />
               <h5 class="caption">{{ plant.type }}</h5>
-            </div> -->
-            <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+            </div>
+            <!-- <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
               <img class="img selected" src="assets/images/forms/veggies.png" />
               <h5 class="caption">Veggies</h5>
             </div>
@@ -75,7 +75,7 @@
             <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
               <img class="img" src="assets/images/forms/whatevergrowsbest.png" />
               <h5 class="caption">Other</h5>
-            </div>
+            </div> -->
           </div>
           
           <h4>Please share more about what you're growing</h4>
