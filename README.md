@@ -71,4 +71,6 @@ Some setup you must do manually if you haven't yet:
      rails g devise:views
      ```sh
 
+     testing blah blah blah
+
 
