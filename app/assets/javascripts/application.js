@@ -12,5 +12,7 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require ng-rails-csrf
 //= require turbolinks
 //= require_tree .
+

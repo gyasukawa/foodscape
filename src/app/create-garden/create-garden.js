@@ -12,7 +12,7 @@ angular.module( 'ngBoilerplate.create-garden', [
         templateUrl: 'create-garden/create-garden.tpl.html'
       }
     },
-    data:{ pageTitle: 'New Garden' }
+    data:{ pageTitle: 'Create Garden' }
   });
 })
 
