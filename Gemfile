@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+# for account creation and authentication
+gem 'devise'
 # added because of controller error
 gem 'responders', '~> 2.0'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -49,5 +51,6 @@ end
 
 group :production do
   gem 'pg'
+  gem 'rails_12factor'
 end
 
