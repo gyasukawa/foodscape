@@ -8,6 +8,7 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.existing-garden',
   'ngBoilerplate.thank-you',
   'ngBoilerplate.show-garden',
+  'ngBoilerplate.create-garden',
   'ngBoilerplate.following',
   'ui.router',
   'angular-carousel'

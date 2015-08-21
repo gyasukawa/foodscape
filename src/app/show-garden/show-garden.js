@@ -80,7 +80,7 @@ angular.module( 'ngBoilerplate.show-garden', [
   var randomNum = Math.floor((Math.random() * 4));
   // Profile page info
   $scope.profilePix = defaultProfilePhotos[randomNum];
-  $scope.scapeName = "Mary's Foodscape";
+  $scope.scapeName = "Mary's NEW Foodscape";
   $scope.status = "Hello from the show-garden.js. This will be a status message.";
   $scope.username = "Mary L.";
   $scope.gardenImages = ["assets/images/community-2.png","assets/images/community-1.jpeg","assets/images/community-3.jpeg"];

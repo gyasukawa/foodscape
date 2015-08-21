@@ -23,6 +23,10 @@ Then kindly navigate your internet browser to
 <http://localhost:3000/UI/index.html#/home>
 and enjoy the pleasant application therein.
 
+## Heroku
+
+Visit https://quiet-harbor-5141.herokuapp.com/UI/index.html#home to see the app live.
+
 ## Devise Setup Instructions
 
 Some setup you must do manually if you haven't yet:
@@ -66,3 +70,7 @@ Some setup you must do manually if you haven't yet:
       ```sh
      rails g devise:views
      ```sh
+
+     testing blah blah blah
+
+

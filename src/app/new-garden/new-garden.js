@@ -18,6 +18,8 @@ angular.module( 'ngBoilerplate.new-garden', [
 
 .controller( 'NewGardenCtrl', function NewGardenCtrl( $scope ) {
 
+  $scope.foo = "New foo";
+
   $scope.plants = [{
                       "type":"Veggies"
                       ,"img":"assets/images/forms/veggies.png"
