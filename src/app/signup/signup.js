@@ -25,7 +25,7 @@ angular.module( 'ngBoilerplate.signup', [
   //             "email": "cbc@cbc.com",
   //             "password": "hellodave",
   //             "password_confirmation":"hellodave"}};
-
+$scope.error_message = false;
   $scope.postIt = function(the_user){
     console.log("trying to work");
 
@@ -44,7 +44,8 @@ angular.module( 'ngBoilerplate.signup', [
         $scope.data = data;
         // $scope.$apply(function() { $location.path("/new-garden"); });
     }).error(function(data, status, headers, config) {
-        $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
+        $scope.error_message = true;
+        // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
         $scope.status = status;
     });
   }
