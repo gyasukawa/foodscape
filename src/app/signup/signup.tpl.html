@@ -5,8 +5,9 @@
         <div class="box-container">
           <h1 class="title">Sign up to get started</h1>
 
-          {{status}}
-          {{error_message}}
+          <div ng-show="error_message" class="error-message">
+            One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match.
+          </div>
 
 <!-- Probably remove novalidate to add error handling -->
           <form novalidate class="simple-form form">
