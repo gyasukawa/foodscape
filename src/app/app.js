@@ -1,6 +1,5 @@
 angular.module( 'ngBoilerplate', [
   'templates-app',
-  'ng-rails-csrf',
   'templates-common',
   'ngBoilerplate.home',
   'ngBoilerplate.signup',
@@ -21,11 +20,6 @@ angular.module( 'ngBoilerplate', [
 
 .run( function run () {
 })
-// .config([
-//   "$httpProvider", function($httpProvider) {
-//     $httpProvider.defaults.headers.common['X-CSRF-Token'] = $('meta[name=csrf-token]').attr('content');
-//   }
-// ])
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location ) {
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){

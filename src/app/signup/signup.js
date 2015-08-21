@@ -23,15 +23,16 @@ angular.module( 'ngBoilerplate.signup', [
   //             email: "abc@abc.com",
   //             password: "hellodave"};
 
-  var data = {"name": "My new name test",
+  var data = {user: {"name": "My new name test",
               "email": "abc@abc.com",
-              "password": "hellodave"};
+              "password": "hellodave",
+              "password_confirmation":"hellodave"}};
 
   $scope.postIt = function(){
     console.log("trying to work");
 
     $http({
-        url: "/users",
+        url: "/users.json",
         method: "POST",
         data: data
     }).success(function(data, status, headers, config) {

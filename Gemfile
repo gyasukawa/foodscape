@@ -1,6 +1,4 @@
 source 'https://rubygems.org'
-# FIXING THE CSRF THING HOPEFULLY
-gem 'ng-rails-csrf'
 # for account creation and authentication
 gem 'devise'
 # added because of controller error
