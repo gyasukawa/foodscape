@@ -4,18 +4,31 @@
       <div class="content-box">
         <div class="box-container">
           <h1 class="title">Sign up to get started</h1>
-          <form class="form">
-            <div class="input-container">
-              <input type="email" class="form-control" placeholder="E-mail" />
+
+          {{status}}
+          {{error_message}}
+
+<!-- Probably remove novalidate to add error handling -->
+          <form novalidate class="simple-form form">
+            <div class="double-input">
+              <div class="input-container">
+                <input type="text" ng-model="user.name" class="form-control" placeholder="Name" />
+              </div>
+              <div class="input-container">
+                <input type="email" ng-model="user.email" class="form-control" placeholder="E-mail" />
+              </div>
             </div>
 
             <div class="double-input">
               <div class="input-container">
-                <input type="password" class="form-control" placeholder="Password" />
+                <input type="password" ng-model="user.password" class="form-control" placeholder="Password" />
               </div>
               <div class="input-container">
-                <input type="number" class="form-control" placeholder="Zip Code" />
+                <input type="password" ng-model="user.password_confirmation" class="form-control" placeholder="Password Confirmation" />
               </div>
+            </div>
+            <div class="input-container">
+                <input type="number" class="form-control" placeholder="Zip Code" />
             </div>
 
             <!-- Don't include option for sign up for now
@@ -36,9 +49,9 @@
             -->
 
             <div class="button-container">
-              <a ui-sref="new-garden" href="#/new-garden">
-                <button type="submit" ng-click="postIt()" class="btn btn-lg get-started-btn">Get Started</button>
-              </a>
+              <!-- <a ui-sref="new-garden" href="#/new-garden"> -->
+                <button type="submit" ng-click="postIt(user)" class="btn btn-lg get-started-btn">Get Started</button>
+              <!-- </a> -->
             </div>
           </form>
         </div>
