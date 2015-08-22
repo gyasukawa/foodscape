@@ -18,7 +18,7 @@ angular.module( 'ngBoilerplate.create-garden', [
 
 .controller( 'CreateGardenCtrl', function CreateGardenCtrl( $scope ) {
 
-
+// for the ng-repeat for the veggie bools
   $scope.plants = [{  "id":1
                       ,"type":"Veggies"
                       ,"img":"assets/images/forms/veggies.png"
@@ -43,10 +43,58 @@ angular.module( 'ngBoilerplate.create-garden', [
 
         $scope.isSelected = [];
 
-        $scope.toggleClass = function (id) {
-          console.log(id);
-           $scope.isSelected[id] = $scope.isSelected[id]=='selected'?'':'selected';
-        };
+  $scope.toggleClass = function (id) {
+    console.log(id);
+     $scope.isSelected[id] = $scope.isSelected[id]=='selected'?'':'selected';
+  };
+
+  $scope.goals = [{ "id":"1",
+                    "text":"Have a place to share updates and photos with my friends and neighbors",
+                      "bool":false},
+                    { "id":"2",
+                    "text":"Get help with foodscape chores, like weeding and harvesting",
+                      "bool":false},
+                    { "id":"3",
+                    "text":"Earn extra money to support my foodscape",
+                      "bool":false},
+                    { "id":"4",
+                    "text":"I'm not sure yet",
+                      "bool":false}];
+
+  $scope.submitGardenForm = function(scapeInfo){
+
+    console.log("trying to work");
+
+    // This works...
+    console.log("My goals", $scope.goals);
+
+    // var goalsAndNeeds = scapeInfo.;
+
+    var data = {scape: {"name": scapeInfo.name,
+              "address_line_1": scapeInfo.address1,
+              "address_line_2": scapeInfo.address2,
+              "city": scapeInfo.city,
+              "state": scapeInfo.state,
+              "zip_code":scapeInfo.zip,
+              "goalsneeds": goalsAndNeeds
+            }};
+
+    console.log("This is what I passed through! Aren't you proud? ", data);
+
+    $http({
+        url: "/users.json",
+        method: "POST",
+        data: data
+    }).success(function(data, status, headers, config) {
+        $scope.data = data;
+        // $scope.$apply(function() { $location.path("/new-garden"); });
+    }).error(function(data, status, headers, config) {
+        $scope.error_message = true;
+        // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
+        $scope.status = status;
+    });
+
+        }
 })
   
 ;
