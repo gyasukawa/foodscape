@@ -28,7 +28,8 @@
 
 .ng-modal-overlay {
   /* A dark translucent div that covers the whole screen */
-  position:absolute;
+  /*position:absolute;*/
+  position: fixed;
   z-index:9999;
   top:0;
   left:0;
@@ -40,7 +41,8 @@
 .ng-modal-dialog {
   /* A centered div above the overlay with a box shadow. */
   z-index:10000;
-  position: absolute;
+  /*position: absolute;*/
+  position: fixed;
   width: 40%; /* Default */
   height: 40%;
   min-height: 300px;

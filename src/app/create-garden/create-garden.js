@@ -16,7 +16,7 @@ angular.module( 'ngBoilerplate.create-garden', [
   });
 })
 
-.controller( 'CreateGardenCtrl', function CreateGardenCtrl( $scope ) {
+.controller( 'CreateGardenCtrl', [ "$scope", "$http",function ( $scope , $http ) {
 
 // for the ng-repeat for the veggie bools
   $scope.plants = [{  "id":1
@@ -52,7 +52,7 @@ angular.module( 'ngBoilerplate.create-garden', [
                     "text":"Have a place to share updates and photos with my friends and neighbors",
                       "bool":false},
                     { "id":"2",
-                    "text":"Get help with foodscape chores, like weeding and harvesting",
+                    "text":"Get help with foodscape chores such as weeding and harvesting",
                       "bool":false},
                     { "id":"3",
                     "text":"Earn extra money to support my foodscape",
@@ -64,11 +64,17 @@ angular.module( 'ngBoilerplate.create-garden', [
   $scope.submitGardenForm = function(scapeInfo){
 
     console.log("trying to work");
+    var goalsAndNeeds = "I would like to...";
 
-    // This works...
     console.log("My goals", $scope.goals);
-
-    // var goalsAndNeeds = scapeInfo.;
+    $scope.goals.forEach(function(goal){
+      if (goal.bool){
+        var str = (goal.text).toLowerCase();
+        goalsAndNeeds += str + ", ";
+        console.log("goals and needs", goalsAndNeeds);
+      }
+    })
+    goalsAndNeeds += scapeInfo.shareText;
 
     var data = {scape: {"name": scapeInfo.name,
               "address_line_1": scapeInfo.address1,
@@ -76,13 +82,14 @@ angular.module( 'ngBoilerplate.create-garden', [
               "city": scapeInfo.city,
               "state": scapeInfo.state,
               "zip_code":scapeInfo.zip,
-              "goalsneeds": goalsAndNeeds
+              "goalsneeds": goalsAndNeeds,
+              "other_details": scapeInfo.otherInfo
             }};
 
     console.log("This is what I passed through! Aren't you proud? ", data);
 
     $http({
-        url: "/users.json",
+        url: "/foodscapes.json",
         method: "POST",
         data: data
     }).success(function(data, status, headers, config) {
@@ -94,7 +101,7 @@ angular.module( 'ngBoilerplate.create-garden', [
         $scope.status = status;
     });
 
-        }
-})
+  }
+}])
   
 ;
