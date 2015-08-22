@@ -76,7 +76,7 @@ angular.module( 'ngBoilerplate.create-garden', [
     })
     goalsAndNeeds += scapeInfo.shareText;
 
-    var data = {scape: {"name": scapeInfo.name,
+    var data = {foodscape: {"name": scapeInfo.name,
               "address_line_1": scapeInfo.address1,
               "address_line_2": scapeInfo.address2,
               "city": scapeInfo.city,
