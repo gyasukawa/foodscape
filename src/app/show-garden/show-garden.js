@@ -98,6 +98,35 @@ angular.module( 'ngBoilerplate.show-garden', [
                     , "content": "I planted tomatoes!"
                     }];
 
-})
+
+  // Add posting updates
+  $scope.postIt = function(post){
+    console.log("trying to work");
+
+    if (post.text != ""){
+      var data = {update: {"foodscape_id": "id",
+                          "text": post.text
+                  }};
+
+      console.log("This is what I passed through! Aren't you proud? ", data);
+
+      $http({
+          url: "/updates.json",
+          method: "POST",
+          data: data
+      }).success(function(data, status, headers, config) {
+          $scope.data = data;
+          // $scope.$apply(function() { $location.path("/new-garden"); });
+      }).error(function(data, status, headers, config) {
+          $scope.error_message = true;
+          // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
+          $scope.status = status;
+      });
+    }
+  }
+
+
+
+}) // end controller
 
 ;

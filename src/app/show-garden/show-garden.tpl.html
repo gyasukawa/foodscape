@@ -97,8 +97,10 @@
                     <div class="updateDate"> {{update.date}}</div>
                     <div class="updateContent">{{update.content}}</div>
                   </div>
-                  <textarea></textarea>
-                  <button class="btn message-btn update-btn">Add Update</button>
+                  <form>
+                    <textarea ng-model="update.text"></textarea>
+                    <button ng-click="postIt(update)" class="btn message-btn update-btn">Add Update</button>
+                  </form>
                   <!-- Use ng-repeat here to put the date and content of each message -->
 
                 </div>
