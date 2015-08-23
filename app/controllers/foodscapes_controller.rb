@@ -55,7 +55,7 @@ class FoodscapesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def foodscape_params
-      params.require(:foodscape).permit(:name, :address_line_1, :address_line_2, :city, :state, :zip_code, :goalsneeds, :other_details, :URL_slug)
+      params.require(:foodscape).permit(:name, :address_line_1, :address_line_2, :city, :state, :zip_code, , :produce, :goalsneeds, :other_details, :URL_slug)
     end
 
 end
