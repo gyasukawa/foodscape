@@ -5,6 +5,6 @@ class ApplicationController < ActionController::Base
 
   # if someone asks for html, redirect them to the home page, we only serve json
   def intercept_html_requests
-    redirect_to('/') if request.format == Mime::HTML
+    redirect_to('/UI/index.html') if request.format == Mime::HTML
   end
 end
