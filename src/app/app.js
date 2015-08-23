@@ -21,13 +21,29 @@ angular.module( 'ngBoilerplate', [
 .run( function run () {
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, $http ) {
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       $scope.pageTitle = toState.data.pageTitle + ' | Scape' ;
     }
   });
-})
+
+  $scope.logout = function(){
+    console.log("trying to log out");
+    $http.post({
+          URL: "/users/sign_out",
+          Method: "DELETE"
+      }).success(function(data, status, headers, config) {
+          $scope.data = data;
+          // $scope.$apply(function() { $location.path("/new-garden"); });
+      }).error(function(data, status, headers, config) {
+          $scope.error_message = true;
+          // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
+          $scope.status = status;
+      });
+  }
+
+}) //end AppCtrl
 
 .directive('modalDialog', [ function () {
   return {

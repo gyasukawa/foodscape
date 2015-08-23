@@ -71,20 +71,20 @@ angular.module( 'ngBoilerplate.create-garden', [
 
   $scope.submitGardenForm = function(scapeInfo){
 
-    if(scapeInfo){
-      console.log("trying to work");
-      var goalsAndNeeds = "I would like to...";
+    if(scapeInfo){ // make sure it's not blank
+      var goalsAndNeeds = $scope.goals;
 
-      console.log("My goals", $scope.goals);
-      $scope.goals.forEach(function(goal){
-        if (goal.bool){
-          var str = (goal.text).toLowerCase();
-          goalsAndNeeds += str + ", ";
-          console.log("goals and needs", goalsAndNeeds);
-        }
-      })
+      // console.log("My goals", $scope.goals);
+      // $scope.goals.forEach(function(goal){
+      //   if (goal.bool){
+      //     var str = (goal.text).toLowerCase();
+      //     goalsAndNeeds += str + ", ";
+      //     console.log("goals and needs", goalsAndNeeds);
+      //   }
+      // })
       if(scapeInfo.shareText){
-        goalsAndNeeds += scapeInfo.shareText;
+        goalsAndNeeds[4] = {"text":scapeInfo.shareText,
+        "bool": true}
       }
       var produce = $scope.plants;
       console.log( $scope.plants);
