@@ -20,12 +20,85 @@ angular.module( 'ngBoilerplate.show-garden', [
 .controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope, $http ) {
 
 
-  $http.get('/foodscapes/:1').then(function(response){
-    console.log(response);
+  $http.get('/foodscapes/1.json').then(function(response){
+
+    var resData = response.data;
+
+    console.log("worked: ", response);
+
+    $scope.profilePix = defaultProfilePhotos[randomNum];
+    $scope.scapeName = resData.name;
+    $scope.status = "Hello from the show-garden.js. This will be a status message.";
+    $scope.username = "Mary L.";
+    $scope.gardenImages = ["assets/images/community-2.png","assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
+    // This stuff goes in the white box under the orange labels
+    $scope.location = resData.city;
+    $scope.produce = "veggies, fruites, etc.";
+    $scope.goalsAndNeeds = resData.goalsneeds;
+    $scope.otherDetails = resData.other_details;
+    $scope.updates = [{
+                        "date": "4/15/15"
+                      , "content": "Watered today."
+                      }
+                      ,{
+                        "date": "5/30/15"
+                      , "content": "I planted tomatoes!"
+                      }];
   }, function(response){
+    console.log("nope");
+  });
 
-  })
+var defaultProfilePhotos = ["assets/images/default_profile_pix/profileicon-watermelon.png",
+                              "assets/images/default_profile_pix/profileicon-lemon.png",
+                              "assets/images/default_profile_pix/profileicon-eggplant.png",
+                              "assets/images/default_profile_pix/profileicon-carrot.png"];
+  var randomNum = Math.floor((Math.random() * 4));
+  // Profile page info
+  // $scope.profilePix = defaultProfilePhotos[randomNum];
+  // $scope.scapeName = "Mary's NEW Foodscape";
+  // $scope.status = "Hello from the show-garden.js. This will be a status message.";
+  // $scope.username = "Mary L.";
+  // $scope.gardenImages = ["assets/images/community-2.png","assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
+  // // This stuff goes in the white box under the orange labels
+  // $scope.location = "The Sunset, San Francisco, CA";
+  // $scope.produce = "veggies, fruites, etc.";
+  // $scope.goalsAndNeeds = "I need a hoe. I'm going to build a planter box.";
+  // $scope.otherDetails = "I have a friendly dog.";
+  // $scope.updates = [{
+  //                     "date": "4/15/15"
+  //                   , "content": "Watered today."
+  //                   }
+  //                   ,{
+  //                     "date": "5/30/15"
+  //                   , "content": "I planted tomatoes!"
+  //                   }];
 
+
+  // Add posting updates
+  $scope.postIt = function(post){
+    console.log("trying to work");
+
+    if (post.text != ""){
+      var data = {update: {"foodscape_id": "id",
+                          "text": post.text
+                  }};
+
+      console.log("This is what I passed through! Aren't you proud? ", data);
+
+      $http({
+          url: "/updates.json",
+          method: "POST",
+          data: data
+      }).success(function(data, status, headers, config) {
+          $scope.data = data;
+          // $scope.$apply(function() { $location.path("/new-garden"); });
+      }).error(function(data, status, headers, config) {
+          $scope.error_message = true;
+          // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
+          $scope.status = status;
+      });
+    }
+  }
 
 // All to do with modals
   $scope.sent = false;
@@ -80,57 +153,7 @@ angular.module( 'ngBoilerplate.show-garden', [
   //  End modals!
 
 
-  var defaultProfilePhotos = ["assets/images/default_profile_pix/profileicon-watermelon.png",
-                              "assets/images/default_profile_pix/profileicon-lemon.png",
-                              "assets/images/default_profile_pix/profileicon-eggplant.png",
-                              "assets/images/default_profile_pix/profileicon-carrot.png"];
-  var randomNum = Math.floor((Math.random() * 4));
-  // Profile page info
-  $scope.profilePix = defaultProfilePhotos[randomNum];
-  $scope.scapeName = "Mary's NEW Foodscape";
-  $scope.status = "Hello from the show-garden.js. This will be a status message.";
-  $scope.username = "Mary L.";
-  $scope.gardenImages = ["assets/images/community-2.png","assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
-  // This stuff goes in the white box under the orange labels
-  $scope.location = "The Sunset, San Francisco, CA";
-  $scope.produce = "veggies, fruites, etc.";
-  $scope.goalsAndNeeds = "I need a hoe. I'm going to build a planter box.";
-  $scope.otherDetails = "I have a friendly dog.";
-  $scope.updates = [{
-                      "date": "4/15/15"
-                    , "content": "Watered today."
-                    }
-                    ,{
-                      "date": "5/30/15"
-                    , "content": "I planted tomatoes!"
-                    }];
-
-
-  // Add posting updates
-  $scope.postIt = function(post){
-    console.log("trying to work");
-
-    if (post.text != ""){
-      var data = {update: {"foodscape_id": "id",
-                          "text": post.text
-                  }};
-
-      console.log("This is what I passed through! Aren't you proud? ", data);
-
-      $http({
-          url: "/updates.json",
-          method: "POST",
-          data: data
-      }).success(function(data, status, headers, config) {
-          $scope.data = data;
-          // $scope.$apply(function() { $location.path("/new-garden"); });
-      }).error(function(data, status, headers, config) {
-          $scope.error_message = true;
-          // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
-          $scope.status = status;
-      });
-    }
-  }
+  
 
 
 
