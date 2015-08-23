@@ -22,30 +22,38 @@ angular.module( 'ngBoilerplate.create-garden', [
   $scope.plants = [{  "id":1
                       ,"type":"Veggies"
                       ,"img":"assets/images/forms/veggies.png"
+                      ,"selected":""
                     }
                     ,{"id":2
                       ,"type":"Herbs"
                       ,"img":"assets/images/forms/herbs.png"
+                      ,"selected":""
                     }
                     ,{"id":3
                       ,"type":"Fruit"
                       ,"img":"assets/images/forms/fruit.png"
+                      ,"selected":""
                     }
                     ,{"id":4
                     , "type":"Flowers"
                       ,"img":"assets/images/forms/flowers.png"
+                      ,"selected":""
                     }
                     ,{"id":5
                       ,"type":"Other"
                     ,"img":"assets/images/forms/whatevergrowsbest.png"
+                    ,"selected":""
                     }];
                   console.log($scope.plants);
 
         $scope.isSelected = [];
 
-  $scope.toggleClass = function (id) {
-    console.log(id);
-     $scope.isSelected[id] = $scope.isSelected[id]=='selected'?'':'selected';
+  $scope.toggleClass = function (the_id) {
+    console.log(the_id);
+    console.log($scope.plants[the_id]);
+    var plantObj = $scope.plants[the_id];
+    plantObj.selected == "selected"? plantObj.selected = "": plantObj.selected = "selected";
+     console.log($scope.plants);
   };
 
   $scope.goals = [{ "id":"1",
@@ -63,44 +71,55 @@ angular.module( 'ngBoilerplate.create-garden', [
 
   $scope.submitGardenForm = function(scapeInfo){
 
-    console.log("trying to work");
-    var goalsAndNeeds = "I would like to...";
+    if(scapeInfo){
+      console.log("trying to work");
+      var goalsAndNeeds = "I would like to...";
 
-    console.log("My goals", $scope.goals);
-    $scope.goals.forEach(function(goal){
-      if (goal.bool){
-        var str = (goal.text).toLowerCase();
-        goalsAndNeeds += str + ", ";
-        console.log("goals and needs", goalsAndNeeds);
+      console.log("My goals", $scope.goals);
+      $scope.goals.forEach(function(goal){
+        if (goal.bool){
+          var str = (goal.text).toLowerCase();
+          goalsAndNeeds += str + ", ";
+          console.log("goals and needs", goalsAndNeeds);
+        }
+      })
+      if(scapeInfo.shareText){
+        goalsAndNeeds += scapeInfo.shareText;
       }
-    })
-    goalsAndNeeds += scapeInfo.shareText;
+      var produce = $scope.plants;
+      console.log( $scope.plants);
+      produce = produce.toString();
+      console.log("should be produce: ", produce);
 
-    var data = {foodscape: {"name": scapeInfo.name,
-              "address_line_1": scapeInfo.address1,
-              "address_line_2": scapeInfo.address2,
-              "city": scapeInfo.city,
-              "state": scapeInfo.state,
-              "zip_code":scapeInfo.zip,
-              "goalsneeds": goalsAndNeeds,
-              "other_details": scapeInfo.otherInfo
-            }};
+      var data = {foodscape: {"name": scapeInfo.name,
+                "address_line_1": scapeInfo.address1,
+                "address_line_2": scapeInfo.address2,
+                "city": scapeInfo.city,
+                "state": scapeInfo.state,
+                "zip_code":scapeInfo.zip,
+                "goalsneeds": goalsAndNeeds,
+                "produce": produce,
+                "other_details": scapeInfo.otherInfo
+              }};
 
-    console.log("This is what I passed through! Aren't you proud? ", data);
+      console.log("This is what I passed through! Aren't you proud? ", data);
 
-    $http({
-        url: "/foodscapes.json",
-        method: "POST",
-        data: data
-    }).success(function(data, status, headers, config) {
-        $scope.data = data;
-        // $scope.$apply(function() { $location.path("/new-garden"); });
-    }).error(function(data, status, headers, config) {
-        $scope.error_message = true;
-        // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
-        $scope.status = status;
-    });
+      $http({
+          url: "/foodscapes.json",
+          method: "POST",
+          data: data
+      }).success(function(data, status, headers, config) {
+          $scope.data = data;
+          // $scope.$apply(function() { $location.path("/new-garden"); });
+      }).error(function(data, status, headers, config) {
+          $scope.error_message = true;
+          // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
+          $scope.status = status;
+      });
 
+    } else {
+      console.log("nope. You didnt put in enough stuff to make this go through.");
+    }
   }
 }])
   

@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20150822004218) do
     t.string   "city"
     t.string   "state"
     t.integer  "zip_code"
+    t.string   "produce"
     t.string   "goalsneeds"
     t.string   "other_details"
     t.string   "URL_slug"

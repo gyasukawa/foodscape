@@ -53,7 +53,7 @@
           <div class="row caption-images">
             <!-- This section will automatically place the icon/checkboxes ...once the angular starts working on this page -->
             <div ng-repeat="plant in plants" class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
-              <img class="img" ng-click="toggleClass($index)" ng-class="isSelected[$index]" ng-src="{{ plant.img }}" />
+              <img class="img" ng-click="toggleClass($index)" ng-class="plants[$index].selected" ng-src="{{ plant.img }}" />
               <h5 class="caption">{{ plant.type }}</h5>
             </div>
             <!-- <div class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
