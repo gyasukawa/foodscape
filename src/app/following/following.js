@@ -46,28 +46,28 @@ angular.module( 'ngBoilerplate.following', [
     $scope.toggleModal();
     $scope.showMessage = true;
     console.log("show message ", $scope.showMessage);
-  }
+  };
     // for the message box to show the already sent thank you message
   $scope.send = function(){
     $scope.showMessage = false;
     $scope.sent = true;
-  }
+  };
 ////// This shows up to confirm that you've followed someone
   $scope.follow = function (){
     $scope.toggleModal();
     $scope.showFollow = true;
-  }
+  };
 
   //////// This shows up to ask if you're sure you want to unfollow someone
   $scope.unfollowConfirm = function(){
     $scope.toggleModal();
     $scope.unfollowConfirmBox = true;
-  }
+  };
 ////////// This confirms that you have actually unfollowed them.
   $scope.unfollow = function(){
     $scope.unfollowConfirmBox = false;
     $scope.unfollowedMessage = true;
-  }
+  };
   // Lightbox stuff -- there is a custom directive for the lightbox in app.js
   $scope.modalShown = false;
   $scope.toggleModal = function() {
