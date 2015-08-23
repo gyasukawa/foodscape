@@ -57,6 +57,6 @@
     "karma": "^0.12.9"
   },
   "scripts": {
-    "postinstall": "./node_modules/grunt-cli/bin/grunt --force"
+    "postinstall": "bower install && grunt build --force"
   }
 }
