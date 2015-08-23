@@ -1,22 +1,48 @@
-angular.module( 'ngBoilerplate.create-garden', [
+angular.module( 'ngBoilerplate.edit-garden', [
   'ui.router',
   'ui.bootstrap'
 ])
 
 .config(function config( $stateProvider ) {
-  $stateProvider.state( 'create-garden', {
-    url: '/create-garden',
+  $stateProvider.state( 'edit-garden', {
+    url: '/edit-garden',
     views: {
       "main": {
-        controller: 'CreateGardenCtrl',
-        templateUrl: 'create-garden/create-garden.tpl.html'
+        controller: 'EditGardenCtrl',
+        templateUrl: 'edit-garden/edit-garden.tpl.html'
       }
     },
-    data:{ pageTitle: 'Create Garden' }
+    data:{ pageTitle: 'Edit Garden' }
   });
 })
 
-.controller( 'CreateGardenCtrl', [ "$scope", "$http",function ( $scope , $http ) {
+.controller( 'EditGardenCtrl', [ "$scope", "$http",function ( $scope , $http ) {
+
+
+  $http.get('/foodscapes/4.json').then(function(response){
+
+    var resData = response.data;
+
+    console.log("worked: ", response);
+    $scope.scapeName = resData.name;
+    $scope.gardenImages = ["assets/images/community-2.png","assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
+    // This stuff goes in the white box under the orange labels
+    $scope.location = resData.city;
+    $scope.produce = angular.fromJson(resData.produce);
+    console.log("Parsed produce", $scope.produce);
+    $scope.goalsAndNeeds = resData.goalsneeds;
+    $scope.otherDetails = resData.other_details;
+    $scope.updates = [{
+                        "date": "4/15/15"
+                      , "content": "Watered today."
+                      }
+                      ,{
+                        "date": "5/30/15"
+                      , "content": "I planted tomatoes!"
+                      }];
+  }, function(response){
+    console.log("nope");
+  });
 
 // for the ng-repeat for the veggie bools
   $scope.plants = [{  "id":1
@@ -87,11 +113,9 @@ angular.module( 'ngBoilerplate.create-garden', [
         "bool": true}
       }
       var produce = $scope.plants;
-      console.log( "scope dot plants: ", $scope.plants);
-      console.log("produce: ", produce);
-
-      produce = JSON.stringify(produce);
-      console.log("should be produce to string: ", produce);
+      console.log( $scope.plants);
+      produce = produce.toString();
+      console.log("should be produce: ", produce);
 
       var data = {foodscape: {"name": scapeInfo.name,
                 "address_line_1": scapeInfo.address1,

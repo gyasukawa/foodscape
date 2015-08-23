@@ -9,6 +9,7 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.thank-you',
   'ngBoilerplate.show-garden',
   'ngBoilerplate.create-garden',
+  'ngBoilerplate.edit-garden',
   'ngBoilerplate.following',
   'ui.router',
   'angular-carousel'
