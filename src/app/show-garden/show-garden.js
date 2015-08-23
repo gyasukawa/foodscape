@@ -17,7 +17,14 @@ angular.module( 'ngBoilerplate.show-garden', [
   });
 })
 
-.controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope ) {
+.controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope, $http ) {
+
+
+  $http.get('/foodscapes/:1').then(function(response){
+    console.log(response);
+  }, function(response){
+
+  })
 
 
 // All to do with modals
