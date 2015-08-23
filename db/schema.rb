@@ -50,6 +50,8 @@ ActiveRecord::Schema.define(version: 20150822004218) do
   end
 
   create_table "users", force: :cascade do |t|
+    t.string   "name",                   default: "", null: false
+    t.integer  "zip_code"
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
     t.string   "reset_password_token"
@@ -60,8 +62,6 @@ ActiveRecord::Schema.define(version: 20150822004218) do
     t.datetime "last_sign_in_at"
     t.inet     "current_sign_in_ip"
     t.inet     "last_sign_in_ip"
-    t.string   "name",                   default: "", null: false
-    t.integer  "zip_code"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
   end
