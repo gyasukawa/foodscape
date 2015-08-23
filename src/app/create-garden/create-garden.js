@@ -72,26 +72,21 @@ angular.module( 'ngBoilerplate.create-garden', [
   $scope.submitGardenForm = function(scapeInfo){
 
     if(scapeInfo){ // make sure it's not blank
-      var goalsAndNeeds = $scope.goals;
 
-      // console.log("My goals", $scope.goals);
-      // $scope.goals.forEach(function(goal){
-      //   if (goal.bool){
-      //     var str = (goal.text).toLowerCase();
-      //     goalsAndNeeds += str + ", ";
-      //     console.log("goals and needs", goalsAndNeeds);
-      //   }
-      // })
+      // formatting goals and needs data
+      var goalsAndNeeds = $scope.goals;
+      //add the additional text as a final object in the array
       if(scapeInfo.shareText){
         goalsAndNeeds[4] = {"text":scapeInfo.shareText,
         "bool": true}
       }
-      var produce = $scope.plants;
-      console.log( "scope dot plants: ", $scope.plants);
-      console.log("produce: ", produce);
+      goalsAndNeeds = JSON.stringify(goalsAndNeeds);
 
+      // Doing mostly the same stuff with the produce grown
+      var produce = $scope.plants;
+      var growingText = {"growingText": scapeInfo.growingText};
+      produce.push(growingText);
       produce = JSON.stringify(produce);
-      console.log("should be produce to string: ", produce);
 
       var data = {foodscape: {"name": scapeInfo.name,
                 "address_line_1": scapeInfo.address1,
@@ -104,7 +99,6 @@ angular.module( 'ngBoilerplate.create-garden', [
                 "other_details": scapeInfo.otherInfo
               }};
 
-      console.log("This is what I passed through! Aren't you proud? ", data);
 
       $http({
           url: "/foodscapes.json",
@@ -112,6 +106,8 @@ angular.module( 'ngBoilerplate.create-garden', [
           data: data
       }).success(function(data, status, headers, config) {
           $scope.data = data;
+          console.log("This is what I passed through!", data);
+
           // $scope.$apply(function() { $location.path("/new-garden"); });
       }).error(function(data, status, headers, config) {
           $scope.error_message = true;
