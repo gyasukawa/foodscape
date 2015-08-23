@@ -36,7 +36,7 @@ ActiveRecord::Schema.define(version: 20150822004218) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "subscriptions", force: :cascade do |t|
+  create_table "subscriptions", id: false, force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "foodscape_id"
     t.datetime "created_at",   null: false
