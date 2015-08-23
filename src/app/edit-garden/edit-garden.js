@@ -1,22 +1,48 @@
-angular.module( 'ngBoilerplate.create-garden', [
+angular.module( 'ngBoilerplate.edit-garden', [
   'ui.router',
   'ui.bootstrap'
 ])
 
 .config(function config( $stateProvider ) {
-  $stateProvider.state( 'create-garden', {
-    url: '/create-garden',
+  $stateProvider.state( 'edit-garden', {
+    url: '/edit-garden',
     views: {
       "main": {
-        controller: 'CreateGardenCtrl',
-        templateUrl: 'create-garden/create-garden.tpl.html'
+        controller: 'EditGardenCtrl',
+        templateUrl: 'edit-garden/edit-garden.tpl.html'
       }
     },
-    data:{ pageTitle: 'Create Garden' }
+    data:{ pageTitle: 'Edit Garden' }
   });
 })
 
-.controller( 'CreateGardenCtrl', [ "$scope", "$http",function ( $scope , $http ) {
+.controller( 'EditGardenCtrl', [ "$scope", "$http",function ( $scope , $http ) {
+
+
+  $http.get('/foodscapes/4.json').then(function(response){
+
+    var resData = response.data;
+
+    console.log("worked: ", response);
+    $scope.scapeName = resData.name;
+    $scope.gardenImages = ["assets/images/community-2.png","assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
+    // This stuff goes in the white box under the orange labels
+    $scope.location = resData.city;
+    $scope.produce = angular.fromJson(resData.produce);
+    console.log("Parsed produce", $scope.produce);
+    $scope.goalsAndNeeds = resData.goalsneeds;
+    $scope.otherDetails = resData.other_details;
+    $scope.updates = [{
+                        "date": "4/15/15"
+                      , "content": "Watered today."
+                      }
+                      ,{
+                        "date": "5/30/15"
+                      , "content": "I planted tomatoes!"
+                      }];
+  }, function(response){
+    console.log("nope");
+  });
 
 // for the ng-repeat for the veggie bools
   $scope.plants = [{  "id":1
@@ -72,21 +98,24 @@ angular.module( 'ngBoilerplate.create-garden', [
   $scope.submitGardenForm = function(scapeInfo){
 
     if(scapeInfo){ // make sure it's not blank
-
-      // formatting goals and needs data
       var goalsAndNeeds = $scope.goals;
-      //add the additional text as a final object in the array
+
+      // console.log("My goals", $scope.goals);
+      // $scope.goals.forEach(function(goal){
+      //   if (goal.bool){
+      //     var str = (goal.text).toLowerCase();
+      //     goalsAndNeeds += str + ", ";
+      //     console.log("goals and needs", goalsAndNeeds);
+      //   }
+      // })
       if(scapeInfo.shareText){
         goalsAndNeeds[4] = {"text":scapeInfo.shareText,
         "bool": true}
       }
-      goalsAndNeeds = JSON.stringify(goalsAndNeeds);
-
-      // Doing mostly the same stuff with the produce grown
       var produce = $scope.plants;
-      var growingText = {"growingText": scapeInfo.growingText};
-      produce.push(growingText);
-      produce = JSON.stringify(produce);
+      console.log( $scope.plants);
+      produce = produce.toString();
+      console.log("should be produce: ", produce);
 
       var data = {foodscape: {"name": scapeInfo.name,
                 "address_line_1": scapeInfo.address1,
@@ -99,6 +128,7 @@ angular.module( 'ngBoilerplate.create-garden', [
                 "other_details": scapeInfo.otherInfo
               }};
 
+      console.log("This is what I passed through! Aren't you proud? ", data);
 
       $http({
           url: "/foodscapes.json",
@@ -106,8 +136,6 @@ angular.module( 'ngBoilerplate.create-garden', [
           data: data
       }).success(function(data, status, headers, config) {
           $scope.data = data;
-          console.log("This is what I passed through!", data);
-
           // $scope.$apply(function() { $location.path("/new-garden"); });
       }).error(function(data, status, headers, config) {
           $scope.error_message = true;

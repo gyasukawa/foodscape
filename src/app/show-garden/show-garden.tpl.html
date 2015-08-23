@@ -84,10 +84,18 @@
                   <div class="info-title">Location</div>
                   {{location}}
                   <div class="info-title">Produce</div>
-                  {{produce}}
+                  <div ng-repeat="plant in myProduce">
+                    {{plant}}
+                  </div>
+
+                  {{extraProduce}}
 
                   <div class="info-title">Goals/Needs</div>
-                  {{goalsAndNeeds}}
+                  <div ng-repeat="goal in myGoals">
+                    I would like to {{goal}}.
+                    <!-- {{goalsAndNeeds}} -->
+                  </div>
+                  {{extraGoal}}
 
                   <div class="info-title">Other Details</div>
                   {{otherDetails}}

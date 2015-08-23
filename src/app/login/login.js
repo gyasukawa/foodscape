@@ -16,8 +16,29 @@ angular.module( 'ngBoilerplate.login', [
   });
 })
 
-.controller( 'LoginCtrl', function LoginCtrl( $scope ) {
+.controller( 'LoginCtrl', function LoginCtrl( $scope, $http ) {
 
+  $scope.login = function(loginInfo){
+
+    var data = {user: {
+        "email": loginInfo.email,
+        "password": loginInfo.password
+    }}
+    $http({
+          url: "/users/sign_in.json",
+          method: "POST",
+          payload: data
+      }).success(function(data, status, headers, config) {
+          $scope.data = data;
+          console.log("logged in!");
+          // $scope.$apply(function() { $location.path("/new-garden"); });
+      }).error(function(data, status, headers, config) {
+          $scope.error_message = true;
+          // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
+          $scope.status = status;
+          console.log("not logged in");
+      });
+  }
 })
 
 ;
