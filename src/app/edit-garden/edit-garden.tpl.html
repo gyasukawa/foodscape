@@ -10,22 +10,22 @@
           
           <h4 class="question">1. Foodscape Name </h4>
           <div class="input-container">
-            <input  ng-model="scapeName" class="form-control"/>
+            <input ng-model="scapeName" class="form-control"/>
           </div>
 
           <h4 class="question">2. What do you grow or plan to grow? Select all that apply.</h4>
 
           <div class="row caption-images">
             <!-- This section will automatically place the icon/checkboxes ...once the angular starts working on this page -->
-            <div ng-repeat="plant in plants" class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
+            <div ng-repeat="plant in plants track by $index" class="col-lg-2 col-md-2 col-sm-3 col-xs-4">
               <img class="img" ng-click="toggleClass($index)" ng-class="plants[$index].selected" ng-src="{{ plant.img }}" />
               <h5 class="caption">{{ plant.type }}</h5>
             </div>
           </div>
           
           <h4>Please share more about what you're growing</h4>
-          <div ng-model="scape.growingText" class="input-container">
-            <textarea class="form-control" placeholder="I'm growing several varieties of greens (including kale, chard, arugula, spinach, and bok choi).  I also grow herbs such as sage, basil, cilantro, and mint."></textarea>
+          <div class="input-container">
+            <textarea ng-model="growingText" class="form-control" placeholder="I'm growing several varieties of greens (including kale, chard, arugula, spinach, and bok choi).  I also grow herbs such as sage, basil, cilantro, and mint."></textarea>
           </div>
      
             <h4 class="question">3. Where is your foodscape? (We won't share your exact address publicly, but will use it to find supporters in your local area)</h4>
@@ -98,7 +98,7 @@
 
           <div align="right" class="buttons-container">
            <!-- <button class="btn btn-large get-started-btn">Save</button> -->
-            <button ng-click="submitGardenForm(scape)" class="btn btn-large get-started-btn">Submit</button> 
+            <button ng-click="submitGardenForm(scapeName, growingText, address1, address2, city, state, zip, goals, extraGoals, otherDetails)" class="btn btn-large get-started-btn">Save All</button> 
           </div>
         </div>
       </div>
