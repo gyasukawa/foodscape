@@ -1,6 +1,7 @@
 source 'https://rubygems.org'
 
 ruby '2.0.0'
+
 # for account creation and authentication
 gem 'devise'
 # added because of controller error
