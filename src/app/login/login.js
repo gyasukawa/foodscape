@@ -18,11 +18,11 @@ angular.module( 'ngBoilerplate.login', [
 
 .controller( 'LoginCtrl', function LoginCtrl( $scope, $http ) {
 
-  $scope.login = function() {
+  $scope.login = function(loginInfo) {
 
     var data = {user: {
-        "email": $scope.user.email,
-        "password": $scope.user.password
+        "email": loginInfo.email,
+        "password": loginInfo.password
     }}
 
     $http({
