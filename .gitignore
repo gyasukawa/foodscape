@@ -9,3 +9,4 @@ db/*.sqlite3
 # bower puts its stuff here, see .bowerrc for enlightenment
 vendor/
 
+/config/app_env_variables.rb
