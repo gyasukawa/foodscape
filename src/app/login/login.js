@@ -18,12 +18,13 @@ angular.module( 'ngBoilerplate.login', [
 
 .controller( 'LoginCtrl', function LoginCtrl( $scope, $http ) {
 
-  $scope.login = function(loginInfo){
+  $scope.login = function(){
 
     var data = {user: {
-        "email": loginInfo.email,
-        "password": loginInfo.password
+        "email": user.email,
+        "password": user.password
     }}
+
     $http({
           url: "/users/sign_in.json",
           method: "POST",
