@@ -8,7 +8,8 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.existing-garden',
   'ngBoilerplate.thank-you',
   'ngBoilerplate.show-garden',
-  // 'ngBoilerplate.create-garden',
+  'ngBoilerplate.create-garden',
+  'ngBoilerplate.edit-garden',
   'ngBoilerplate.following',
   'ui.router',
   'angular-carousel'
@@ -21,13 +22,29 @@ angular.module( 'ngBoilerplate', [
 .run( function run () {
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, $http ) {
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       $scope.pageTitle = toState.data.pageTitle + ' | Scape' ;
     }
   });
-})
+
+  $scope.logout = function(){
+    console.log("trying to log out");
+    $http.post({
+          URL: "/users/sign_out",
+          Method: "DELETE"
+      }).success(function(data, status, headers, config) {
+          $scope.data = data;
+          // $scope.$apply(function() { $location.path("/new-garden"); });
+      }).error(function(data, status, headers, config) {
+          $scope.error_message = true;
+          // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
+          $scope.status = status;
+      });
+  }
+
+}) //end AppCtrl
 
 .directive('modalDialog', [ function () {
   return {
@@ -39,10 +56,12 @@ angular.module( 'ngBoilerplate', [
     transclude: true, // we want to insert custom content inside the directive
     link: function(scope, element, attrs) {
       scope.dialogStyle = {};
-      if (attrs.width)
-        scope.dialogStyle.width = attrs.width;
-      if (attrs.height)
-        scope.dialogStyle.height = attrs.height;
+      if (attrs.width) {
+          scope.dialogStyle.width = attrs.width;
+      }
+      if (attrs.height) {
+          scope.dialogStyle.height = attrs.height;
+      }
       scope.hideModal = function() {
         scope.show = false;
       };

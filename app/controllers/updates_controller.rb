@@ -1,2 +1,5 @@
 class UpdatesController < ApplicationController
+
+
+
 end

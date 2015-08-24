@@ -1,4 +1,9 @@
 source 'https://rubygems.org'
+
+ruby '2.0.0'
+
+# for update model emails
+gem 'mandrill-api'
 # for account creation and authentication
 gem 'devise'
 # added because of controller error

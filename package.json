@@ -32,7 +32,8 @@
     "karma-jasmine": "^0.1.5",
     "grunt-karma": "^0.8.2",
     "karma-coffee-preprocessor": "^0.2.1",
-    "karma": "^0.12.9"
+    "karma": "^0.12.9",
+    "bower": "^1.4.1"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
@@ -54,9 +55,10 @@
     "karma-jasmine": "^0.1.5",
     "grunt-karma": "^0.8.2",
     "karma-coffee-preprocessor": "^0.2.1",
-    "karma": "^0.12.9"
+    "karma": "^0.12.9",
+    "bower": "^1.4.1"
   },
   "scripts": {
-    "postinstall": "./node_modules/grunt-cli/bin/grunt --force"
+    "postinstall": "./node_modules/bower/bin/bower install && ./node_modules/grunt-cli/bin/grunt build --force"
   }
 }
