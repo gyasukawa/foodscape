@@ -33,8 +33,10 @@ ActiveRecord::Schema.define(version: 20150822004218) do
   end
 
   create_table "pictures", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "foodscape_id"
+    t.boolean  "main"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "subscriptions", id: false, force: :cascade do |t|
@@ -45,8 +47,11 @@ ActiveRecord::Schema.define(version: 20150822004218) do
   end
 
   create_table "updates", force: :cascade do |t|
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer  "foodscape_id"
+    t.string   "heading"
+    t.string   "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
   end
 
   create_table "users", force: :cascade do |t|
