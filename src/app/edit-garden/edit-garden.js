@@ -3,9 +3,10 @@ angular.module( 'ngBoilerplate.edit-garden', [
   'ui.bootstrap'
 ])
 
+
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'edit-garden', {
-    url: '/edit-garden',
+    url: '/edit-garden/:scapeId',
     views: {
       "main": {
         controller: 'EditGardenCtrl',
@@ -16,12 +17,12 @@ angular.module( 'ngBoilerplate.edit-garden', [
   });
 })
 
-.controller( 'EditGardenCtrl', [ "$scope", "$http",function ( $scope , $http ) {
-
+.controller( 'EditGardenCtrl', [ "$scope", "$http", "$stateParams", function ( $scope , $http, $stateParams ) {
+  var scape_id = $stateParams.scapeId;
   $scope.plants = [];
 
   // GET GET GET GET GET
-  $http.get('/foodscapes/9.json').then(function(response){
+  $http.get('/foodscapes/' + scape_id + '.json').then(function(response){
 
     var resData = response.data;
     console.log("worked: ", response);
@@ -123,8 +124,8 @@ angular.module( 'ngBoilerplate.edit-garden', [
                 "other_details": otherDetails
               }};
 
-      console.log("This is what I passed through! Aren't you proud? ", data);
-      $http.put("/foodscapes/9.json", data)
+      console.log("This is what I passed through! ", data);
+      $http.put('/foodscapes/' + scape_id + '.json', data)
       .success(function(data, status, headers){console.log("put success! ", data)})
       .error(function(data, status, headers){
         console.log("FAIL to put");

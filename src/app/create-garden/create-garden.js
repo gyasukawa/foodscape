@@ -85,6 +85,7 @@ angular.module( 'ngBoilerplate.create-garden', [
       var produce = $scope.plants;
       var growingText = {"growingText": scapeInfo.growingText};
       produce.push(growingText);
+      console.log($scope.plants);
       produce = JSON.stringify(produce);
 
       var data = {foodscape: {"name": scapeInfo.name,

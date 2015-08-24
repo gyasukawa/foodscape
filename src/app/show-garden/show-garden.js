@@ -6,7 +6,7 @@ angular.module( 'ngBoilerplate.show-garden', [
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'show-garden', {
     // Going to need to mess with this URL in order to have the individual one to show.
-    url: '/show-garden',
+    url: '/show-garden/:scapeId',
     views: {
       "main": {
         controller: 'ShowGardenCtrl',
@@ -17,10 +17,12 @@ angular.module( 'ngBoilerplate.show-garden', [
   });
 })
 
-.controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope, $http ) {
+.controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope, $http, $stateParams ) {
+
+  var scape_id = $stateParams.scapeId; //grabs the scape that we want
 
 // THIS IS TO PUT STUFF ON THE PAGE ///////////////////////////////////////
-  $http.get('/foodscapes/9.json').then(function(response){
+  $http.get('/foodscapes/' + scape_id + '.json').then(function(response){
 
     var resData = response.data;
 
@@ -59,18 +61,30 @@ angular.module( 'ngBoilerplate.show-garden', [
     $scope.extraProduce = (produce[5].growingText)? produce[5].growingText : "";
     // $scope.goalsAndNeeds = resData.goalsneeds;
     $scope.otherDetails = resData.other_details;
-    $scope.updates = [{
+    
+  }, function(response){
+    console.log("nope");
+  });
+
+// Get updates!
+$http.get('/updates.json').then(function(response){
+  var resData = response.data;
+  console.log("updates: ", resData);
+}, function(response){
+  console.log("no updates");
+});
+
+$scope.updates = [{
                         "date": "4/15/15"
+                      , "user_id": 4
                       , "content": "Watered today."
                       }
                       ,{
                         "date": "5/30/15"
+                      , "user_id": 4
                       , "content": "I planted tomatoes!"
                       }];
-  }, function(response){
-    console.log("nope");
-  });
-////////// END GET REQUEST TO PUT THINGS ON SHOW PAGE //////////////
+////////// END GET REQUESTS TO PUT THINGS ON SHOW PAGE //////////////
 
   var defaultProfilePhotos = ["assets/images/default_profile_pix/profileicon-watermelon.png",
                               "assets/images/default_profile_pix/profileicon-lemon.png",
