@@ -58,10 +58,11 @@ angular.module( 'ngBoilerplate.show-garden', [
       }
     }
 
-    $scope.extraProduce = (produce[5].growingText)? produce[5].growingText : "";
+    $scope.extraProduce = (produce[5])? produce[5].growingText : "";
+
     // $scope.goalsAndNeeds = resData.goalsneeds;
     $scope.otherDetails = resData.other_details;
-    
+
   }, function(response){
     console.log("nope");
   });
@@ -99,7 +100,7 @@ $scope.updates = [{
     console.log("trying to work");
 
     if (post.text != ""){
-      var data = {update: {"foodscape_id": "id",
+      var data = {update: {"foodscape_id": scape_id,
                           "text": post.text
                   }};
 
