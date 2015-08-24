@@ -30,7 +30,8 @@ angular.module( 'ngBoilerplate.edit-garden', [
 
     // For produce checkboxes. Arrange to go onto the page.
     var produce = angular.fromJson(resData.produce);
-    $scope.extraProduce = produce[5];
+    console.log("Produce of five" , produce[5].growingText);
+    $scope.growingText = produce[5].growingText;
 
     for(var i = 0; i < 6; i++){
       $scope.plants.push(produce[i]);
@@ -91,10 +92,12 @@ angular.module( 'ngBoilerplate.edit-garden', [
   //                   "text":"I'm not sure yet",
   //                     "bool":false}];
 
-  $scope.submitGardenForm = function(scapeName, growingText, address1, address2, city, state, zip, extraGoals, otherDetails){
+  $scope.submitGardenForm = function(scapeName, growingText, address1, address2, city, state, zip, goals, extraGoals, otherDetails){
 
+
+    console.log("Goals!! ", goals);
     // if(scapeInfo){ // make sure it's not blank
-      var goalsAndNeeds = $scope.goals;
+       var goalsAndNeeds = goals;
 
       // console.log("My goals", $scope.goals);
       // $scope.goals.forEach(function(goal){
@@ -104,13 +107,13 @@ angular.module( 'ngBoilerplate.edit-garden', [
       //     console.log("goals and needs", goalsAndNeeds);
       //   }
       // })
-      if($scope.extraGoals){
-        goalsAndNeeds[4] = {"text":$scope.extraGoals}
+      if(extraGoals){
+        goalsAndNeeds[4] = {"text": extraGoals}
       }
+      goalsAndNeeds = JSON.stringify(goalsAndNeeds);
       var produce = $scope.plants;
-      console.log( $scope.plants);
+      produce[5] = {"growingText": growingText};
       produce = JSON.stringify(produce);
-      console.log("should be produce: ", produce);
 
 
       var data = {foodscape: {"name": scapeName,
@@ -124,7 +127,7 @@ angular.module( 'ngBoilerplate.edit-garden', [
                 "other_details": otherDetails
               }};
 
-      console.log("This is what I passed through! ", data);
+      console.log("This is what I passed through to edit! ", data);
       $http.put('/foodscapes/' + scape_id + '.json', data)
       .success(function(data, status, headers){console.log("put success! ", data)})
       .error(function(data, status, headers){
