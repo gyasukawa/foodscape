@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 
+# For photo upload
+gem "paperclip", "~> 4.3"
+
 # for account creation and authentication
 gem 'devise'
 # added because of controller error
