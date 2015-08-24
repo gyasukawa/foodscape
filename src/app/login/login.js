@@ -18,16 +18,17 @@ angular.module( 'ngBoilerplate.login', [
 
 .controller( 'LoginCtrl', function LoginCtrl( $scope, $http ) {
 
-  $scope.login = function(loginInfo){
+  $scope.login = function(loginInfo) {
 
     var data = {user: {
         "email": loginInfo.email,
         "password": loginInfo.password
     }}
+
     $http({
           url: "/users/sign_in.json",
           method: "POST",
-          payload: data
+          data: data
       }).success(function(data, status, headers, config) {
           $scope.data = data;
           console.log("logged in!");
@@ -38,7 +39,12 @@ angular.module( 'ngBoilerplate.login', [
           $scope.status = status;
           console.log("not logged in");
       });
-  }
+  };
+
+  $scope.logout = function() {
+
+  };
+
 })
 
 ;

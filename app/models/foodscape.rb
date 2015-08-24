@@ -4,4 +4,7 @@ class Foodscape < ActiveRecord::Base
 
   has_many :subscriptions
   has_many :users, through: :subscriptions
+
+  has_many :updates
+  has_many :pictures
 end
