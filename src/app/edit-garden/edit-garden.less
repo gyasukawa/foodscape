@@ -1,0 +1,130 @@
+.garden-page {
+  .link {
+    color: @orange;
+    text-align: center;
+    display: block;
+    margin-top: -30px;
+    text-decoration: none;
+  }
+
+  .image {
+    width: 100%;
+    height: 120px;
+    border-radius: 3px;
+    background-color: #F6F6F6;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+
+    &.placeholder-image {
+      .fa {
+        font-size: 50px;
+        color: #666;
+        line-height: 120px;
+      }
+    }
+
+    &.size25 {
+      background-image: url('images/gardens/size25.jpg');
+    }
+
+    &.size50 {
+      background-image: url('images/gardens/size100.jpg');
+    }
+
+    &.size100 {
+      background-image: url('images/gardens/communitygarden.jpg');
+    }
+  }
+
+  .question {
+    font-weight: 600;
+    margin-top: 50px;
+
+    &.border-top {
+      border-top: 1px solid @orange;
+      padding-top: 40px;
+    }
+  }
+
+  .statement {
+    margin-top: 20px;
+
+    .bolder {
+      font-weight: 600;
+      color: @orange;
+      width: 130px;
+      display: inline-block;
+    }
+  }
+
+  .tip {
+    font-style: italic;
+    font-size: 12px;
+    line-height: 100%;
+    margin-top: 5px;
+  }
+
+  .input-container {
+    margin-bottom: 10px;
+    textarea {
+      resize: none;
+      min-height: 100px;
+    }
+  }
+
+  .buttons-container {
+    margin-top: 40px;
+
+    .btn.get-started-btn {
+      width: 130px;
+      margin-left: 20px;
+    }
+
+    .btn.back-btn {
+      background: transparent;
+      border-color: transparent;
+      color: @orange;
+      float: left;
+      padding-left: 0;
+      width: auto;
+    }
+  }
+
+  .caption-images {
+    margin-top: 15px;
+    margin-bottom: 0;
+
+    h5.caption {
+      text-align: center;
+    }
+
+    .img {
+      width: 100%;
+      height: auto;
+      border: 4px solid transparent;
+
+      .transition(all);
+
+      &.selected {
+        border-color: #CCCC00;
+      }
+    }
+  }
+
+  .radio {
+    .bolder {
+      font-weight: 600;
+      color: @orange;
+    }
+  }
+
+  .upload-button-container {
+    .btn.get-started-btn {
+      width: 100px;
+    }
+  }
+}

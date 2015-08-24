@@ -32,7 +32,8 @@ $scope.error_message = false;
     var data = {user: {"name": the_user.name,
               "email": the_user.email,
               "password": the_user.password,
-              "password_confirmation":the_user.password_confirmation}};
+              "password_confirmation": the_user.password_confirmation,
+              "zip_code": the_user.zip_code}};
 
     console.log("This is what I passed through! Aren't you proud? ", data);
 
