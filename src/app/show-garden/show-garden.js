@@ -47,6 +47,7 @@ angular.module( 'ngBoilerplate.show-garden', [
     $scope.location = resData.city;
 
     var produce = angular.fromJson(resData.produce);
+    console.log("produce", produce);
     $scope.myProduce = [];
     for(var i = 0; i < 5; i++){
       if(produce[i].selected == "selected"){
@@ -55,7 +56,7 @@ angular.module( 'ngBoilerplate.show-garden', [
       }
     }
 
-    $scope.extraProduce = produce[5].growingText;
+    $scope.extraProduce = (produce[5].growingText)? produce[5].growingText : "";
     // $scope.goalsAndNeeds = resData.goalsneeds;
     $scope.otherDetails = resData.other_details;
     $scope.updates = [{
@@ -76,7 +77,7 @@ angular.module( 'ngBoilerplate.show-garden', [
                               "assets/images/default_profile_pix/profileicon-eggplant.png",
                               "assets/images/default_profile_pix/profileicon-carrot.png"];
   var randomNum = Math.floor((Math.random() * 4));
-                  }];
+                  // }];
 
 
   // Add posting updates

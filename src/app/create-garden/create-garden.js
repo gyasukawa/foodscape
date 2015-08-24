@@ -77,8 +77,7 @@ angular.module( 'ngBoilerplate.create-garden', [
       var goalsAndNeeds = $scope.goals;
       //add the additional text as a final object in the array
       if(scapeInfo.shareText){
-        goalsAndNeeds[4] = {"text":scapeInfo.shareText,
-        "bool": true}
+        goalsAndNeeds[4] = {"text":scapeInfo.shareText}
       }
       goalsAndNeeds = JSON.stringify(goalsAndNeeds);
 

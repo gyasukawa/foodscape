@@ -19,18 +19,42 @@ angular.module( 'ngBoilerplate.edit-garden', [
 .controller( 'EditGardenCtrl', [ "$scope", "$http",function ( $scope , $http ) {
 
 
-  $http.get('/foodscapes/4.json').then(function(response){
+  $http.get('/foodscapes/9.json').then(function(response){
 
     var resData = response.data;
-
     console.log("worked: ", response);
     $scope.scapeName = resData.name;
+
+    // For produce checkboxes. Arrange to go onto the page.
+    var produce = angular.fromJson(resData.produce);
+    $scope.extraProduce = produce[5];
+    $scope.plants = [];
+    for(var i = 0; i < 6; i++){
+      $scope.plants.push(produce[i]);
+    }
+
     $scope.gardenImages = ["assets/images/community-2.png","assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
     // This stuff goes in the white box under the orange labels
-    $scope.location = resData.city;
-    $scope.produce = angular.fromJson(resData.produce);
-    console.log("Parsed produce", $scope.produce);
-    $scope.goalsAndNeeds = resData.goalsneeds;
+    $scope.address1 = resData.address_line_1;
+    $scope.address2 = resData.address_line_2;
+    $scope.city = resData.city;
+    $scope.state = resData.state;
+    $scope.zip = resData.zip;
+
+
+
+
+    var myGoals = angular.fromJson(resData.goalsneeds);
+    $scope.extraGoals = myGoals[4].text;
+    $scope.goals = [];
+    for(var i = 0; i < 4; i++){
+      $scope.goals.push(myGoals[i]);
+    }
+
+
+
+    console.log("goalsneeds", $scope.goals);
+
     $scope.otherDetails = resData.other_details;
     $scope.updates = [{
                         "date": "4/15/15"
@@ -44,35 +68,8 @@ angular.module( 'ngBoilerplate.edit-garden', [
     console.log("nope");
   });
 
-// for the ng-repeat for the veggie bools
-  $scope.plants = [{  "id":1
-                      ,"type":"Veggies"
-                      ,"img":"assets/images/forms/veggies.png"
-                      ,"selected":""
-                    }
-                    ,{"id":2
-                      ,"type":"Herbs"
-                      ,"img":"assets/images/forms/herbs.png"
-                      ,"selected":""
-                    }
-                    ,{"id":3
-                      ,"type":"Fruit"
-                      ,"img":"assets/images/forms/fruit.png"
-                      ,"selected":""
-                    }
-                    ,{"id":4
-                    , "type":"Flowers"
-                      ,"img":"assets/images/forms/flowers.png"
-                      ,"selected":""
-                    }
-                    ,{"id":5
-                      ,"type":"Other"
-                    ,"img":"assets/images/forms/whatevergrowsbest.png"
-                    ,"selected":""
-                    }];
-                  console.log($scope.plants);
 
-        $scope.isSelected = [];
+  $scope.isSelected = [];
 
   $scope.toggleClass = function (the_id) {
     console.log(the_id);
