@@ -45,7 +45,7 @@ angular.module( 'ngBoilerplate', [
       });
   };
 
-}); //end AppCtrl
+}) //end AppCtrl
 
 .directive('modalDialog', [ function () {
   return {
