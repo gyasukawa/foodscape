@@ -8,6 +8,12 @@ gem 'mandrill-api'
 # For photo upload
 gem "paperclip", "~> 4.3"
 
+# for omniauth
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'therubyracer'
+gem 'omniauth-digitalocean'
+
 # for account creation and authentication
 gem 'devise'
 # added because of controller error
