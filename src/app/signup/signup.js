@@ -38,7 +38,7 @@ $scope.error_message = false;
     console.log("This is what I passed through! Aren't you proud? ", data);
 
     $http({
-        url: "/users",
+        url: "/users.json",
         method: "POST",
         data: data
     }).success(function(data, status, headers, config) {
