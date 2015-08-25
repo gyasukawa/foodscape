@@ -67,13 +67,15 @@ angular.module( 'ngBoilerplate.show-garden', [
     console.log("nope");
   });
 
+console.log("COOKIE MONSTER", document.cookie);
+
 // Get updates!
-$http.get('/updates.json').then(function(response){
-  var resData = response.data;
-  console.log("updates: ", resData);
-}, function(response){
-  console.log("no updates");
-});
+// $http.get('/updates.json').then(function(response){
+//   var resData = response.data;
+//   console.log("updates: ", resData);
+// }, function(response){
+//   console.log("no updates");
+// });
 
 $scope.updates = [{
                         "date": "4/15/15"
@@ -107,7 +109,7 @@ $scope.updates = [{
       console.log("This is what I passed through! Aren't you proud? ", data);
 
       $http({
-          url: "/updates.json",
+          url: "/foodscapes/" + scape_id + "/updates.json",
           method: "POST",
           data: data
       }).success(function(data, status, headers, config) {
