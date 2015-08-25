@@ -6,7 +6,7 @@ angular.module( 'ngBoilerplate.show-garden', [
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'show-garden', {
     // Going to need to mess with this URL in order to have the individual one to show.
-    url: '/show-garden/:scapeId',
+    url: '/foodscapes/:scapeId',
     views: {
       "main": {
         controller: 'ShowGardenCtrl',
@@ -44,7 +44,8 @@ angular.module( 'ngBoilerplate.show-garden', [
     $scope.scapeName = resData.name;
     $scope.status = "Hello from the show-garden.js. This will be a status message."; // Is this the most recent update?
     $scope.username = "Mary L."; // this needs the username of the person who runs it
-    $scope.gardenImages = ["assets/images/community-2.png","assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
+    $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"]
+    // ["assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
     // This stuff goes in the white box under the orange labels
     $scope.location = resData.city;
 
