@@ -40,11 +40,4 @@ angular.module( 'ngBoilerplate.login', [
           console.log("not logged in");
       });
   };
-
-  $scope.logout = function() {
-
-  };
-
-})
-
-;
+});

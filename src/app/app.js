@@ -31,9 +31,10 @@ angular.module( 'ngBoilerplate', [
 
   $scope.logout = function(){
     console.log("trying to log out");
-    $http.post({
-          URL: "/users/sign_out",
-          Method: "DELETE"
+    $http({
+          url: "/users/sign_out.json",
+          method: "DELETE",
+          data: {}
       }).success(function(data, status, headers, config) {
           $scope.data = data;
           // $scope.$apply(function() { $location.path("/new-garden"); });
@@ -42,9 +43,9 @@ angular.module( 'ngBoilerplate', [
           // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
           $scope.status = status;
       });
-  }
+  };
 
-}) //end AppCtrl
+}); //end AppCtrl
 
 .directive('modalDialog', [ function () {
   return {
