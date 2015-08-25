@@ -2,11 +2,14 @@
   "name": "ng-boilerplate",
   "version": "0.3.2",
   "devDependencies": {
-    "angular": "~1.4",
+    "angular": "~1.4.*",
     "bootstrap": "~3.1",
     "angular-carousel": "~0.3.12",
     "angular-bootstrap": "~0.10.0",
     "angular-ui-router": "~0.2"
   },
-  "dependencies": {}
+  "dependencies": {
+    "angular-cookie": "~4.0.9",
+    "angular-cookies": "~1.4.*"
+  }
 }

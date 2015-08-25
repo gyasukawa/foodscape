@@ -12,14 +12,49 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.edit-garden',
   'ngBoilerplate.following',
   'ui.router',
-  'angular-carousel'
+  'angular-carousel',
+  'ngCookies',
 ])
+.factory('Auth', ['$cookieStore', function ($cookieStore) {
+
+  var _user = {};
+
+  return {
+      user : _user,
+      set: function (_user) {
+        console.log("setting!");
+          // you can retrive a user setted from another page, like login sucessful page.
+          existing_cookie_user = $cookieStore.get('current.user');
+          _user =  _user || existing_cookie_user;
+          $cookieStore.put('current.user', _user);
+          console.log("I am the user? ", _user);
+      },
+      remove: function () {
+          $cookieStore.remove('current.user', _user);
+      }
+  };
+}])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
   $urlRouterProvider.otherwise( '/home' );
 })
 
-.run( function run () {
+.run( function run (Auth, UserRestService) {
+  var _user = UserRestService.requestCurrentUser();
+  Auth.set(_user);
+})
+
+.service("UserRestService", function UserRestService ($http, $location, $q){
+    return service = {
+      requestCurrentUser: function() {
+        return $http.get('/users.json').then(function(response) {
+          service.currentUser = response.data.user;
+          console.log(service.currentUser);
+          return service.currentUser;
+        });
+      }
+    }
+    // currentUser: null,
 })
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, $http ) {

@@ -21,6 +21,8 @@ class FoodscapesController < ApplicationController
   # POST /foodscapes.json
   def create
     @foodscape = Foodscape.new(foodscape_params)
+    @user = current_user
+    @foodscape.user_id = @user.id
 
     if @foodscape.save
       render json: @foodscape, status: :created
