@@ -180,11 +180,8 @@ DEPENDENCIES
   devise
   jbuilder (~> 2.0)
   jquery-rails
-<<<<<<< HEAD
   mandrill-api
-=======
   paperclip (~> 4.3)
->>>>>>> 80026c8f8ce0a9e3c848458035636490aba388e8
   pg
   rails (= 4.2.1)
   rails_12factor
@@ -196,9 +193,6 @@ DEPENDENCIES
   turbolinks
   uglifier (>= 1.3.0)
   web-console (~> 2.0)
-<<<<<<< HEAD
-=======
 
 BUNDLED WITH
    1.10.6
->>>>>>> 80026c8f8ce0a9e3c848458035636490aba388e8
