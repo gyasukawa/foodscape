@@ -17,6 +17,7 @@ class FoodscapesController < ApplicationController
     render json: @foodscape
   end
 
+
   # POST /foodscapes
   # POST /foodscapes.json
   def create

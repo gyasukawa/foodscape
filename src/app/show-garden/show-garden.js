@@ -70,12 +70,19 @@ angular.module( 'ngBoilerplate.show-garden', [
 console.log("COOKIE MONSTER", document.cookie);
 
 // Get updates!
-// $http.get('/updates.json').then(function(response){
-//   var resData = response.data;
-//   console.log("updates: ", resData);
-// }, function(response){
-//   console.log("no updates");
-// });
+$http.get("/foodscapes/" + scape_id + "/updates.json").then(function(response){
+  var resData = response.data;
+  console.log("updates: ", resData);
+  var updateArray = [];
+  for(var i = 0; i < resData.length; i++){
+     updateArray.push({"date" : resData[i].created_at,
+                      "content": resData[i].description});
+  }
+
+  $scope.updates = updateArray;
+}, function(response){
+  console.log("no updates");
+});
 
 $scope.updates = [{
                         "date": "4/15/15"
@@ -112,10 +119,10 @@ $scope.updates = [{
           url: "/foodscapes/" + scape_id + "/updates.json",
           method: "POST",
           data: data
-      }).success(function(data, status, headers, config) {
+      }).success(function(data, status, headers) {
           $scope.data = data;
           // $scope.$apply(function() { $location.path("/new-garden"); });
-      }).error(function(data, status, headers, config) {
+      }).error(function(data, status, headers) {
           $scope.error_message = true;
           // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
           $scope.status = status;
@@ -147,6 +154,17 @@ $scope.updates = [{
   $scope.follow = function (){
     $scope.toggleModal();
     $scope.showFollow = true;
+    $http({
+      url: "/foodscapes/" + scape_id + "/subscriptions.json",
+      method: "POST",
+      data: {}
+    }).succes(function(data, status, headers){
+      $scope.status = status;
+      console.log("Following!");
+    }).error(function(data, status, headers){
+      console.log("ERROR");
+      $scope.status = status;
+    })
   };
 
   //////// This shows up to ask if you're sure you want to unfollow someone
