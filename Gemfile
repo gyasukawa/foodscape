@@ -12,7 +12,7 @@ gem "paperclip", "~> 4.3"
 gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'therubyracer'
-gem 'omniauth-digitalocean'
+gem 'omniauth-oauth2'
 
 # for account creation and authentication
 gem 'devise'
