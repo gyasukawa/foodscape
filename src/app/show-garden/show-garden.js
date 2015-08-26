@@ -24,13 +24,13 @@ angular.module( 'ngBoilerplate.show-garden', [
 // THIS IS TO PUT STUFF ON THE PAGE ///////////////////////////////////////
   $http.get('/foodscapes/' + scape_id + '.json').then(function(response){
 
-    var resData = response.data;
+    var resData = response.data.foodscape;
 
     console.log("worked: ", response);
     console.log(resData);
-    console.log(resData.current_user);
+    console.log(response.data.current_user);
 
-    var goalsAndNeeds = angular.fromJson(resData.foodscape.goalsneeds);
+    var goalsAndNeeds = angular.fromJson(resData.goalsneeds);
     $scope.myGoals = [];
     for(var i = 0; i < 4; i++){
       if(goalsAndNeeds[i].bool){
@@ -44,7 +44,6 @@ angular.module( 'ngBoilerplate.show-garden', [
     // Pulls from our random veggie pix
     $scope.profilePix = defaultProfilePhotos[randomNum];
     $scope.scapeName = resData.name;
-    $scope.status = "Hello from the show-garden.js. This will be a status message."; // Is this the most recent update?
     $scope.username = "Mary L."; // this needs the username of the person who runs it
     $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"]
     // ["assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
@@ -70,33 +69,41 @@ angular.module( 'ngBoilerplate.show-garden', [
     console.log("nope");
   });
 
-console.log("COOKIE MONSTER", document.cookie);
 
 // Get updates!
 $http.get("/foodscapes/" + scape_id + "/updates.json").then(function(response){
-  var resData = response.data;
-  console.log("updates: ", resData);
+  console.log("UPDATE RESPONSE ", response);
+  var upData = response.data;
+  console.log("updates: ", upData);
   var updateArray = [];
-  for(var i = 0; i < resData.length; i++){
-     updateArray.push({"date" : resData[i].created_at,
-                      "content": resData[i].description});
+  // Backwards to put the updates in reverse chron order
+  for(var i = upData.length-1; i > -1; i--){
+    var date = upData[i].created_at;
+    console.log(date);
+    var year = date.slice(0,4);
+    var month = date.slice(5,7);
+    var day = date.slice(8,10);
+    console.log("Date: ", day, month, year);
+     updateArray.push({"date" : day + "/" + month + "/" + year,
+                      "content": upData[i].description});
   }
 
   $scope.updates = updateArray;
+  $scope.status = updateArray[0].content;
 }, function(response){
   console.log("no updates");
 });
 
-$scope.updates = [{
-                        "date": "4/15/15"
-                      , "user_id": 4
-                      , "content": "Watered today."
-                      }
-                      ,{
-                        "date": "5/30/15"
-                      , "user_id": 4
-                      , "content": "I planted tomatoes!"
-                      }];
+// $scope.updates = [{
+//                         "date": "4/15/15"
+//                       , "user_id": 4
+//                       , "content": "Watered today."
+//                       }
+//                       ,{
+//                         "date": "5/30/15"
+//                       , "user_id": 4
+//                       , "content": "I planted tomatoes!"
+//                       }];
 ////////// END GET REQUESTS TO PUT THINGS ON SHOW PAGE //////////////
 
   var defaultProfilePhotos = ["assets/images/default_profile_pix/profileicon-watermelon.png",
@@ -109,17 +116,18 @@ $scope.updates = [{
 
   // Add posting updates
   $scope.postIt = function(post){
-    console.log("trying to work");
+    console.log("trying to work ", scape_id);
 
     if (post.text != ""){
-      var data = {update: {"foodscape_id": scape_id,
-                          "text": post.text
+      var data = {update: {
+        "foodscape_id": Number(scape_id),
+                          "description": post.text
                   }};
 
       console.log("This is what I passed through! Aren't you proud? ", data);
 
       $http({
-          url: "/foodscapes/" + scape_id + "/updates.json",
+          url: "/foodscapes/" + Number(scape_id) + "/updates.json",
           method: "POST",
           data: data
       }).success(function(data, status, headers) {
