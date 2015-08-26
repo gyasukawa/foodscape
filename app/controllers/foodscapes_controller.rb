@@ -14,7 +14,7 @@ class FoodscapesController < ApplicationController
   # GET /foodscapes/1
   # GET /foodscapes/1.json
   def show
-    render json: @foodscape
+    render json: {foodscape: @foodscape, current_user: current_user, user_signed_in?: user_signed_in?, user_session: user_session}
   end
 
   # POST /foodscapes

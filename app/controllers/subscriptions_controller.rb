@@ -10,7 +10,7 @@ class SubscriptionsController < ApplicationController
   def create
     @subscription = Subscription.new(user_id: current_user.id, foodscape_id: params[:foodscape_id])
 
-    if @user.save
+    if @subscription.save
       render json: @subscription, status: :created
     else
       render json: @subscription, status: :unprocessable_entity
