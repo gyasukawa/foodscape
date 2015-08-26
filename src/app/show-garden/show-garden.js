@@ -138,6 +138,7 @@ pullUpdates();
           data: data
       }).success(function(data, status, headers) {
           $scope.data = data;
+          $scope.update.text = "";
           pullUpdates();
           // $scope.$apply(function() { $location.path("/new-garden"); });
       }).error(function(data, status, headers) {
