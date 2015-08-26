@@ -6,7 +6,7 @@ angular.module( 'ngBoilerplate.edit-garden', [
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'edit-garden', {
-    url: '/edit-garden/:scapeId',
+    url: '/foodscapes/edit/:scapeId',
     views: {
       "main": {
         controller: 'EditGardenCtrl',
