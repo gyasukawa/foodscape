@@ -2,19 +2,25 @@ class SubscriptionsController < ApplicationController
   before_filter :intercept_html_requests, :authenticate_user!
   layout false
   respond_to :json
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :set_subscription, only: [:show, :edit, :update, :destroy]
 
 
-  # GET /users/1
-  # GET /users/1.json
-  def show
-    render json: @user
+  # POST /users
+  # POST /users.json
+  def create
+    @subscription = Subscription.new(user_id: current_user.id, foodscape_id: params[:foodscape_id])
+
+    if @user.save
+      render json: @subscription, status: :created
+    else
+      render json: @subscription, status: :unprocessable_entity
+    end
   end
 
   # DELETE /users/1
   # DELETE /users/1.json
   def destroy
-    @user.destroy
+    @subscription.destroy
 
     head :no_content
   end
