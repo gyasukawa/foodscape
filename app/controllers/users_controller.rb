@@ -1,8 +1,8 @@
 class UsersController < ApplicationController
-  before_filter :intercept_html_requests, :authenticate_user!
+  before_filter :intercept_html_requests
   layout false
   respond_to :json
-  before_action :set_user, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, :set_user, only: [:show, :edit, :update, :destroy]
 
   # GET /users
   # GET /users.json

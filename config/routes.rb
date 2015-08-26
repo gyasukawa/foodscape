@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :foodscapes do
+    resources :subscriptions
     resources :updates
     resources :pictures
   end

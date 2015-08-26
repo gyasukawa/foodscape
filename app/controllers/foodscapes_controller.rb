@@ -1,8 +1,8 @@
 class FoodscapesController < ApplicationController
-  before_filter :intercept_html_requests, :authenticate_user!
+  before_filter :intercept_html_requests
   layout false
   respond_to :json
-  before_action :set_foodscape, only: [:show, :edit, :update, :destroy]
+  before_action :authenticate_user!, :set_foodscape, only: [:show, :edit, :update, :destroy]
 
   # GET /foodscapes
   # GET /foodscapes.json
@@ -21,6 +21,8 @@ class FoodscapesController < ApplicationController
   # POST /foodscapes.json
   def create
     @foodscape = Foodscape.new(foodscape_params, user_id: current_user.id)
+
+    p "#{current_user.id}"
 
     if @foodscape.save
       render json: @foodscape, status: :created
@@ -55,7 +57,7 @@ class FoodscapesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def foodscape_params
-      params.require(:foodscape).permit(:name, :address_line_1, :address_line_2, :city, :state, :zip_code, :produce, :goalsneeds, :other_details, :URL_slug)
+      params.require(:foodscape).permit(:user_id, :name, :address_line_1, :address_line_2, :city, :state, :zip_code, :produce, :goalsneeds, :other_details, :URL_slug)
     end
 
 end
