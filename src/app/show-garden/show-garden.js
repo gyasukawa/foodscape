@@ -71,28 +71,34 @@ angular.module( 'ngBoilerplate.show-garden', [
 
 
 // Get updates!
-$http.get("/foodscapes/" + scape_id + "/updates.json").then(function(response){
-  console.log("UPDATE RESPONSE ", response);
-  var upData = response.data;
-  console.log("updates: ", upData);
-  var updateArray = [];
-  // Backwards to put the updates in reverse chron order
-  for(var i = upData.length-1; i > -1; i--){
-    var date = upData[i].created_at;
-    console.log(date);
-    var year = date.slice(0,4);
-    var month = date.slice(5,7);
-    var day = date.slice(8,10);
-    console.log("Date: ", day, month, year);
-     updateArray.push({"date" : day + "/" + month + "/" + year,
-                      "content": upData[i].description});
-  }
 
-  $scope.updates = updateArray;
-  $scope.status = updateArray[0].content;
-}, function(response){
-  console.log("no updates");
-});
+
+var pullUpdates = function(){
+  $http.get("/foodscapes/" + scape_id + "/updates.json").then(function(response){
+      console.log("UPDATE RESPONSE ", response);
+      var upData = response.data;
+      console.log("updates: ", upData);
+      var updateArray = [];
+      // Backwards to put the updates in reverse chron order
+      for(var i = upData.length-1; i > -1; i--){
+        var date = upData[i].created_at;
+        console.log(date);
+        var year = date.slice(0,4);
+        var month = date.slice(5,7);
+        var day = date.slice(8,10);
+        console.log("Date: ", day, month, year);
+        updateArray.push({"date" : day + "/" + month + "/" + year,
+                          "content": upData[i].description});
+      }
+
+    $scope.updates = updateArray;
+    $scope.status = updateArray[0].content;
+      }, function(response){
+    console.log("no updates");
+  });
+}
+
+pullUpdates();
 
 // $scope.updates = [{
 //                         "date": "4/15/15"
@@ -132,6 +138,7 @@ $http.get("/foodscapes/" + scape_id + "/updates.json").then(function(response){
           data: data
       }).success(function(data, status, headers) {
           $scope.data = data;
+          pullUpdates();
           // $scope.$apply(function() { $location.path("/new-garden"); });
       }).error(function(data, status, headers) {
           $scope.error_message = true;
