@@ -22,7 +22,10 @@ class FoodscapesController < ApplicationController
   def create
     @foodscape = Foodscape.new(foodscape_params, user_id: current_user.id)
 
-    p "#{current_user.id}"
+    p "I am printing the ID OF THE CURRENT_USER"
+    p '*' * 10
+    p current_user.id
+    p "THIS IS THE END OF THE CURRENT_USER NONSENSE"
 
     if @foodscape.save
       render json: @foodscape, status: :created
