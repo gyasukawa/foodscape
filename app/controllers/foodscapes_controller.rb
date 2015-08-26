@@ -20,9 +20,10 @@ class FoodscapesController < ApplicationController
   # POST /foodscapes
   # POST /foodscapes.json
   def create
-    @foodscape = Foodscape.new(foodscape_params, user_id: current_user.id)
+    @foodscape = Foodscape.new(foodscape_params)
 
     if @foodscape.save
+      @foodscape.update(user_id: current_user.id)
       render json: @foodscape, status: :created
     else
       render json: @foodscape.errors, status: :unprocessable_entity
