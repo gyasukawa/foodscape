@@ -107,8 +107,10 @@
                   <form>
                     <textarea ng-model="update.text"></textarea>
                     <button ng-click="postIt(update)" class="btn message-btn update-btn">Add Update</button>
+                    <button onclick="sendTheMail(); return false;">Send the Mail</button>
                   </form>
                   <!-- Use ng-repeat here to put the date and content of each message -->
+                  <pre id="response"></pre>
 
                 </div>
               </div>

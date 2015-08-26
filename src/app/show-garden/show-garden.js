@@ -119,6 +119,67 @@ pullUpdates();
   var randomNum = Math.floor((Math.random() * 4));
                   // }];
 
+// start Mandrill API function and params
+      // Create a function to log the response from the Mandrill API
+      function log(obj) {
+          $('#response').text(JSON.stringify(obj));
+      }
+
+      // create a new instance of the Mandrill class with your API key
+      var m = new mandrill.Mandrill('55zOecDadI2ajt-66mNoXQ');
+
+      // create a variable for the API call parameters
+      var params = {
+          "message": {
+              "from_email":"admin@myfoodscape.com",
+              "to":[{"email":"iring.ma@gmail.com"},{"email":"grace.yasukawa@gmail.com"}],
+              "subject": "Sending a text email from the Mandrill API",
+              "html": "<h4>You have an update from *|HOST|*\'s Foodscape</h4><p>Hi *|NAME|*, Tomatoes are ready for picking!</p><br>Please visit the <a href=\'http://myfoodscape.com\'>foodscape</a> to see more details</br>",
+              "autotext": true,
+              "track_opens": true,
+              "track_clicks": true,
+              "merge_vars": [{
+                  "rcpt": "iring.ma@gmail.com",
+                  "vars": [
+                              {
+                              "name": "HOST",
+                              "content": "Mary"
+                              },
+                              {
+                              "name": "NAME",
+                              "content": "Irene"
+                              }
+                          ]
+                  },
+                  {
+                  "rcpt": "grace.yasukawa@gmail.com",
+                  "vars": [
+                              {
+                              "name": "HOST",
+                              "content": "Mary"
+                              },
+                              {
+                              "name": "NAME",
+                              "content": "Grace"
+                              }
+                          ]
+                  }
+                  ]
+          }
+      };
+
+      function sendTheMail() {
+      // Send the email!
+
+          m.messages.send(params, function(res) {
+              log(res);
+          }, function(err) {
+              log(err);
+          });
+      }
+
+
+// end Mandrill API stuff
 
   // Add posting updates
   $scope.postIt = function(post){
