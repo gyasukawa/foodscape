@@ -48,6 +48,27 @@ class FoodscapesController < ApplicationController
     head :no_content
   end
 
+  # ### Subscriptions custom routes ###
+
+  # POST /foodscapes/1/follow
+  # POST /foodscapes/1/follow.json
+  def follow
+    current_user.subscriptions << @foodscape
+    if current_user.subscriptions.save
+      render json: current_user.subscriptions.where(foodscape_id: params[:foodscape_id]).first
+    else
+      render json: current_user.subscriptions.errors, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /foodscapes/1/unfollow
+  # DELETE /foodscapes/1/unfollow.json
+  def unfollow
+    current_user.subscriptions.delete(@foodscape)
+
+    head :no_content
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_foodscape
