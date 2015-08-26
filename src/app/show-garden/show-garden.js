@@ -27,8 +27,10 @@ angular.module( 'ngBoilerplate.show-garden', [
     var resData = response.data;
 
     console.log("worked: ", response);
+    console.log(resData);
+    console.log(resData.current_user);
 
-    var goalsAndNeeds = angular.fromJson(resData.goalsneeds);
+    var goalsAndNeeds = angular.fromJson(resData.foodscape.goalsneeds);
     $scope.myGoals = [];
     for(var i = 0; i < 4; i++){
       if(goalsAndNeeds[i].bool){
