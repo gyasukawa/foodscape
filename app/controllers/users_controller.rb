@@ -47,6 +47,15 @@ class UsersController < ApplicationController
   #   head :no_content
   # end
 
+  # ### Subscriptions custom route - Foodscapes I'm Following ###
+
+  # GET /users/1/following
+  # GET /users/1/following.json
+  def following
+    @subscriptions = current_user.subscriptions
+    render json: @subscriptions
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_user
