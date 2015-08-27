@@ -53,7 +53,12 @@ class UsersController < ApplicationController
   # GET /users/1/following.json
   def following
     @subscriptions = current_user.subscriptions
-    render json: @subscriptions
+    @hosts = []
+    @subscriptions.each do |subscription|
+      foodscape = Foodscape.find(subscription.foodscape_id)
+      @hosts << User.find(foodscape.user_id)
+    end
+    render json: {subscriptions: @subscriptions, hosts: @hosts}
   end
 
   # ### Current User custom route ###
