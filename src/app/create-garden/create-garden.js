@@ -5,7 +5,7 @@ angular.module( 'ngBoilerplate.create-garden', [
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'create-garden', {
-    url: '/create-garden',
+    url: '/foodscapes/new',
     views: {
       "main": {
         controller: 'CreateGardenCtrl',

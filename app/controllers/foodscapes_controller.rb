@@ -1,5 +1,5 @@
 class FoodscapesController < ApplicationController
-  before_filter :intercept_html_requests, :authenticate_user!
+  before_filter :intercept_html_requests #, :authenticate_user!
   layout false
   respond_to :json
   before_action :set_foodscape, only: [:show, :edit, :update, :destroy, :follow, :unfollow]
@@ -17,10 +17,13 @@ class FoodscapesController < ApplicationController
     render json: {foodscape: @foodscape, current_user: current_user, user_signed_in?: user_signed_in?, user_session: user_session}
   end
 
+
   # POST /foodscapes
   # POST /foodscapes.json
   def create
     @foodscape = Foodscape.new(foodscape_params)
+    @user = current_user
+    @foodscape.user_id = @user.id
 
     if @foodscape.save
       @foodscape.update(user_id: current_user.id)
