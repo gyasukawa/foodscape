@@ -2,7 +2,7 @@ class FoodscapesController < ApplicationController
   before_filter :intercept_html_requests #, :authenticate_user!
   layout false
   respond_to :json
-  before_action :set_foodscape, only: [:show, :edit, :update, :destroy]
+  before_action :set_foodscape, only: [:show, :edit, :update, :destroy, :follow, :unfollow]
 
   # GET /foodscapes
   # GET /foodscapes.json
@@ -47,6 +47,27 @@ class FoodscapesController < ApplicationController
   # DELETE /foodscapes/1.json
   def destroy
     @foodscape.destroy
+
+    head :no_content
+  end
+
+  # ### Subscriptions custom routes ###
+
+  # POST /foodscapes/1/follow
+  # POST /foodscapes/1/follow.json
+  def follow
+    current_user.subscriptions << @foodscape
+    if current_user.subscriptions.save
+      render json: current_user.subscriptions.where(foodscape_id: params[:foodscape_id]).first
+    else
+      render json: current_user.subscriptions.errors, status: :unprocessable_entity
+    end
+  end
+
+  # DELETE /foodscapes/1/unfollow
+  # DELETE /foodscapes/1/unfollow.json
+  def unfollow
+    current_user.subscriptions.delete(@foodscape)
 
     head :no_content
   end
