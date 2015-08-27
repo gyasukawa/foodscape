@@ -11,4 +11,4 @@ class OmniauthCallbacksController < ApplicationController
   end
 end
 
-# Finally, if you want to allow your users to cancel sign up with Facebook, you can redirect them to "cancel_user_registration_path". This will remove all session data starting with "devise." and the new_with_session hook above will no longer be called. <--FIGURE OUT HOW TO DO THIS!
+# "If you want to allow your users to cancel sign up with Facebook, you can redirect them to "cancel_user_registration_path". This will remove all session data starting with "devise." and the new_with_session hook above will no longer be called." <--FIGURE OUT HOW TO DO THIS!
