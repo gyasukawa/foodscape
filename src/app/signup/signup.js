@@ -55,7 +55,7 @@ $scope.error_message = false;
     console.log("trying to execute Facebook OAuth");
 
     $http({
-      url: "/my_engine/users/auth/facebook",
+      url: "/users/auth/facebook",
       method: "POST"
     }).success(function(status, headers, config) {
       console.log("success!")
