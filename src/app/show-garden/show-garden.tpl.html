@@ -38,15 +38,15 @@
           <p>{{status}}</p>
 
           <!-- These buttons show up when the user has not followed this person's page or is not logged in -->
-          <!-- <button class="btn get-started-btn">Follow</button>
-          <button class="btn message-btn">Share Profile</button> -->
+          <button ng-show="userFollowing" class="btn get-started-btn" ng-click="unfollow()">Unfollow</button>
+          <!-- <button ng-hide="usersScape" class="btn message-btn">Share Profile</button> -->
 
           <!-- This button shows up when the user is following this person already...ask if there needs to be a share button here, too -->
-          <button ng-click='follow()' class="btn get-started-btn">Follow</button>
+          <button ng-show="userNotFollowing" ng-click='follow()' class="btn get-started-btn">Follow</button>
 
           <!-- These buttons show up when this this is the user's page and they are logged in -->
-          <!-- <button class="btn get-started-btn">Share</button>
-          <button class="btn message-btn">Edit Page</button> -->
+          <button class="btn get-started-btn">Share</button>
+          <button ng-show="usersScape" class="btn message-btn">Edit Foodscape</button>
         </div>
       </div>
     </div>
@@ -65,7 +65,7 @@
             {{username}}
             <!-- <img src="#" width="100px"> -->
             <!-- This button shows up when this is somebody else's page -->
-            <button ng-click='message()' class="btn message-btn">Message</button>
+            <button ng-show="showMessageButton" ng-click='message()' class="btn message-btn">Message</button>
           </div>
           <div class="col-xs-9 col-md-9 col-sm-9 col-lg-9">
             <!-- <img src="assets/images/community-2.png" width="100%"> -->
@@ -104,7 +104,7 @@
                     <div class="updateDate"> {{update.date}}</div>
                     <div class="updateContent">{{update.content}}</div>
                   </div>
-                  <form>
+                  <form ng-show="usersScape">
                     <textarea ng-model="update.text"></textarea>
                     <button ng-click="postIt(update)" class="btn message-btn update-btn">Add Update</button>
                     <!-- <button onclick="sendTheMail(); return false;">Send the Mail</button> -->
@@ -119,14 +119,14 @@
               <div class="col-xs-5 col-xs-offset-7">
 
                 <!-- This button shows up when this is someone else's profile -->
-                <button ng-click='message()' class="btn message-btn">Message</button>
+                <button ng-show="showMessageButton" ng-click='message()' class="btn message-btn">Message</button>
 
 
                 <!-- This button shows up if the user follows this person -->
-                <!-- <button ng-click="unfollowConfirm()" class="btn get-started-btn">Unfollow</button> -->
+                <button ng-show="userFollowing" ng-click="unfollowConfirm()" class="btn get-started-btn">Unfollow</button>
 
                 <!-- This button shows up if the user does not follow this person -->
-                <button ng-click="follow()" class="btn get-started-btn">Follow</button>
+                <button ng-show="userNotFollowing" ng-click="follow()" class="btn get-started-btn">Follow</button>
 
                 <!-- No buttons if this is the user's page -->
 

@@ -21,19 +21,39 @@ angular.module( 'ngBoilerplate.show-garden', [
 
   var scape_id = $stateParams.scapeId; //grabs the scape that we want
 
-// THIS IS TO PUT STUFF ON THE PAGE ///////////////////////////////////////
-  var current_user;
+  var current_user; // inits a current_user variable so that we can use it outside the http request
 
+// THIS IS TO PUT STUFF ON THE PAGE ///////////////////////////////////////
+
+  //This request gets the information for this specific foodscape
   $http.get('/foodscapes/' + scape_id + '.json').then(function(response){
 
     var resData = response.data.foodscape;
+
+    //current_user is sent over when the page loads
     current_user = response.data.current_user;
-    // console.log("Current user from inside get " , current_user);
 
-    // console.log("worked: ", response);
-    // console.log(resData);
-    // console.log(response.data.current_user);
+    var usFoll = false;
+    $scope.usersScape = false;
+    $scope.userFollowing = false;
+    $scope.userNotFollowing = false;
+    $scope.showMessageButton = false;
+    //AUTH STUFF
+    console.log("here is the current user", current_user);
+    if (current_user){
+      console.log("The IDs, scape and then user ", resData.user_id , current_user.id);
+      if(current_user.id == resData.user_id){
+        $scope.usersScape = true;
+      } else if(usFoll){//current_user is following the foodscape
+        $scope.showMessageButton = true;
+        $scope.userFollowing = true;
+      } else{
+        $scope.showMessageButton = true;
+        $scope.userNotFollowing = true;
+      }
+    }
 
+    //Loading foodscape data onto page//////////////////
     var goalsAndNeeds = angular.fromJson(resData.goalsneeds);
     $scope.myGoals = [];
     for(var i = 0; i < 4; i++){
@@ -44,7 +64,10 @@ angular.module( 'ngBoilerplate.show-garden', [
       }
     }
     $scope.extraGoal = goalsAndNeeds[4].text;
-    $scope.username = response.data.current_user.name;
+
+    //Get correct username for this!!
+    $scope.username = resData.user_id;
+
 
     // Pulls from our random veggie pix
     $scope.profilePix = defaultProfilePhotos[randomNum];
@@ -71,45 +94,37 @@ angular.module( 'ngBoilerplate.show-garden', [
 
   }, function(response){
     console.log("nope");
+    //Need to add error handling here
   });
 
 
-// Get updates!
-var pullUpdates = function(){
-  $http.get("/foodscapes/" + scape_id + "/updates.json").then(function(response){
-      // console.log("UPDATE RESPONSE ", response);
-      var upData = response.data;
-      // console.log("updates: ", upData);
-      var updateArray = [];
-      // Backwards to put the updates in reverse chron order
-      for(var i = upData.length-1; i > -1; i--){
-        var date = upData[i].created_at;
-        var year = date.slice(0,4);
-        var month = date.slice(5,7);
-        var day = date.slice(8,10);
-        updateArray.push({"date" : day + "/" + month + "/" + year,
-                          "content": upData[i].description});
-      }
+  // Get updates and put them on the page. This is in a function cause it needs to run again after we post.
+  var pullUpdates = function(){
+    $http.get("/foodscapes/" + scape_id + "/updates.json").then(function(response){
+        // console.log("UPDATE RESPONSE ", response);
+        var upData = response.data;
+        // console.log("updates: ", upData);
+        var updateArray = [];
+        // Backwards to put the updates in reverse chron order
+        for(var i = upData.length-1; i > -1; i--){
+          var date = upData[i].created_at;
+          var year = date.slice(0,4);
+          var month = date.slice(5,7);
+          var day = date.slice(8,10);
+          updateArray.push({"date" : day + "/" + month + "/" + year,
+                            "content": upData[i].description});
+        }
 
-    $scope.updates = updateArray;
-    $scope.status = updateArray[0].content;
-      }, function(response){
-    console.log("no updates");
-  });
-}
+      $scope.updates = updateArray;
+      $scope.status = updateArray[0].content;
+        }, function(response){
+      console.log("no updates");
+    });
+  }
+  // Pulls updates when the page loads
+  pullUpdates();
 
-pullUpdates();
 
-// $scope.updates = [{
-//                         "date": "4/15/15"
-//                       , "user_id": 4
-//                       , "content": "Watered today."
-//                       }
-//                       ,{
-//                         "date": "5/30/15"
-//                       , "user_id": 4
-//                       , "content": "I planted tomatoes!"
-//                       }];
 ////////// END GET REQUESTS TO PUT THINGS ON SHOW PAGE //////////////
 
   var defaultProfilePhotos = ["assets/images/default_profile_pix/profileicon-watermelon.png",
@@ -119,6 +134,8 @@ pullUpdates();
   var randomNum = Math.floor((Math.random() * 4));
                   // }];
 
+
+/////////////// MAILER FOR UPDATES /////////////////////
 // start Mandrill API function and params
       // Create a function to log the response from the Mandrill API
       // function log(obj) {
@@ -139,7 +156,7 @@ pullUpdates();
             "from_email":"admin@myfoodscape.com",
             "to":[{"email":"iring.ma@gmail.com"},{"email":"grace.yasukawa@gmail.com"},{"email":"allxiecleary@gmail.com"}], // This needs to be subscribers
             "subject": "Update from " + userName + "'s Foodscape",
-            "html": "<h4>You have an update from " + userName + "'s Foodscape</h4><p>" + update + "</p><br>Please visit the <a href=\'http://myfoodscape.com\'>foodscape</a> to see more details</br>",
+            "html": "<h4>You have an update from " + userName + "'s Foodscape</h4><p>" + update + "</p><br>Please visit the <a href='http://myfoodscape.com'>foodscape</a> to see more details</br>",//I'm going to actually put the link to the foodscape in the email
             "autotext": true,
             "track_opens": true,
             "track_clicks": true,
@@ -187,7 +204,7 @@ pullUpdates();
   }
 
 
-// end Mandrill API stuff
+// ///////end Mandrill mailer API stuff //////
 
   // Add posting updates
   $scope.postIt = function(post){
@@ -199,9 +216,6 @@ pullUpdates();
                           "description": post.text
                   }};
 
-      console.log("This is what I passed through! Aren't you proud? ", data);
-      console.log("current user from inside postit ", current_user);
-      
       var updateMessage = makeUpdateEmail(post.text);
       sendTheMail(updateMessage);
 

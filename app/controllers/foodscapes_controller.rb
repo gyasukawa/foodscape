@@ -1,5 +1,5 @@
 class FoodscapesController < ApplicationController
-  before_filter :intercept_html_requests, :authenticate_user!
+  before_filter :intercept_html_requests #, :authenticate_user!
   layout false
   respond_to :json
   before_action :set_foodscape, only: [:show, :edit, :update, :destroy]
