@@ -4,6 +4,7 @@ class FoodscapesController < ApplicationController
   respond_to :json
   before_action :set_foodscape, only: [:show, :edit, :update, :destroy]
 
+
   # GET /foodscapes
   # GET /foodscapes.json
   def index

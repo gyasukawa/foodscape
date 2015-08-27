@@ -2,6 +2,9 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 
+# for photo attachments
+gem "paperclip", "~> 4.3"
+
 # for update model emails
 gem 'mandrill-api'
 
