@@ -1,9 +1,10 @@
 angular.module( 'ngBoilerplate.login', [
+  'ng-token-auth',
   'ui.router',
   'ui.bootstrap'
 ])
 
-.config(function config( $stateProvider ) {
+.config(function config( $stateProvider, $authProvider ) {
   $stateProvider.state( 'login', {
     url: '/login',
     views: {
@@ -14,9 +15,13 @@ angular.module( 'ngBoilerplate.login', [
     },
     data:{ pageTitle: 'Login' }
   });
+
+  $authProvider.configure({
+    apiUrl: 'http://localhost:3000'
+  });
 })
 
-.controller( 'LoginCtrl', function LoginCtrl( $scope, $http ) {
+.controller( 'LoginCtrl', function LoginCtrl( $scope, $http, $auth ) {
 
   $scope.login = function(loginInfo) {
 
@@ -40,4 +45,18 @@ angular.module( 'ngBoilerplate.login', [
           console.log("not logged in");
       });
   };
+
+  // Omniauth Sign In
+
+  $scope.handleBtnClick = function() {
+    $auth.authenticate('facebook')
+    .then(function(resp) {
+      alert('something successful happened')
+    })
+    .catch(function(resp) {
+        // handle errors
+        alert('something terrible happened')
+    });
+  };
+
 });
