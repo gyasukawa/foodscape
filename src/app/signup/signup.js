@@ -49,7 +49,22 @@ $scope.error_message = false;
         // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
         $scope.status = status;
     });
-  }
+  };
+
+  $scope.auth = function() {
+    console.log("trying to execute Facebook OAuth");
+
+    $http({
+      url: "/my_engine/users/auth/facebook",
+      method: "POST"
+    }).success(function(status, headers, config) {
+      console.log("success!")
+    }).error(function(status, headers, config) {
+      console.log("failure...")
+      $scope.error_message = true;
+    });
+
+  };
 
 
 
