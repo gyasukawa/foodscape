@@ -10,7 +10,7 @@ gem "paperclip", "~> 4.3"
 
 # for omniauth
 gem 'omniauth'
-gem 'omniauth-facebook'
+gem 'omniauth-facebook', '~> 1.4.1'
 gem 'therubyracer'
 gem 'omniauth-oauth2'
 
