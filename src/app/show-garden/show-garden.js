@@ -17,7 +17,7 @@ angular.module( 'ngBoilerplate.show-garden', [
   });
 })
 
-.controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope, $http, $stateParams ) {
+.controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope, $http, $stateParams, $location ) {
 
   var scape_id = $stateParams.scapeId; //grabs the scape that we want
 
