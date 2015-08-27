@@ -22,13 +22,17 @@ angular.module( 'ngBoilerplate.show-garden', [
   var scape_id = $stateParams.scapeId; //grabs the scape that we want
 
 // THIS IS TO PUT STUFF ON THE PAGE ///////////////////////////////////////
+  var current_user;
+
   $http.get('/foodscapes/' + scape_id + '.json').then(function(response){
 
     var resData = response.data.foodscape;
+    current_user = response.data.current_user;
+    // console.log("Current user from inside get " , current_user);
 
-    console.log("worked: ", response);
-    console.log(resData);
-    console.log(response.data.current_user);
+    // console.log("worked: ", response);
+    // console.log(resData);
+    // console.log(response.data.current_user);
 
     var goalsAndNeeds = angular.fromJson(resData.goalsneeds);
     $scope.myGoals = [];
@@ -40,18 +44,18 @@ angular.module( 'ngBoilerplate.show-garden', [
       }
     }
     $scope.extraGoal = goalsAndNeeds[4].text;
+    $scope.username = response.data.current_user.name;
 
     // Pulls from our random veggie pix
     $scope.profilePix = defaultProfilePhotos[randomNum];
     $scope.scapeName = resData.name;
-    $scope.username = "Mary L."; // this needs the username of the person who runs it
     $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"]
     // ["assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
     // This stuff goes in the white box under the orange labels
     $scope.location = resData.city;
 
     var produce = angular.fromJson(resData.produce);
-    console.log("produce", produce);
+    // console.log("produce", produce);
     $scope.myProduce = [];
     for(var i = 0; i < 5; i++){
       if(produce[i].selected == "selected"){
@@ -71,22 +75,18 @@ angular.module( 'ngBoilerplate.show-garden', [
 
 
 // Get updates!
-
-
 var pullUpdates = function(){
   $http.get("/foodscapes/" + scape_id + "/updates.json").then(function(response){
-      console.log("UPDATE RESPONSE ", response);
+      // console.log("UPDATE RESPONSE ", response);
       var upData = response.data;
-      console.log("updates: ", upData);
+      // console.log("updates: ", upData);
       var updateArray = [];
       // Backwards to put the updates in reverse chron order
       for(var i = upData.length-1; i > -1; i--){
         var date = upData[i].created_at;
-        console.log(date);
         var year = date.slice(0,4);
         var month = date.slice(5,7);
         var day = date.slice(8,10);
-        console.log("Date: ", day, month, year);
         updateArray.push({"date" : day + "/" + month + "/" + year,
                           "content": upData[i].description});
       }
@@ -119,6 +119,75 @@ pullUpdates();
   var randomNum = Math.floor((Math.random() * 4));
                   // }];
 
+// start Mandrill API function and params
+      // Create a function to log the response from the Mandrill API
+      // function log(obj) {
+      //     $('#response').text(JSON.stringify(obj));
+      // }
+
+      // create a new instance of the Mandrill class with your API key
+  var m = new mandrill.Mandrill('55zOecDadI2ajt-66mNoXQ');
+
+      // create a variable for the API call parameters
+
+  var makeUpdateEmail = function(update){
+    var userName = current_user.name;
+    console.log("makeUpdateEmail username:: ", userName);
+    // 
+    var params = {
+        "message": {
+            "from_email":"admin@myfoodscape.com",
+            "to":[{"email":"iring.ma@gmail.com"},{"email":"grace.yasukawa@gmail.com"},{"email":"allxiecleary@gmail.com"}], // This needs to be subscribers
+            "subject": "Update from " + userName + "'s Foodscape",
+            "html": "<h4>You have an update from " + userName + "'s Foodscape</h4><p>" + update + "</p><br>Please visit the <a href=\'http://myfoodscape.com\'>foodscape</a> to see more details</br>",
+            "autotext": true,
+            "track_opens": true,
+            "track_clicks": true,
+            "merge_vars": [{
+                "rcpt": "iring.ma@gmail.com",
+                "vars": [
+                            {
+                            "name": "HOST",
+                            "content": "Mary"
+                            },
+                            {
+                            "name": "NAME",
+                            "content": "Irene"
+                            }
+                        ]
+                },
+                {
+                "rcpt": "grace.yasukawa@gmail.com",
+                "vars": [
+                            {
+                            "name": "HOST",
+                            "content": "Mary"
+                            },
+                            {
+                            "name": "NAME",
+                            "content": "Grace"
+                            }
+                        ]
+                }
+                ]
+        }
+    };
+    console.log("PARAMS:: ", params);
+    return params;
+  } // end makeUpdateEmail function
+
+  function sendTheMail(params) {
+  // Send the email!
+
+      m.messages.send(params, function(res) {
+          console.log("email response, " , res);
+      }, function(err) {
+          console.log("error:: ", err);
+      });
+  }
+
+
+// end Mandrill API stuff
 
   // Add posting updates
   $scope.postIt = function(post){
@@ -131,6 +200,10 @@ pullUpdates();
                   }};
 
       console.log("This is what I passed through! Aren't you proud? ", data);
+      console.log("current user from inside postit ", current_user);
+      
+      var updateMessage = makeUpdateEmail(post.text);
+      sendTheMail(updateMessage);
 
       $http({
           url: "/foodscapes/" + Number(scape_id) + "/updates.json",

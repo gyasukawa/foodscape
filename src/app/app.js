@@ -22,12 +22,12 @@ angular.module( 'ngBoilerplate', [
   return {
       user : _user,
       set: function (_user) {
-        console.log("setting!");
+        // console.log("setting!");
           // you can retrive a user setted from another page, like login sucessful page.
           existing_cookie_user = $cookieStore.get('current.user');
           _user =  _user || existing_cookie_user;
           $cookieStore.put('current.user', _user);
-          console.log("I am the user? ", _user);
+          // console.log("I am the user? ", _user);
       },
       remove: function () {
           $cookieStore.remove('current.user', _user);
