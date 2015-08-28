@@ -72,7 +72,7 @@ angular.module( 'ngBoilerplate', [
   };
 
 // GETS CURRENT USER. AUTH for navbar
-  $http.get('/current_user.json').then(
+  $http.get('/the_current_user.json').then(
     function(response){
       console.log("current user from app.js ", response);
 

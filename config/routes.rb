@@ -1,6 +1,13 @@
 Rails.application.routes.draw do
 
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "omniauth_callbacks" }
+
+  get "/auth/failure" => redirect("/")
+
+  # devise_scope :user do
+  #   delete 'sign_out', :to => 'devise/sessions#destroy', as: => :destroy_user_session
+  # end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -15,7 +22,7 @@ Rails.application.routes.draw do
   get 'users/:id/following' => 'users#following', as: :following
   post 'foodscapes/:id/follow' => 'foodscapes#follow', as: :follow
   delete 'foodscapes/:id/unfollow' => 'foodscapes#unfollow', as: :unfollow
-  get 'current_user' => 'users#current_user', as: :current_user
+  get 'the_current_user' => 'users#the_current_user', as: :the_current_user
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :foodscapes do

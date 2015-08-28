@@ -63,10 +63,11 @@ class UsersController < ApplicationController
 
   # ### Current User custom route ###
 
-  # GET /current_user
-  # GET /current_user.json
-  def current_user
-    render json: current_user
+  # GET /the_current_user
+  # GET /the_current_user.json
+  def the_current_user
+    @current_user = current_user
+    render json: @current_user
   end
 
   private
