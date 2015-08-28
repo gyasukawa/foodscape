@@ -14,7 +14,7 @@ class FoodscapesController < ApplicationController
   # GET /foodscapes/1
   # GET /foodscapes/1.json
   def show
-    @host = User.find(@foodscape.id)
+    @host = User.find(@foodscape.user_id)
     render json: {foodscape: @foodscape, current_user: current_user, user_signed_in?: user_signed_in?, user_session: user_session, host: @host}
   end
 
@@ -57,12 +57,13 @@ class FoodscapesController < ApplicationController
   # POST /foodscapes/1/follow
   # POST /foodscapes/1/follow.json
   def follow
-    current_user.subscriptions << @foodscape
-    if current_user.subscriptions.save
+    # current_user.subscriptions << @foodscape
+    current_user.subscriptions.create(user_id: current_user.id, foodscape_id: @foodscape.id)
+    # if error
+    #   render json: current_user.subscriptions.errors, status: :unprocessable_entity
+    # else
       render json: current_user.subscriptions.where(foodscape_id: params[:foodscape_id]).first
-    else
-      render json: current_user.subscriptions.errors, status: :unprocessable_entity
-    end
+    # end
   end
 
   # DELETE /foodscapes/1/unfollow

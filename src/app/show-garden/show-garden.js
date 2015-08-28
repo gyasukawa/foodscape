@@ -315,22 +315,22 @@ angular.module( 'ngBoilerplate.show-garden', [
     $scope.showFollow = true;
 
     //this is the data to send when following someone
-    var data = {
-      subscriptions : {
-      // "foodscape": scape_id
-      "foodscape_id": Number(scape_id),
-      "user_id": Number(current_user.id)
-      }
-    };
+    // var data = {
+    //   subscriptions : {
+    //   // "foodscape": scape_id
+    //   "foodscape_id": Number(scape_id),
+    //   "user_id": Number(current_user.id)
+    //   }
+    // };
 
     ///the follow post request
     $http({
           url: "/foodscapes/" + Number(scape_id) + "/follow.json",
-          method: "POST",
-          data: data
-      }).success(function(data, status, headers) {
-          $scope.data = data;
-      }).error(function(data, status, headers) {
+          method: "POST"
+          // data: data
+      }).success(function( status, headers) {
+          // $scope.data = data;
+      }).error(function( status, headers) {
           $scope.error_message = true;
           $scope.status = status;
       }); //end follow post
