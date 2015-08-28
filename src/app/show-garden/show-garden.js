@@ -135,6 +135,10 @@ angular.module( 'ngBoilerplate.show-garden', [
   var randomNum = Math.floor((Math.random() * 4));
                   // }];
 
+$scope.edit = function(){
+  $window.location.href = '/UI/index.html#/foodscapes/edit' + scape_id;
+
+}
 
 /////////////// MAILER FOR UPDATES /////////////////////
 // start Mandrill API function and params

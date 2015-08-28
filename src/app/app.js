@@ -15,47 +15,47 @@ angular.module( 'ngBoilerplate', [
   'angular-carousel',
   'ngCookies',
 ])
-.factory('Auth', ['$cookieStore', function ($cookieStore) {
+// .factory('Auth', ['$cookieStore', function ($cookieStore) {
 
-  var _user = {};
+//   var _user = {};
 
-  return {
-      user : _user,
-      set: function (_user) {
-        // console.log("setting!");
-          // you can retrive a user setted from another page, like login sucessful page.
-          existing_cookie_user = $cookieStore.get('current.user');
-          _user =  _user || existing_cookie_user;
-          $cookieStore.put('current.user', _user);
-          // console.log("I am the user? ", _user);
-      },
-      remove: function () {
-          $cookieStore.remove('current.user', _user);
-      }
-  };
-}])
+//   return {
+//       user : _user,
+//       set: function (_user) {
+//         // console.log("setting!");
+//           // you can retrive a user setted from another page, like login sucessful page.
+//           existing_cookie_user = $cookieStore.get('current.user');
+//           _user =  _user || existing_cookie_user;
+//           $cookieStore.put('current.user', _user);
+//           // console.log("I am the user? ", _user);
+//       },
+//       remove: function () {
+//           $cookieStore.remove('current.user', _user);
+//       }
+//   };
+// }])
 
 .config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
   $urlRouterProvider.otherwise( '/home' );
 })
 
-.run( function run (Auth, UserRestService) {
-  var _user = UserRestService.requestCurrentUser();
-  Auth.set(_user);
+.run( function run () {
+  // var _user = UserRestService.requestCurrentUser();
+  // Auth.set(_user);
 })
 
-.service("UserRestService", function UserRestService ($http, $location, $q){
-    return service = {
-      requestCurrentUser: function() {
-        return $http.get('/users.json').then(function(response) {
-          service.currentUser = response.data.user;
-          console.log(service.currentUser);
-          return service.currentUser;
-        });
-      }
-    }
-    // currentUser: null,
-})
+// .service("UserRestService", function UserRestService ($http, $location, $q){
+//     return service = {
+//       requestCurrentUser: function() {
+//         return $http.get('/users.json').then(function(response) {
+//           service.currentUser = response.data.user;
+//           console.log(service.currentUser);
+//           return service.currentUser;
+//         });
+//       }
+//     }
+//     // currentUser: null,
+// })
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, $http,  $anchorScroll, $window ) {
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
@@ -72,7 +72,7 @@ angular.module( 'ngBoilerplate', [
     // $anchorScroll();
   };
 
-  var current_user = null;
+  $scope.current_user = null;
 
   // GETS CURRENT USER. AUTH for navbar
   $scope.userLoggedOut = false;
@@ -81,18 +81,22 @@ angular.module( 'ngBoilerplate', [
     $http.get('/the_current_user.json').then(
       function(response){
         console.log("current user from app.js ", response);
-        current_user = response.data;
+        $scope.current_user = response.data;
       $scope.userLoggedIn = true;
+      $scope.userLoggedOut = false;
 
       }, function(response){
       console.log("nope from app.js current user ", response);
       $scope.userLoggedOut = true;
-      current_user = null;
+      $scope.userLoggedIn = false;
+      $scope.current_user = null;
     });
   }
   checkAuth();
 
-
+  $scope.subscriptions = function(){
+    $window.location.href = '/UI/index.html#/subscriptions'
+  }
 
   $scope.myFoodscape = function(){
     $http({
@@ -105,7 +109,7 @@ angular.module( 'ngBoilerplate', [
           //called foodscapes/by_user/:userID or something soon
           //to avoid dumbass for loops.
           for(var i = 0; i < data.length; i++){
-            if (data[i].user_id === current_user.id){
+            if (data[i].user_id === $scope.current_user.id){
               var thisUserFoodscape = i;
               $window.location.href = '/UI/index.html#/foodscapes/' + (i+1);
               return i;

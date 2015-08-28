@@ -26,7 +26,7 @@ angular.module( 'ngBoilerplate.signup', [
   //             "password": "hellodave",
   //             "password_confirmation":"hellodave"}};
 $scope.error_message = false;
-  $scope.postIt = function(the_user){
+  $scope.signUp = function(the_user){
     console.log("trying to work");
 
     var data = {user: {"name": the_user.name,
