@@ -57,12 +57,19 @@ angular.module( 'ngBoilerplate', [
     // currentUser: null,
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, $http ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, $http,  $anchorScroll ) {
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       $scope.pageTitle = toState.data.pageTitle + ' | Scape' ;
     }
   });
+
+
+  $scope.scrollTo = function(id) {
+    $location.hash(id);
+    console.log($location.hash());
+    $anchorScroll();
+  };
 
 // GETS CURRENT USER. AUTH for navbar
   $http.get('/current_user.json').then(
