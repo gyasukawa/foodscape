@@ -51,7 +51,9 @@ $scope.error_message = false;
     });
   };
 
-  $scope.auth = function() {
+  $scope.auth = function(event) {
+    event.preventDefault();
+
     console.log("trying to execute Facebook OAuth");
 
     $http({

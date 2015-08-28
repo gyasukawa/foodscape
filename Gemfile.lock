@@ -208,7 +208,7 @@ DEPENDENCIES
   jquery-rails
   mandrill-api
   omniauth
-  omniauth-facebook (~> 1.4.1)
+  omniauth-facebook
   omniauth-oauth2
   paperclip (~> 4.3)
   pg
