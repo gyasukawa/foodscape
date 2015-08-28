@@ -57,7 +57,7 @@ angular.module( 'ngBoilerplate', [
     // currentUser: null,
 })
 
-.controller( 'AppCtrl', function AppCtrl ( $scope, $location, $http,  $anchorScroll ) {
+.controller( 'AppCtrl', function AppCtrl ( $scope, $location, $http,  $anchorScroll, $window ) {
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
     if ( angular.isDefined( toState.data.pageTitle ) ) {
       $scope.pageTitle = toState.data.pageTitle + ' | Scape' ;
@@ -66,26 +66,60 @@ angular.module( 'ngBoilerplate', [
 
 
   $scope.scrollTo = function(id) {
-    $location.hash(id);
-    console.log($location.hash());
-    $anchorScroll();
+    // $location.hash(id);
+    $window.location.href = '/UI/index.html#/home#' + id;
+    // console.log($location.hash());
+    // $anchorScroll();
   };
-$scope.userLoggedOut = false;
-$scope.userLoggedIn = false;
-// GETS CURRENT USER. AUTH for navbar
-  $http.get('/the_current_user.json').then(
-    function(response){
-      console.log("current user from app.js ", response);
-    $scope.userLoggedIn = true;
 
-    }, function(response){
-    console.log("nope from app.js current user ", response);
-    $scope.userLoggedOut = true;
-  });
+  var current_user = null;
+
+  // GETS CURRENT USER. AUTH for navbar
+  $scope.userLoggedOut = false;
+  $scope.userLoggedIn = false;
+  var checkAuth = function(){
+    $http.get('/the_current_user.json').then(
+      function(response){
+        console.log("current user from app.js ", response);
+        current_user = response.data;
+      $scope.userLoggedIn = true;
+
+      }, function(response){
+      console.log("nope from app.js current user ", response);
+      $scope.userLoggedOut = true;
+      current_user = null;
+    });
+  }
+  checkAuth();
 
 
 
+  $scope.myFoodscape = function(){
+    $http({
+      url: "/foodscapes.json",
+          method: "GET",
+          data: {}
+      }).success(function(data, status, headers, config) {
+          console.log("all foodscampes, maybe ", data);
+          //This is going to have a dedicated route
+          //called foodscapes/by_user/:userID or something soon
+          //to avoid dumbass for loops.
+          for(var i = 0; i < data.length; i++){
+            if (data[i].user_id === current_user.id){
+              var thisUserFoodscape = i;
+              $window.location.href = '/UI/index.html#/foodscapes/' + (i+1);
+              return i;
+            } else {
+              $window.location.href = '/UI/index.html#/foodscape/new';
 
+            }
+          }
+      }).error(function(data, status, headers, config) {
+          // $scope.error_message = true;
+          // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
+          $scope.status = status;
+      });
+  }
 
   $scope.logout = function(){
     console.log("trying to log out");
@@ -95,13 +129,17 @@ $scope.userLoggedIn = false;
           data: {}
       }).success(function(data, status, headers, config) {
           $scope.data = data;
+          console.log("Successfully logged out, we think")
           // $scope.$apply(function() { $location.path("/new-garden"); });
+          $window.location.href = '/UI/index.html#/login';
       }).error(function(data, status, headers, config) {
           $scope.error_message = true;
           // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
           $scope.status = status;
       });
+      checkAuth();
   };
+  
 
 }) //end AppCtrl
 

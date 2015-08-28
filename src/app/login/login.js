@@ -31,9 +31,9 @@ angular.module( 'ngBoilerplate.login', [
           data: data
       }).success(function(data, status, headers, config) {
           $scope.data = data;
-          console.log("logged in!");
+          console.log("logged in!", data);
 
-          $window.location.href = '/UI/index.html#/foodscape/1';
+          $window.location.href = '/UI/index.html#/home';
       }).error(function(data, status, headers, config) {
           $scope.error_message = true;
           // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."

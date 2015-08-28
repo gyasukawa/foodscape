@@ -112,28 +112,23 @@
         <div class="collapse navbar-collapse" collapse="menuCollapsed">
           <ul class="nav navbar-nav navbar-right">
             <li ng-show="userLoggedOut">
-              <a  ng-click="scrollTo(how-it-works)">
+              <a  ng-click="scrollTo('how-it-works')">
                 How It Works
               </a>
             </li>
             <li ng-show="userLoggedOut">
-              <a ng-click="faqLink()">
+              <a ng-click="scrollTo('FAQ')">
                 FAQ
               </a>
             </li>
             <li ng-show="userLoggedOut">
-              <a ng-click="communityLink()">
+              <a ng-click="scrollTo('community')">
                 Our Community
               </a>
             </li>
             <li ng-show="userLoggedOut">
               <a ui-sref="login">
                 Login
-              </a>
-            </li>
-            <li ng-show="userLoggedIn" >
-              <a ng-click="logout()">
-                Logout
               </a>
             </li>
             <li ng-show="userLoggedIn" >
@@ -144,6 +139,11 @@
             <li ng-show="userLoggedIn" >
               <a ng-click="subscriptions()">
                 Subscriptions
+              </a>
+            </li>
+            <li ng-show="userLoggedIn" >
+              <a ng-click="logout()">
+                Logout
               </a>
             </li>
             <li ng-show="userLoggedOut" class="orange-link">

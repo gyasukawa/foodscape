@@ -117,7 +117,7 @@ angular.module( 'ngBoilerplate.show-garden', [
         }
 
       $scope.updates = updateArray;
-      $scope.status = updateArray[0].content;
+      $scope.statusBar = updateArray[0].content;
         }, function(response){
       console.log("no updates");
     });
