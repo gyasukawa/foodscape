@@ -52,11 +52,7 @@ angular.module( 'ngBoilerplate.following', [
     $scope.showMessage = false;
     $scope.sent = true;
   };
-////// This shows up to confirm that you've followed someone
-  $scope.follow = function (){
-    $scope.toggleModal();
-    $scope.showFollow = true;
-  };
+ 
 
   //////// This shows up to ask if you're sure you want to unfollow someone
   $scope.unfollowConfirm = function(){

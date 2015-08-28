@@ -64,6 +64,20 @@ angular.module( 'ngBoilerplate', [
     }
   });
 
+// GETS CURRENT USER. AUTH for navbar
+  $http.get('/current_user.json').then(
+    function(response){
+      console.log("current user from app.js ", response);
+
+
+    }, function(response){
+    console.log("nope from app.js current user ", response);
+  });
+
+
+
+
+
   $scope.logout = function(){
     console.log("trying to log out");
     $http({
