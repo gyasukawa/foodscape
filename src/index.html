@@ -111,32 +111,42 @@
 
         <div class="collapse navbar-collapse" collapse="menuCollapsed">
           <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a ng-click="scrollTo(how-it-works)">
+            <li ng-show="userLoggedOut">
+              <a  ng-click="scrollTo(how-it-works)">
                 How It Works
               </a>
             </li>
-            <li>
+            <li ng-show="userLoggedOut">
               <a ng-click="faqLink()">
                 FAQ
               </a>
             </li>
-            <li>
+            <li ng-show="userLoggedOut">
               <a ng-click="communityLink()">
                 Our Community
               </a>
             </li>
-            <li>
+            <li ng-show="userLoggedOut">
               <a ui-sref="login">
                 Login
               </a>
             </li>
-            <li ng-click="logout()">
-              <a>
+            <li ng-show="userLoggedIn" >
+              <a ng-click="logout()">
                 Logout
               </a>
             </li>
-            <li class="orange-link">
+            <li ng-show="userLoggedIn" >
+              <a ng-click="myFoodscape()">
+                My Foodscape
+              </a>
+            </li>
+            <li ng-show="userLoggedIn" >
+              <a ng-click="subscriptions()">
+                Subscriptions
+              </a>
+            </li>
+            <li ng-show="userLoggedOut" class="orange-link">
               <a ui-sref="signup">
                 Get Started
               </a>

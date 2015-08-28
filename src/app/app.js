@@ -70,15 +70,17 @@ angular.module( 'ngBoilerplate', [
     console.log($location.hash());
     $anchorScroll();
   };
-
+$scope.userLoggedOut = false;
+$scope.userLoggedIn = false;
 // GETS CURRENT USER. AUTH for navbar
   $http.get('/the_current_user.json').then(
     function(response){
       console.log("current user from app.js ", response);
-
+    $scope.userLoggedIn = true;
 
     }, function(response){
     console.log("nope from app.js current user ", response);
+    $scope.userLoggedOut = true;
   });
 
 
