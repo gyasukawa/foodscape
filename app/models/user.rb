@@ -10,14 +10,22 @@ class User < ActiveRecord::Base
   has_many :foodscapes, through: :subscriptions
 
   def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-      # user.provider = auth.provider
-      # user.uid = auth.uid
-      user.email = auth.info.email
-      user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.name
-      # user.image = auth.info.image # assumes the user profile is an image attribute on the user model, to add in when we figure out paperclip
-    end
+    # where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    #   # user.provider = auth.provider
+    #   # user.uid = auth.uid
+    #   user.email = auth.info.email
+    #   user.password = Devise.friendly_token[0,20]
+    #   user.name = auth.info.name
+    #   # user.image = auth.info.image # assumes the user profile is an image attribute on the user model, to add in when we figure out paperclip
+    # end
+    user = find_by(provider: auth.provider, uid: auth.uid)
+    user = create(uid: auth.uid, provider: auth.provider) if user.nil?
+    user.accesstoken = auth.credentials.token
+    user.refreshtoken = auth.credentials.refresh_token
+    user.name = auth.info.name
+    user.email = auth.info.email
+    user.save
+    user
   end
 
   def self.new_with_session(params, session)
