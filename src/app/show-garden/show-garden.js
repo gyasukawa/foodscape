@@ -293,24 +293,28 @@ angular.module( 'ngBoilerplate.show-garden', [
 
 
 /////// This is for when you want to send a message
+  //this opens a messsage box
   $scope.message = function(){
     $scope.toggleModal();
     $scope.showMessage = true;
     console.log("show message ", $scope.showMessage);
   };
-    // for the message box to show the already sent thank you message
+  // for the message box to show the already sent thank you message
   $scope.send = function(messageText){
-
+    // This is where the message is put together and then actually sent
     var messageParams = makeMessageEmail(messageText);
     sendTheMail(messageParams);
-
+    //and then show the thank you box.
     $scope.showMessage = false;
     $scope.sent = true;
   };
+
 ////// This shows up to confirm that you've followed someone
   $scope.follow = function (){
     $scope.toggleModal();
     $scope.showFollow = true;
+
+    //this is the data to send when following someone
     var data = {
       subscriptions : {
       // "foodscape": scape_id
@@ -318,6 +322,8 @@ angular.module( 'ngBoilerplate.show-garden', [
       "user_id": Number(current_user.id)
       }
     };
+
+    ///the follow post request
     $http({
           url: "/foodscapes/" + Number(scape_id) + "/follow.json",
           method: "POST",
