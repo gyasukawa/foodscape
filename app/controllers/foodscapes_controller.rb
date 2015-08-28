@@ -59,7 +59,7 @@ class FoodscapesController < ApplicationController
   def follow
     # current_user.subscriptions << @foodscape
     current_user.subscriptions.create(user_id: current_user.id, foodscape_id: @foodscape.id)
-    # if error
+    # if errors?
     #   render json: current_user.subscriptions.errors, status: :unprocessable_entity
     # else
       render json: current_user.subscriptions.where(foodscape_id: params[:foodscape_id]).first
@@ -69,7 +69,8 @@ class FoodscapesController < ApplicationController
   # DELETE /foodscapes/1/unfollow
   # DELETE /foodscapes/1/unfollow.json
   def unfollow
-    current_user.subscriptions.delete(@foodscape)
+    subscription = current_user.subscriptions.where(foodscape_id: @foodscape.id).first
+    current_user.subscriptions.delete(subscription)
 
     head :no_content
   end
