@@ -150,7 +150,11 @@ angular.module( 'ngBoilerplate.edit-garden', [
 
       console.log("This is what I passed through to edit! ", data);
       $http.put('/foodscapes/' + scape_id + '.json', data)
-      .success(function(data, status, headers){console.log("put success! ", data)})
+      .success(function(data, status, headers){
+        console.log("put success! ", data)
+        $window.location.href = '/UI/index.html#/foodscapes/' + scape_id;
+
+      })
       .error(function(data, status, headers){
         console.log("FAIL to put");
       })

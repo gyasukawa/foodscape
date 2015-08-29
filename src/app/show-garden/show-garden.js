@@ -17,7 +17,7 @@ angular.module( 'ngBoilerplate.show-garden', [
   });
 })
 
-.controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope, $http, $stateParams, $location ) {
+.controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope, $http, $stateParams, $location, $window ) {
 
   var scape_id = $stateParams.scapeId; //grabs the scape that we want
 
@@ -117,7 +117,9 @@ angular.module( 'ngBoilerplate.show-garden', [
         }
 
       $scope.updates = updateArray;
-      $scope.statusBar = updateArray[0].content;
+      if(updateArray[0]){
+        $scope.statusBar = updateArray[0].content;
+      }
         }, function(response){
       console.log("no updates");
     });
@@ -136,7 +138,7 @@ angular.module( 'ngBoilerplate.show-garden', [
                   // }];
 
 $scope.edit = function(){
-  $window.location.href = '/UI/index.html#/foodscapes/edit' + scape_id;
+  $window.location.href = '/UI/index.html#/foodscapes/edit/' + scape_id;
 
 }
 
