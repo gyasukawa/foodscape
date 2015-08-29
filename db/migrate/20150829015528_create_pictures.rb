@@ -3,6 +3,7 @@ class CreatePictures < ActiveRecord::Migration
     create_table :pictures do |t|
       t.references :foodscape
       t.boolean :main
+      t.attachment :image
 
       t.timestamps null: false
     end
