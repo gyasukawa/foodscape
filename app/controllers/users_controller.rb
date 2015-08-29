@@ -52,6 +52,10 @@ class UsersController < ApplicationController
   # GET /users/1/following
   # GET /users/1/following.json
   def following
+    p "This is the name of the current user"
+    p current_user.name
+    p current_user.subscriptions
+    p "This is the end of the current user info"
     @subscriptions = current_user.subscriptions
     @hosts = []
     @subscriptions.each do |subscription|

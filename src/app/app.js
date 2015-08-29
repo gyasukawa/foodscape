@@ -83,10 +83,6 @@ $scope.userLoggedIn = false;
     $scope.userLoggedOut = true;
   });
 
-
-
-
-
   $scope.logout = function(){
     console.log("trying to log out");
     $http({
