@@ -47,7 +47,7 @@
         <div ng-repeat="foodscape in foodscapes" class="box-container">
           <div class="col-xs-4"><img class="followed-image" src="{{foodscape.img}}"></div>
           <div class="col-xs-5">
-	          <div class="followed-garden"><h2>{{foodscape.title}}</h2></div>
+	          <div class="followed-garden"><h2><a href="{{foodscape.url}}">{{foodscape.title}}</a></h2></div>
 	          <div class="followed-location">{{foodscape.location}}</div>
 	          <div class="recent-status">{{foodscape.status}}</div>
 	        </div>

@@ -320,18 +320,18 @@ $scope.edit = function(){
     $scope.toggleModal();
     $scope.showFollow = true;
 
-    //this is the data to send when following someone
-    // var data = {
-    //   subscriptions : {
-    //   // "foodscape": scape_id
-    //   "foodscape_id": Number(scape_id),
-    //   "user_id": Number(current_user.id)
-    //   }
-    // };
+    // this is the data to send when following someone
+    var data = {
+      subscriptions : {
+      // "foodscape": scape_id
+      "foodscape_id": Number(scape_id),
+      "user_id": Number(current_user.id)
+      }
+    };
 
     ///the follow post request
     $http({
-          url: "/foodscapes/" + Number(scape_id) + "/follow.json",
+          url: "/foodscapes/" + scape_id + "/follow.json",
           method: "POST"
           // data: data
       }).success(function( status, headers) {

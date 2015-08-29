@@ -1,4 +1,4 @@
-angular.module( 'ngBoilerplate.login', [
+ angular.module( 'ngBoilerplate.login', [
   'ui.router',
   'ui.bootstrap'
 ])
