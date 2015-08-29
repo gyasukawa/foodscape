@@ -52,8 +52,26 @@ class UsersController < ApplicationController
   # GET /users/1/following
   # GET /users/1/following.json
   def following
+    p "This is the name of the current user"
+    p current_user.name
+    p current_user.subscriptions
+    p "This is the end of the current user info"
     @subscriptions = current_user.subscriptions
-    render json: @subscriptions
+    @hosts = []
+    @subscriptions.each do |subscription|
+      foodscape = Foodscape.find(subscription.foodscape_id)
+      @hosts << User.find(foodscape.user_id)
+    end
+    render json: {subscriptions: @subscriptions, hosts: @hosts}
+  end
+
+  # ### Current User custom route ###
+
+  # GET /the_current_user
+  # GET /the_current_user.json
+  def the_current_user
+    @current_user = current_user
+    render json: @current_user
   end
 
   private

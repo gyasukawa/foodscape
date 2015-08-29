@@ -1,5 +1,4 @@
 class Foodscape < ActiveRecord::Base
-
   belongs_to :user
 
   has_many :subscriptions
@@ -7,4 +6,6 @@ class Foodscape < ActiveRecord::Base
 
   has_many :updates
   has_many :pictures
+
+  validates_uniqueness_of :user_id, message: "Cannot create more than one foodscape!"
 end

@@ -6,7 +6,7 @@ angular.module( 'ngBoilerplate.following', [
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'following', {
     // Going to need to mess with this URL in order to have the individual one to show.
-    url: '/following',
+    url: '/subscriptions',
     views: {
       "main": {
         controller: 'FollowingCtrl',
@@ -18,8 +18,44 @@ angular.module( 'ngBoilerplate.following', [
 
 })
 
-.controller( 'FollowingCtrl', function FollowingCtrl( $scope ) {
-	$scope.foodscapes = [{
+.controller( 'FollowingCtrl', function FollowingCtrl( $http, $scope ) {
+
+
+  $scope.checkAuth = function(){
+    $http.get('/the_current_user.json').then(
+        function(response){
+          console.log("current user from following", response);
+          $scope.current_user = response.data;
+          $scope.loadFollowing();
+
+        }, function(response){
+        console.log("nope from app.js current user ", response);
+        $scope.current_user = null;
+      });
+  }
+
+  $scope.loadFollowing = function(){
+    var user_id = $scope.current_user.id;
+    $http({
+            url: "/users/" + user_id + "/following.json",
+            method: "GET",
+            data: {}
+        }).success(function(data, status, headers) {
+            // $scope.data = data;
+            pullUpdates();
+            // $scope.$apply(function() { $location.path("/new-garden"); });
+        }).error(function(data, status, headers) {
+            // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
+            $scope.status = status;
+        });
+    }
+
+  $scope.checkAuth();
+
+  // console.log("Following current user", $scope.current_user);
+
+
+  $scope.foodscapes = [{
 						"title": "Mary's Foodscape"
 						,"location": "San Jose"
 						,"status":"I watered my tomatoes"
@@ -52,11 +88,7 @@ angular.module( 'ngBoilerplate.following', [
     $scope.showMessage = false;
     $scope.sent = true;
   };
-////// This shows up to confirm that you've followed someone
-  $scope.follow = function (){
-    $scope.toggleModal();
-    $scope.showFollow = true;
-  };
+
 
   //////// This shows up to ask if you're sure you want to unfollow someone
   $scope.unfollowConfirm = function(){
