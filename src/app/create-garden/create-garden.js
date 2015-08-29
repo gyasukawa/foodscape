@@ -5,7 +5,7 @@ angular.module( 'ngBoilerplate.create-garden', [
 
 .config(function config( $stateProvider ) {
   $stateProvider.state( 'create-garden', {
-    url: '/foodscapes/new',
+    url: '/foodscape/new',
     views: {
       "main": {
         controller: 'CreateGardenCtrl',
@@ -16,7 +16,7 @@ angular.module( 'ngBoilerplate.create-garden', [
   });
 })
 
-.controller( 'CreateGardenCtrl', [ "$scope", "$http",function ( $scope , $http ) {
+.controller( 'CreateGardenCtrl', [ "$scope", "$http", "$window", function ( $scope , $http, $window ) {
 
 // for the ng-repeat for the veggie bools
   $scope.plants = [{  "id":1
@@ -108,6 +108,7 @@ angular.module( 'ngBoilerplate.create-garden', [
       }).success(function(data, status, headers, config) {
           $scope.data = data;
           console.log("This is what I passed through!", data);
+          $window.location.href = '/UI/index.html#/foodscapes/' + data.id;
 
           // $scope.$apply(function() { $location.path("/new-garden"); });
       }).error(function(data, status, headers, config) {

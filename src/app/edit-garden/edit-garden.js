@@ -17,55 +17,76 @@ angular.module( 'ngBoilerplate.edit-garden', [
   });
 })
 
-.controller( 'EditGardenCtrl', [ "$scope", "$http", "$stateParams", function ( $scope , $http, $stateParams ) {
+.controller( 'EditGardenCtrl', [ "$scope", "$http", "$stateParams", "$window", "$location" , function ( $scope , $http, $stateParams, $window, $location ) {
+  console.log("TO THE WINDOW!" ,$window);
+
   var scape_id = $stateParams.scapeId;
+  $scope.current_user;
+ 
+  $scope.checkAuth = function(){
+    $http.get('/the_current_user.json').then(
+        function(response){
+          console.log("current user from following", response);
+          $scope.current_user = response.data;
+          $scope.loadFoodscape($window);
+
+        }, function(response){
+        console.log("nope from app.js current user ", response);
+        $scope.current_user = null;
+      });
+  }
+
+ $scope.checkAuth();
   $scope.plants = [];
+  $scope.loadFoodscape = function($window){
 
-  // GET GET GET GET GET
-  $http.get('/foodscapes/' + scape_id + '.json').then(function(response){
+    // GET GET GET GET GET
+    $http.get('/foodscapes/' + scape_id + '.json').then(function(response){
+      var resData = response.data;
+      
+      if (resData.foodscape.user_id == $scope.current_user.id){
+        console.log("worked: ", response);
+        resData = resData.foodscape;
+        
+        $scope.scapeName = resData.name;
 
-    var resData = response.data;
-    console.log("worked: ", response);
-    $scope.scapeName = resData.name;
 
-    // For produce checkboxes. Arrange to go onto the page.
-    var produce = angular.fromJson(resData.produce);
-    console.log("Produce of five" , produce[5].growingText);
-    $scope.growingText = produce[5].growingText;
 
-    for(var i = 0; i < 6; i++){
-      $scope.plants.push(produce[i]);
-    }
+        // For produce checkboxes. Arrange to go onto the page.
+        var produce = angular.fromJson(resData.produce);
+        console.log("Produce of five" , produce);
+        $scope.growingText = produce[5].growingText;
 
-    $scope.gardenImages = ["assets/images/community-2.png","assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
+        for(var i = 0; i < 6; i++){
+          $scope.plants.push(produce[i]);
+        }
 
-    // GET LOCATION
-    $scope.address1 = resData.address_line_1;
-    $scope.address2 = resData.address_line_2;
-    $scope.city = resData.city;
-    $scope.state = resData.state;
-    $scope.zip = resData.zip;
+        $scope.gardenImages = ["assets/images/community-2.png","assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
 
-    // GET GOALS
-    var myGoals = angular.fromJson(resData.goalsneeds);
-    $scope.extraGoals = myGoals[4].text;
-    $scope.goals = [];
-    for(var i = 0; i < 4; i++){
-      $scope.goals.push(myGoals[i]);
-    }
+        // GET LOCATION
+        $scope.address1 = resData.address_line_1;
+        $scope.address2 = resData.address_line_2;
+        $scope.city = resData.city;
+        $scope.state = resData.state;
+        $scope.zip = resData.zip;
 
-    $scope.otherDetails = resData.other_details;
-    $scope.updates = [{
-                        "date": "4/15/15"
-                      , "content": "Watered today."
-                      }
-                      ,{
-                        "date": "5/30/15"
-                      , "content": "I planted tomatoes!"
-                      }];
-  }, function(response){
-    console.log("nope");
-  }); /// END GET
+        // GET GOALS
+        var myGoals = angular.fromJson(resData.goalsneeds);
+        $scope.extraGoals = myGoals[4].text;
+        $scope.goals = [];
+        for(var i = 0; i < 4; i++){
+          $scope.goals.push(myGoals[i]);
+        }
+
+        $scope.otherDetails = resData.other_details;
+      } else {
+          $window.location.href = '/UI/index.html#/home';
+
+      }
+    }, function(response){
+      console.log("nope");
+    }); /// END GET
+  }
 
 
   $scope.isSelected = [];
@@ -129,7 +150,11 @@ angular.module( 'ngBoilerplate.edit-garden', [
 
       console.log("This is what I passed through to edit! ", data);
       $http.put('/foodscapes/' + scape_id + '.json', data)
-      .success(function(data, status, headers){console.log("put success! ", data)})
+      .success(function(data, status, headers){
+        console.log("put success! ", data)
+        $window.location.href = '/UI/index.html#/foodscapes/' + scape_id;
+
+      })
       .error(function(data, status, headers){
         console.log("FAIL to put");
       })

@@ -17,7 +17,7 @@ angular.module( 'ngBoilerplate.show-garden', [
   });
 })
 
-.controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope, $http, $stateParams, $location ) {
+.controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope, $http, $stateParams, $location, $window ) {
 
   var scape_id = $stateParams.scapeId; //grabs the scape that we want
 
@@ -29,6 +29,7 @@ angular.module( 'ngBoilerplate.show-garden', [
   $http.get('/foodscapes/' + scape_id + '.json').then(function(response){
 
     var resData = response.data.foodscape;
+    console.log("RESponse: ", response);
 
     //current_user is sent over when the page loads
     current_user = response.data.current_user;
@@ -66,7 +67,7 @@ angular.module( 'ngBoilerplate.show-garden', [
     $scope.extraGoal = goalsAndNeeds[4].text;
 
     //Get correct username for this!!
-    $scope.username = resData.user_id;
+    $scope.username = response.data.host.name;
 
 
     // Pulls from our random veggie pix
@@ -116,7 +117,9 @@ angular.module( 'ngBoilerplate.show-garden', [
         }
 
       $scope.updates = updateArray;
-      $scope.status = updateArray[0].content;
+      if(updateArray[0]){
+        $scope.statusBar = updateArray[0].content;
+      }
         }, function(response){
       console.log("no updates");
     });
@@ -134,6 +137,10 @@ angular.module( 'ngBoilerplate.show-garden', [
   var randomNum = Math.floor((Math.random() * 4));
                   // }];
 
+$scope.edit = function(){
+  $window.location.href = '/UI/index.html#/foodscapes/edit/' + scape_id;
+
+}
 
 /////////////// MAILER FOR UPDATES /////////////////////
 // start Mandrill API function and params
@@ -150,13 +157,59 @@ angular.module( 'ngBoilerplate.show-garden', [
   var makeUpdateEmail = function(update){
     var userName = current_user.name;
     console.log("makeUpdateEmail username:: ", userName);
-    // 
+    //
     var params = {
         "message": {
             "from_email":"admin@myfoodscape.com",
             "to":[{"email":"iring.ma@gmail.com"},{"email":"grace.yasukawa@gmail.com"},{"email":"allxiecleary@gmail.com"}], // This needs to be subscribers
             "subject": "Update from " + userName + "'s Foodscape",
             "html": "<h4>You have an update from " + userName + "'s Foodscape</h4><p>" + update + "</p><br>Please visit the <a href='http://myfoodscape.com'>foodscape</a> to see more details</br>",//I'm going to actually put the link to the foodscape in the email
+            "autotext": true,
+            "track_opens": true,
+            "track_clicks": true,
+            "merge_vars": [{
+                "rcpt": "iring.ma@gmail.com",
+                "vars": [
+                            {
+                            "name": "HOST",
+                            "content": "Mary"
+                            },
+                            {
+                            "name": "NAME",
+                            "content": "Irene"
+                            }
+                        ]
+                },
+                {
+                "rcpt": "grace.yasukawa@gmail.com",
+                "vars": [
+                            {
+                            "name": "HOST",
+                            "content": "Mary"
+                            },
+                            {
+                            "name": "NAME",
+                            "content": "Grace"
+                            }
+                        ]
+                }
+                ]
+        }
+    };
+    console.log("PARAMS:: ", params);
+    return params;
+  } // end makeUpdateEmail function
+
+  var makeMessageEmail = function(message){
+    var userName = current_user.name;
+    console.log("makeMessageEmail username:: ", userName);
+    //
+    var params = {
+        "message": {
+            "from_email":"admin@myfoodscape.com",
+            "to":[{"email":"iring.ma@gmail.com"},{"email":"grace.yasukawa@gmail.com"},{"email":"allxiecleary@gmail.com"}], // This needs to be subscribers
+            "subject": "Message from " + userName+"!",
+            "html": "<h4>You have message from " + userName + ".</h4><p>" + message + "</p><br> You can reply using their email (for now): <a href='"+ current_user.email +"'>foodscape</a></br>",//I'm going to actually put the link to the foodscape in the email
             "autotext": true,
             "track_opens": true,
             "track_clicks": true,
@@ -246,31 +299,47 @@ angular.module( 'ngBoilerplate.show-garden', [
 
 
 /////// This is for when you want to send a message
+  //this opens a messsage box
   $scope.message = function(){
     $scope.toggleModal();
     $scope.showMessage = true;
     console.log("show message ", $scope.showMessage);
   };
-    // for the message box to show the already sent thank you message
-  $scope.send = function(){
+  // for the message box to show the already sent thank you message
+  $scope.send = function(messageText){
+    // This is where the message is put together and then actually sent
+    var messageParams = makeMessageEmail(messageText);
+    sendTheMail(messageParams);
+    //and then show the thank you box.
     $scope.showMessage = false;
     $scope.sent = true;
   };
+
 ////// This shows up to confirm that you've followed someone
   $scope.follow = function (){
     $scope.toggleModal();
     $scope.showFollow = true;
+
+    //this is the data to send when following someone
+    // var data = {
+    //   subscriptions : {
+    //   // "foodscape": scape_id
+    //   "foodscape_id": Number(scape_id),
+    //   "user_id": Number(current_user.id)
+    //   }
+    // };
+
+    ///the follow post request
     $http({
-      url: "/foodscapes/" + scape_id + "/subscriptions.json",
-      method: "POST",
-      data: {}
-    }).succes(function(data, status, headers){
-      $scope.status = status;
-      console.log("Following!");
-    }).error(function(data, status, headers){
-      console.log("ERROR");
-      $scope.status = status;
-    })
+          url: "/foodscapes/" + Number(scape_id) + "/follow.json",
+          method: "POST"
+          // data: data
+      }).success(function( status, headers) {
+          // $scope.data = data;
+      }).error(function( status, headers) {
+          $scope.error_message = true;
+          $scope.status = status;
+      }); //end follow post
   };
 
   //////// This shows up to ask if you're sure you want to unfollow someone

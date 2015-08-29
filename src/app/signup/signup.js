@@ -26,7 +26,7 @@ angular.module( 'ngBoilerplate.signup', [
   //             "password": "hellodave",
   //             "password_confirmation":"hellodave"}};
 $scope.error_message = false;
-  $scope.postIt = function(the_user){
+  $scope.signUp = function(the_user){
     console.log("trying to work");
 
     var data = {user: {"name": the_user.name,
@@ -49,7 +49,24 @@ $scope.error_message = false;
         // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
         $scope.status = status;
     });
-  }
+  };
+
+  $scope.auth = function(event) {
+    event.preventDefault();
+
+    console.log("trying to execute Facebook OAuth");
+
+    $http({
+      url: "/users/auth/facebook",
+      method: "POST"
+    }).success(function(status, headers, config) {
+      console.log("success!")
+    }).error(function(status, headers, config) {
+      console.log("failure...")
+      $scope.error_message = true;
+    });
+
+  };
 
 
 

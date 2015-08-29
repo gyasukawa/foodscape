@@ -5,8 +5,8 @@
     <modal-dialog show='modalShown'>
       <div ng-show="showMessage" class="message-box">
         <h1>Send a message to {{scapeName}}!</h1>
-        <textarea>Write a message here.</textarea>
-        <button ng-click="send()" class="btn get-started-btn">Send</button>
+        <textarea ng-model="messageText">Write a message here.</textarea>
+        <button ng-click="send(messageText)" class="btn get-started-btn">Send</button>
       </div>
       <div ng-show="sent" class="thank-box">
         <h1>Thank you!</h1>
@@ -35,7 +35,7 @@
         <!-- Green bar at the top -->
         <div class="profile-bar">
           <h2> {{scapeName}} </h2>
-          <p>{{status}}</p>
+          <p>{{statusBar}}</p>
 
           <!-- These buttons show up when the user has not followed this person's page or is not logged in -->
           <button ng-show="userFollowing" class="btn get-started-btn" ng-click="unfollow()">Unfollow</button>
@@ -46,7 +46,7 @@
 
           <!-- These buttons show up when this this is the user's page and they are logged in -->
           <button class="btn get-started-btn">Share</button>
-          <button ng-show="usersScape" class="btn message-btn">Edit Foodscape</button>
+          <button ng-show="usersScape" ng-click="edit()" class="btn message-btn">Edit Foodscape</button>
         </div>
       </div>
     </div>
