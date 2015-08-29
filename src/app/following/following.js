@@ -37,7 +37,7 @@ angular.module( 'ngBoilerplate.following', [
   $scope.loadFollowing = function(){
     var user_id = $scope.current_user.id;
     $http({
-            url: "users/" + user_id + "/following",
+            url: "/users/" + user_id + "/following.json",
             method: "GET",
             data: {}
         }).success(function(data, status, headers) {
@@ -53,7 +53,7 @@ angular.module( 'ngBoilerplate.following', [
   $scope.checkAuth();
 
   // console.log("Following current user", $scope.current_user);
-  
+
 
   $scope.foodscapes = [{
 						"title": "Mary's Foodscape"
@@ -88,7 +88,7 @@ angular.module( 'ngBoilerplate.following', [
     $scope.showMessage = false;
     $scope.sent = true;
   };
- 
+
 
   //////// This shows up to ask if you're sure you want to unfollow someone
   $scope.unfollowConfirm = function(){
