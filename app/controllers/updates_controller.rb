@@ -59,4 +59,5 @@ class UpdatesController < ApplicationController
       params.require(:update).permit(:heading, :description, :foodscape_id, :created_at, :updated_at)
     end
 
+
 end
