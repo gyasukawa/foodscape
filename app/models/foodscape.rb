@@ -8,4 +8,6 @@ class Foodscape < ActiveRecord::Base
   has_many :pictures
 
   validates_uniqueness_of :user_id, message: "Cannot create more than one foodscape!"
+
+  accepts_nested_attributes_for :updates
 end
