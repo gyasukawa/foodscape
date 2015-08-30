@@ -25,4 +25,4 @@ and enjoy the pleasant application therein.
 
 ## Heroku
 
-Visit https://quiet-harbor-5141.herokuapp.com/UI/index.html#home to see the app live.
+Visit https://scape-dev.herokuapp.com/UI/index.html#home to see the app live.
