@@ -48,13 +48,13 @@
           <div class="col-xs-4"><img class="followed-image" src="{{foodscape.img}}"></div>
           <div class="col-xs-5">
 	          <div class="followed-garden"><h2><a href="{{foodscape.url}}">{{foodscape.title}}</a></h2></div>
-	          <div class="followed-location">{{foodscape.location}}</div>
-	          <div class="recent-status">{{foodscape.status}}</div>
+	          <div class="followed-location">{{foodscape.status}}</div>
+	          <div class="recent-status">{{foodscape.location}}</div>
 	        </div>
 	        <div class="col-xs-3">
-	          <button ng-click='message()' class="btn get-started-btn update-btn">Message</button>
+	          <button ng-click='message(foodscape)' class="btn get-started-btn update-btn">Message</button>
 	          <br>
-	          <button ng-click="unfollowConfirm()" class="btn get-started-btn update-btn">Unfollow</button>
+	          <button ng-click="unfollowConfirm(foodscape)" class="btn get-started-btn update-btn">Unfollow</button>
 	        </div>
         </div>
       </div>
