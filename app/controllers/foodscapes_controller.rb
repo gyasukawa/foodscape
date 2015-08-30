@@ -69,8 +69,7 @@ class FoodscapesController < ApplicationController
   # DELETE /foodscapes/1/unfollow
   # DELETE /foodscapes/1/unfollow.json
   def unfollow
-    subscription = current_user.subscriptions.where(foodscape_id: @foodscape.id).first
-    current_user.subscriptions.delete(subscription)
+    Subscription.delete_all(user_id: current_user.id, foodscape_id: @foodscape.id)
 
     head :no_content
   end
