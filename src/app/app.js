@@ -108,15 +108,19 @@ angular.module( 'ngBoilerplate', [
           //This is going to have a dedicated route
           //called foodscapes/by_user/:userID or something soon
           //to avoid dumbass for loops.
-          for(var i = 0; i < data.length; i++){
-            if (data[i].user_id === $scope.current_user.id){
-              var thisUserFoodscape = i;
-              $window.location.href = '/UI/index.html#/foodscapes/' + (i+1);
-              return i;
-            } else {
-              $window.location.href = '/UI/index.html#/foodscape/new';
+          if(data.length > 0){
+            for(var i = 0; i < data.length; i++){
+              if (data[i].user_id === $scope.current_user.id){
+                var thisUserFoodscape = i;
+                $window.location.href = '/UI/index.html#/foodscapes/' + (i+1);
+                return i;
+              } else {
+                $window.location.href = '/UI/index.html#/foodscape/new';
 
+              }
             }
+          } else {
+            $window.location.href = '/UI/index.html#/foodscape/new';
           }
       }).error(function(data, status, headers, config) {
           // $scope.error_message = true;

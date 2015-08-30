@@ -16,7 +16,7 @@ angular.module( 'ngBoilerplate.signup', [
   });
 })
 
-.controller( 'SignupCtrl', ['$scope', '$http', function ($scope, $http) {
+.controller( 'SignupCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
 
 
 
@@ -43,6 +43,7 @@ $scope.error_message = false;
         data: data
     }).success(function(data, status, headers, config) {
         $scope.data = data;
+        $window.location.href = '/UI/index.html#/home';
         // $scope.$apply(function() { $location.path("/new-garden"); });
     }).error(function(data, status, headers, config) {
         $scope.error_message = true;

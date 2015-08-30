@@ -36,7 +36,8 @@
         <div class="profile-bar">
           <h2> {{scapeName}} </h2>
           <p>{{statusBar}}</p>
-
+          
+          <div class="fb-share-button" data-href="{{scapeURL}}" data-layout="button"></div>
           <!-- These buttons show up when the user has not followed this person's page or is not logged in -->
           <button ng-show="userFollowing" class="btn get-started-btn" ng-click="unfollow()">Unfollow</button>
           <!-- <button ng-hide="usersScape" class="btn message-btn">Share Profile</button> -->
