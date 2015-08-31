@@ -15,7 +15,16 @@ class FoodscapesController < ApplicationController
   # GET /foodscapes/1.json
   def show
     @host = User.find(@foodscape.user_id)
-    render json: {foodscape: @foodscape, current_user: current_user, user_signed_in?: user_signed_in?, user_session: user_session, host: @host}
+    @following = false
+    if Subscription.exists?(:user_id => current_user.id, :foodscape_id => @foodscape.id)
+      @following = true
+    end
+    @followers = []
+    subscriptions = Subscription.where(foodscape_id: @foodscape.id)
+    subscriptions.each do |sub|
+      @followers << User.find(sub.user_id)
+    end
+    render json: {foodscape: @foodscape, current_user: current_user, user_signed_in?: user_signed_in?, user_session: user_session, host: @host, following: @following, followers: @followers}
   end
 
 
