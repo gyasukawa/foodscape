@@ -349,6 +349,21 @@ $scope.edit = function(){
   };
 ////////// This confirms that you have actually unfollowed them.
   $scope.unfollow = function(){
+    $http({
+          url: "/foodscapes/" + scape_id + "/unfollow.json",
+          method: "DELETE",
+          data: {}
+      }).success(function(data, status, headers, config) {
+          $scope.data = data;
+          console.log("Successfully unfollowed")
+          $scope.userNotFollowing = true;
+          $scope.userFollowing = false;
+          // $scope.$apply(function() { $location.path("/new-garden"); });
+          $window.location.href = '/UI/index.html#/login';
+      }).error(function(data, status, headers, config) {
+          $scope.error_message = true;
+          // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
+      }); // end delete request
     $scope.unfollowConfirmBox = false;
     $scope.unfollowedMessage = true;
   };
