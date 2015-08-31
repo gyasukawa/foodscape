@@ -13,7 +13,7 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.following',
   'ui.router',
   'angular-carousel',
-  'ngCookies',
+  // 'ngCookies',
 ])
 // .factory('Auth', ['$cookieStore', function ($cookieStore) {
 
@@ -35,15 +35,6 @@ angular.module( 'ngBoilerplate', [
 //   };
 // }])
 
-.config( function myAppConfig ( $stateProvider, $urlRouterProvider ) {
-  $urlRouterProvider.otherwise( '/home' );
-})
-
-.run( function run () {
-  // var _user = UserRestService.requestCurrentUser();
-  // Auth.set(_user);
-})
-
 // .service("UserRestService", function UserRestService ($http, $location, $q){
 //     return service = {
 //       requestCurrentUser: function() {
@@ -56,6 +47,17 @@ angular.module( 'ngBoilerplate', [
 //     }
 //     // currentUser: null,
 // })
+
+.config( function myAppConfig ( $stateProvider, $urlRouterProvider) {
+  $urlRouterProvider.otherwise( '/home' );
+})
+
+.run( function run ( ) {
+  // var _user = UserRestService.requestCurrentUser();
+  // Auth.set(_user);
+})
+
+
 
 .controller( 'AppCtrl', function AppCtrl ( $scope, $location, $http,  $anchorScroll, $window ) {
   $scope.$on('$stateChangeSuccess', function(event, toState, toParams, fromState, fromParams){
@@ -130,22 +132,25 @@ angular.module( 'ngBoilerplate', [
   }
 
   $scope.logout = function(){
+
+
     console.log("trying to log out");
     $http({
           url: "/users/sign_out.json",
           method: "DELETE",
-          data: {}
+          // data: {}
       }).success(function(data, status, headers, config) {
           $scope.data = data;
           console.log("Successfully logged out, we think")
           // $scope.$apply(function() { $location.path("/new-garden"); });
-          $window.location.href = '/UI/index.html#/login';
+          // $window.location.href = '/UI/index.html#/login';
+          checkAuth();
       }).error(function(data, status, headers, config) {
           $scope.error_message = true;
           // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
           $scope.status = status;
       });
-      checkAuth();
+      
   };
 
 

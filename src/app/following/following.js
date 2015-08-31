@@ -18,7 +18,7 @@ angular.module( 'ngBoilerplate.following', [
 
 })
 
-.controller( 'FollowingCtrl', function FollowingCtrl( $http, $scope ) {
+.controller( 'FollowingCtrl', function FollowingCtrl( $http, $scope , $window) {
 
 
   $scope.checkAuth = function(){
@@ -37,6 +37,7 @@ angular.module( 'ngBoilerplate.following', [
 
   $scope.foodscapes = [];
   $scope.loadFoodscapeData = function(subscriptionData){
+    $scope.foodscapes = [];
     for(var i = 0; i < subscriptionData.subscriptions.length; i++){
       var scape_id = subscriptionData.subscriptions[i].foodscape_id;
       $scope.host_name = subscriptionData.hosts[i].name; // don't need this yet.
@@ -45,7 +46,7 @@ angular.module( 'ngBoilerplate.following', [
               method: "GET",
               data: {}
           }).success(function(data, status, headers) {
-             console.log("following scape data ", data);
+             console.log("following scape data from loadFoodscape Data", data);
              var resData = data.foodscape;
              var followedScape = {
               "title": resData.name
@@ -158,7 +159,7 @@ angular.module( 'ngBoilerplate.following', [
           $scope.data = data;
           console.log("Successfully unfollowed")
           // $scope.$apply(function() { $location.path("/new-garden"); });
-          $window.location.href = '/UI/index.html#/login';
+          $scope.loadFollowing();
       }).error(function(data, status, headers, config) {
           $scope.error_message = true;
           // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
