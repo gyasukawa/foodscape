@@ -23,6 +23,8 @@ angular.module( 'ngBoilerplate.show-garden', [
 
   var current_user; // inits a current_user variable so that we can use it outside the http request
 
+  $scope.followerEmails = [];
+
 // THIS IS TO PUT STUFF ON THE PAGE ///////////////////////////////////////
 
   //This request gets the information for this specific foodscape
@@ -30,6 +32,10 @@ angular.module( 'ngBoilerplate.show-garden', [
 
     var resData = response.data.foodscape;
     console.log("RESponse: ", response);
+
+    for(var i = 0; i < response.data.followers.length; i++){
+      $scope.followerEmails.push({"email" : response.data.followers[i].email});
+    }
 
     //current_user is sent over when the page loads
     current_user = response.data.current_user;
@@ -157,12 +163,15 @@ $scope.edit = function(){
 
   var makeUpdateEmail = function(update){
     var userName = current_user.name;
+
+   
+
     console.log("makeUpdateEmail username:: ", userName);
     //
     var params = {
         "message": {
             "from_email":"admin@myfoodscape.com",
-            "to":[{"email":"iring.ma@gmail.com"},{"email":"grace.yasukawa@gmail.com"},{"email":"allxiecleary@gmail.com"}], // This needs to be subscribers
+            "to":$scope.followerEmails, // This needs to be subscribers
             "subject": "Update from " + userName + "'s Foodscape",
             "html": "<h4>You have an update from " + userName + "'s Foodscape</h4><p>" + update + "</p><br>Please visit the <a href='http://myfoodscape.com'>foodscape</a> to see more details</br>",//I'm going to actually put the link to the foodscape in the email
             "autotext": true,
