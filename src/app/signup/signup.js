@@ -34,6 +34,8 @@ $scope.error_message = false;
               "password": the_user.password,
               "password_confirmation": the_user.password_confirmation,
               "zip_code": the_user.zip_code}};
+    $scope.redirect_path = the_user.radio;
+    console.log("redirect path?", $scope.redirect_path);
 
     console.log("This is what I passed through! Aren't you proud? ", data);
 
@@ -43,7 +45,12 @@ $scope.error_message = false;
         data: data
     }).success(function(data, status, headers, config) {
         $scope.data = data;
-        $window.location.href = '/UI/index.html#/home';
+        if($scope.redirect_path == "host"){
+          $window.location.href = '/UI/index.html#/foodscape/new';
+
+        }else{
+          $window.location.href = '/UI/index.html#/home';
+        }
         // $scope.$apply(function() { $location.path("/new-garden"); });
     }).error(function(data, status, headers, config) {
         $scope.error_message = true;
