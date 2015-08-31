@@ -320,6 +320,8 @@ $scope.edit = function(){
   $scope.follow = function (){
     $scope.toggleModal();
     $scope.showFollow = true;
+    $scope.userFollowing = true;
+    $scope.userNotFollowing = false;
 
     // this is the data to send when following someone
     var data = {
