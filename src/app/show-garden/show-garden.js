@@ -34,7 +34,8 @@ angular.module( 'ngBoilerplate.show-garden', [
     //current_user is sent over when the page loads
     current_user = response.data.current_user;
 
-    var usFoll = false;
+
+    var usFoll = response.data.following;
     $scope.usersScape = false;
     $scope.userFollowing = false;
     $scope.userNotFollowing = false;
@@ -359,7 +360,7 @@ $scope.edit = function(){
           $scope.userNotFollowing = true;
           $scope.userFollowing = false;
           // $scope.$apply(function() { $location.path("/new-garden"); });
-          $window.location.href = '/UI/index.html#/login';
+          // $window.location.href = '/UI/index.html#/login';
       }).error(function(data, status, headers, config) {
           $scope.error_message = true;
           // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
