@@ -36,37 +36,26 @@ angular.module( 'ngBoilerplate.following', [
 
 
   $scope.foodscapes = [];
-  $scope.loadFoodscapeData = function(subscriptionData){
+  $scope.loadFoodscapeData = function(subscribedFoodscapes){
+
+    var foodscapeData = angular.fromJson(subscribedFoodscapes.foodscapes);
+    console.log(foodscapeData);
     $scope.foodscapes = [];
-    for(var i = 0; i < subscriptionData.subscriptions.length; i++){
-      var scape_id = subscriptionData.subscriptions[i].foodscape_id;
-      $scope.host_name = subscriptionData.hosts[i].name; // don't need this yet.
-      $http({
-              url: "/foodscapes/" + scape_id + ".json",
-              method: "GET",
-              data: {}
-          }).success(function(data, status, headers) {
-             console.log("following scape data from loadFoodscape Data", data);
-             var resData = data.foodscape;
-             var followedScape = {
-              "title": resData.name
-              ,"location": resData.city
-              ,"status": $scope.host_name //this is the host name, not the status. Duh. Needs to be changed eventually after we don't need another get request to do it.
-              ,"img":"./assets/images/community-2.png"
-              ,"url":"/UI/index.html#/foodscapes/" + scape_id
-              , "scape_id": scape_id
-              }
-             $scope.foodscapes.push(followedScape);
+    for(var i = 0; i < foodscapeData.length; i++){
+      var scape_id = foodscapeData[i].foodscape_id;
 
-
-              // $scope.data = data;
-              // $scope.$apply(function() { $location.path("/new-garden"); });
-          }).error(function(data, status, headers) {
-              // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
-              $scope.status = status;
-          });
+     var followedScape = {
+      "title": foodscapeData[i].name
+      ,"location": foodscapeData[i].city
+      ,"status": subscribedFoodscapes.hosts[i].name //this is the host name, not the status. Duh. Needs to be changed eventually after we don't need another get request to do it.
+      ,"img":"./assets/images/community-2.png"
+      ,"url":"/UI/index.html#/foodscapes/" + scape_id
+      , "scape_id": scape_id
+      }
+     $scope.foodscapes.push(followedScape);
     }
   }
+
   $scope.loadFollowing = function(){
     var user_id = $scope.current_user.id;
     $http({
@@ -87,27 +76,7 @@ angular.module( 'ngBoilerplate.following', [
 
   $scope.checkAuth();
 
-  // console.log("Following current user", $scope.current_user);
 
-  // This is a function to load the actual foodscape data
-  // THIS NEEDS TO BE TRANSFERRED TO THE BACKEND!
-  // This is extremely inefficient.
-
-  
-
-
-  // $scope.foodscapes = [{
-  //           "title": "Mary's Foodscape"
-  //           ,"location": "San Jose"
-  //           ,"status":"I watered my tomatoes"
-  //           ,"img":"./assets/images/community-2.png"
-  //           }
-  //           ,{
-  //           "title": "Sarah's Foodscape"
-  //           ,"location": "San Francisco"
-  //           ,"status":"Just dug a big hole"
-  //           ,"img":"./assets/images/community-3.jpeg"
-  //           }];
 
   // All to do with modals
   $scope.sent = false;
@@ -126,6 +95,7 @@ angular.module( 'ngBoilerplate.following', [
     $scope.toggleModal();
     $scope.showMessage = true;
     $scope.toScapeHost = scapeHost;
+    console.log("to scapehost", scapeHost);
     console.log("show message ", $scope.showMessage);
   };
     // for the message box to show the already sent thank you message
