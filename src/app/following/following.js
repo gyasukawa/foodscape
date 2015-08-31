@@ -51,6 +51,7 @@ angular.module( 'ngBoilerplate.following', [
       ,"img":"./assets/images/community-2.png"
       ,"url":"/UI/index.html#/foodscapes/" + scape_id
       , "scape_id": scape_id
+      ,"host_email": subscribedFoodscapes.hosts[i].email
       }
      $scope.foodscapes.push(followedScape);
     }
@@ -99,7 +100,8 @@ angular.module( 'ngBoilerplate.following', [
     console.log("show message ", $scope.showMessage);
   };
     // for the message box to show the already sent thank you message
-  $scope.send = function(){
+  $scope.send = function(messageText){
+    console.log(messageText);
     var messageParams = makeMessageEmail(messageText);
     sendTheMail(messageParams);
 
@@ -156,15 +158,19 @@ angular.module( 'ngBoilerplate.following', [
   var m = new mandrill.Mandrill('55zOecDadI2ajt-66mNoXQ');
 
   var makeMessageEmail = function(message){
-    var userName = current_user.name;
-    console.log("makeMessageEmail username:: ", userName);
+
+    console.log("message rescipient", $scope.messageRecipient);
+    var userName = $scope.current_user.name;
+    console.log("makeMessageEmail from username:: ", userName);
+    console.log("to email", $scope.messageRecipient.email);
+    console.log("from email", $scope.current_user.email);
     //
     var params = {
         "message": {
             "from_email":"admin@myfoodscape.com",
-            "to":[{"email":"iring.ma@gmail.com"},{"email":"grace.yasukawa@gmail.com"},{"email":"allxiecleary@gmail.com"}], // This needs to be subscribers
-            "subject": "Message from " + userName+"!",
-            "html": "<h4>You have message from " + userName + ".</h4><p>" + message + "</p><br> You can reply using their email (for now): <a href='"+ current_user.email +"'>foodscape</a></br>",//I'm going to actually put the link to the foodscape in the email
+            "to":[{"email": $scope.messageRecipient.host_email }],
+            "subject": "Message from " + userName +"!",
+            "html": "<h4>You have message from " + userName + ".</h4><p>" + message + "</p><br> You can reply using their email (for now): <a href='"+ $scope.current_user.email +"'>foodscape</a></br>",//I'm going to actually put the link to the foodscape in the email
             "autotext": true,
             "track_opens": true,
             "track_clicks": true,
