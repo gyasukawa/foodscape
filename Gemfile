@@ -7,6 +7,7 @@ gem 'mandrill-api'
 
 # For photo upload
 gem "paperclip", "~> 4.3"
+gem "aws-sdk", '< 2.0'
 
 # for omniauth
 gem 'omniauth'

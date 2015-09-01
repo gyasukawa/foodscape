@@ -31,4 +31,8 @@ class User < ActiveRecord::Base
     end
   end
 
+
+  def as_json(options={})
+    super(options).merge avatar_url: avatar.url
+  end
 end
