@@ -71,7 +71,7 @@ angular.module( 'ngBoilerplate.show-garden', [
 
 
     // Pulls from our random veggie pix
-    $scope.profilePix = defaultProfilePhotos[randomNum];
+    $scope.avatarUrl = current_user.avatar_url;
     $scope.scapeName = resData.name;
     $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"]
     // ["assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
