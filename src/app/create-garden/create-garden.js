@@ -16,7 +16,7 @@ angular.module( 'ngBoilerplate.create-garden', [
   });
 })
 
-.controller( 'CreateGardenCtrl', [ "$scope", "$http", "$window", function ( $scope , $http, $window ) {
+.controller( 'CreateGardenCtrl', [ "$scope", "$http", "$window", "Upload", function ( $scope , $http, $window, Upload) {
 
 // for the ng-repeat for the veggie bools
   $scope.plants = [{  "id":1
@@ -121,6 +121,6 @@ angular.module( 'ngBoilerplate.create-garden', [
       console.log("nope. You didnt put in enough stuff to make this go through.");
     }
   }
-}])
-  
+}])// end CreateGardenCtrl
+
 ;
