@@ -13,6 +13,7 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.following',
   'ui.router',
   'angular-carousel',
+  'ngFileUpload'
   // 'ngCookies',
 ])
 // .factory('Auth', ['$cookieStore', function ($cookieStore) {
@@ -150,7 +151,7 @@ angular.module( 'ngBoilerplate', [
           // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
           $scope.status = status;
       });
-      
+
   };
 
 
