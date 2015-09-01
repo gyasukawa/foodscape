@@ -143,7 +143,7 @@ angular.module( 'ngBoilerplate', [
           $scope.data = data;
           console.log("Successfully logged out, we think")
           // $scope.$apply(function() { $location.path("/new-garden"); });
-          // $window.location.href = '/UI/index.html#/login';
+          $window.location.href = '/UI/index.html#/login';
           checkAuth();
       }).error(function(data, status, headers, config) {
           $scope.error_message = true;
