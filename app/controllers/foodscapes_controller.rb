@@ -36,6 +36,7 @@ class FoodscapesController < ApplicationController
     @foodscape = Foodscape.new(foodscape_params)
     @user = current_user
     @foodscape.user_id = @user.id
+    @foodscape.slug = @foodscape.name.downcase.gsub(" ", "-")
 
     if @foodscape.save
       @foodscape.update(user_id: current_user.id)
@@ -88,12 +89,12 @@ class FoodscapesController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_foodscape
-      @foodscape = Foodscape.find(params[:id])
+      @foodscape = Foodscape.find_by_slug(params[:id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def foodscape_params
-      params.require(:foodscape).permit(:name, :address_line_1, :address_line_2, :city, :state, :zip_code, :produce, :goalsneeds, :other_details, :URL_slug)
+      params.require(:foodscape).permit(:name, :address_line_1, :address_line_2, :city, :state, :zip_code, :produce, :goalsneeds, :other_details, :slug)
     end
 
 end
