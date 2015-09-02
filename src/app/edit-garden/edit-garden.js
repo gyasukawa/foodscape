@@ -26,9 +26,6 @@ angular.module( 'ngBoilerplate.edit-garden', [
 
   //IMAGE STUFF
 
-  // var sendImagePayload = function(formData, method, url) {
-
-
     $scope.uploadFile = function (file) {
       // console.log(":::::FILES ", file);
       // for (var i = 0; i < files.length; i++) {
@@ -44,41 +41,6 @@ angular.module( 'ngBoilerplate.edit-garden', [
       // }
     }
 
-  //   console.log("url", url)
-  //   console.log("We're about to format the form data ", formData);
-  //   var file_attachment, options, ref, ref1;
-  //   file_attachment = (ref = formData) != null ? ref : [];
-  //   // console.log("file attachment ", file_attachment)
-  //   // console.log("file.type REALLY", file_attachment.type);
-  //   // var theType = file_attachment.type;
-
-
-
-
-  //   options = { headers: {'Content-Type': undefined },
-  //               url: url,
-  //               method: method,
-  //               picture : {
-  //                           image: file_attachment,
-  //                           main: false
-  //                         }
-  //             };
-  //   console.log("We're about to actually upload ", options);
-  //   return Upload.upload(options);
-  // };
-
-
-  // $scope.uploadImageHopefully = function(formData) { //formData is file_attachment from the page from down by the submit form
-
-  //   console.log("form data from the page inside uploadImageHopefully, ", formData)
-  //   return sendImagePayload(formData, "POST", "foodscapes/" + scape_id + "/pictures.json");
-  // }
-  // // var editImageHopefully = function(formData, recordId) {
-  // //   return sendPayload(formData, "PUT", "my_resources/" + picture_id + ".json");
-  // // }
-
-
-  
 // END IMAGE STUFF
 
 
@@ -159,18 +121,6 @@ angular.module( 'ngBoilerplate.edit-garden', [
      console.log($scope.plants);
   };
 
-  // $scope.goals = [{ "id":"1",
-  //                   "text":"Have a place to share updates and photos with my friends and neighbors",
-  //                     "bool":false},
-  //                   { "id":"2",
-  //                   "text":"Get help with foodscape chores such as weeding and harvesting",
-  //                     "bool":false},
-  //                   { "id":"3",
-  //                   "text":"Earn extra money to support my foodscape",
-  //                     "bool":false},
-  //                   { "id":"4",
-  //                   "text":"I'm not sure yet",
-  //                     "bool":false}];
 
   $scope.submitGardenForm = function(scapeName, growingText, address1, address2, city, state, zip, goals, extraGoals, otherDetails, file_attachment){
 
@@ -220,22 +170,7 @@ angular.module( 'ngBoilerplate.edit-garden', [
       .error(function(data, status, headers){
         console.log("FAIL to put");
       })
-      // $http({
-      //     url: "/foodscapes.json",
-      //     method: "PUT",
-      //     data: data
-      // }).success(function(data, status, headers, config) {
-      //     $scope.data = data;
-      //     // $scope.$apply(function() { $location.path("/new-garden"); });
-      // }).error(function(data, status, headers, config) {
-      //     $scope.error_message = true;
-      //     // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
-      //     $scope.status = status;
-      // });
 
-    // } else {
-    //   console.log("nope. You didnt put in enough stuff to make this go through.");
-    // }
   }
 }])
   
