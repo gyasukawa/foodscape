@@ -13,6 +13,10 @@ grunt build --force
 Currently the `--force` flag is required because `Gruntfile.js`
 appears to ignore options like `laxcommas` for unknown reasons.
 
+## Configure AWS S3
+grab AWS_SECRET_ACCESS_KEY and AWS_ACCESS_KEY_ID from heroku (heroku config -a scape-dev)
+add exports in your .bash_profile to add these environment variables
+
 ## Running the dev server
 
 ```sh
