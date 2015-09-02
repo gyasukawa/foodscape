@@ -71,7 +71,7 @@ angular.module( 'ngBoilerplate.show-garden', [
 
 
     // Pulls from our random veggie pix
-    $scope.avatarUrl = current_user.avatar_url;
+    $scope.avatarUrl = current_user.avatar_url; //change to current_user.avatar_file_name with any other S3 specifications
     $scope.scapeName = resData.name;
     $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"]
     // ["assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
