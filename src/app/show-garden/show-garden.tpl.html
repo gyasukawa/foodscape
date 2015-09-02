@@ -39,7 +39,7 @@
           
           <div class="fb-share-button" data-href="{{scapeURL}}" data-layout="button"></div>
           <!-- These buttons show up when the user has not followed this person's page or is not logged in -->
-          <button ng-show="userFollowing" class="btn get-started-btn" ng-click="unfollow()">Unfollow</button>
+          <button ng-show="userFollowing" class="btn get-started-btn" ng-click="unfollowConfirm()">Unfollow</button>
           <!-- <button ng-hide="usersScape" class="btn message-btn">Share Profile</button> -->
 
           <!-- This button shows up when the user is following this person already...ask if there needs to be a share button here, too -->
@@ -92,7 +92,7 @@
                   {{extraProduce}}
 
                   <div class="info-title">Goals/Needs</div>
-                  <div ng-repeat="goal in myGoals">
+                  <div ng-repeat="goal in myGoals track by $index">
                     I would like to {{goal}}.
                   </div>
                   {{extraGoal}}

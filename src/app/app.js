@@ -13,6 +13,7 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.following',
   'ui.router',
   'angular-carousel',
+  'ngFileUpload'
   // 'ngCookies',
 ])
 // .factory('Auth', ['$cookieStore', function ($cookieStore) {
@@ -143,14 +144,14 @@ angular.module( 'ngBoilerplate', [
           $scope.data = data;
           console.log("Successfully logged out, we think")
           // $scope.$apply(function() { $location.path("/new-garden"); });
-          // $window.location.href = '/UI/index.html#/login';
+          $window.location.href = '/UI/index.html#/login';
           checkAuth();
       }).error(function(data, status, headers, config) {
           $scope.error_message = true;
           // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
           $scope.status = status;
       });
-      
+
   };
 
 
