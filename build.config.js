@@ -68,7 +68,8 @@ module.exports = {
       'vendor/angular-ui-utils/modules/route/route.js',
       'vendor/angular-touch/angular-touch.js',
       'vendor/angular-carousel/dist/angular-carousel.js',
-      'vendor/angular-cookies/angular-cookies.js'
+      'vendor/ng-file-upload/ng-file-upload.min.js',
+      'vendor/ng-file-upload-shim/ng-file-upload-shim.min.js'
     ],
     css: [
       'vendor/angular-carousel/dist/angular-carousel.css'

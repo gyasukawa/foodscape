@@ -6,8 +6,8 @@
     <modal-dialog show='modalShown'>
       <div ng-show="showMessage" class="message-box">
         <h1>Send a message to {{scapeName}}!</h1>
-        <textarea>Write a message here.</textarea>
-        <button ng-click="send()" class="btn get-started-btn">Send</button>
+        <textarea ng-model="messageText">Write a message here.</textarea>
+        <button ng-click="send(messageText)" class="btn get-started-btn">Send</button>
       </div>
       <div ng-show="sent" class="thank-box">
         <h1>Thank you!</h1>
