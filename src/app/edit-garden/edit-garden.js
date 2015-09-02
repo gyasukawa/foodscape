@@ -34,7 +34,7 @@ angular.module( 'ngBoilerplate.edit-garden', [
           $scope.upload = Upload.upload({
               url: '/foodscapes/' + scape_id + '/pictures.json',
               method: 'POST',
-              fields: { main : false },
+              fields: { 'picture[main]' : false },
               file: file,
               fileFormDataName: 'picture[image]'
           });
@@ -44,7 +44,7 @@ angular.module( 'ngBoilerplate.edit-garden', [
 // END IMAGE STUFF
 
 
- 
+
   $scope.checkAuth = function(){
     $http.get('/the_current_user.json').then(
         function(response){
@@ -65,11 +65,11 @@ angular.module( 'ngBoilerplate.edit-garden', [
     // GET GET GET GET GET
     $http.get('/foodscapes/' + scape_id + '.json').then(function(response){
       var resData = response.data;
-      
+
       if (resData.foodscape.user_id == $scope.current_user.id){
         // console.log("worked: ", response);
         resData = resData.foodscape;
-        
+
         $scope.scapeName = resData.name;
 
 
@@ -173,5 +173,5 @@ angular.module( 'ngBoilerplate.edit-garden', [
 
   }
 }])
-  
+
 ;
