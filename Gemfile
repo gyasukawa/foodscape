@@ -2,6 +2,10 @@ source 'https://rubygems.org'
 
 ruby '2.0.0'
 
+gem 'rack-mount', " ~> 0.7.2"
+
+
+
 # for update model emails
 gem 'mandrill-api'
 

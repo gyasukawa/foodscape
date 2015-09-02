@@ -17,16 +17,60 @@ angular.module( 'ngBoilerplate.edit-garden', [
   });
 })
 
-.controller( 'EditGardenCtrl', [ "$scope", "$http", "$stateParams", "$window", "$location" , function ( $scope , $http, $stateParams, $window, $location ) {
-  console.log("TO THE WINDOW!" ,$window);
+.controller( 'EditGardenCtrl', [ "$scope", "$http", "$stateParams", "$window", "$location" , "Upload", "$timeout", function ( $scope , $http, $stateParams, $window, $location, Upload, $timeout ) {
+  // console.log("TO THE WINDOW!" ,$window);
 
   var scape_id = $stateParams.scapeId;
+
   $scope.current_user;
+
+  //IMAGE STUFF
+
+  var sendImagePayload = function(formData, method, url) {
+
+    console.log("url", url)
+    console.log("We're about to format the form data ", formData);
+    var file_attachment, options, ref, ref1;
+    file_attachment = (ref = formData) != null ? ref : [];
+    // console.log("file attachment ", file_attachment)
+    // console.log("file.type REALLY", file_attachment.type);
+    // var theType = file_attachment.type;
+
+
+
+
+    options = { headers: {'Content-Type': undefined },
+                url: url,
+                method: method,
+                picture : {
+                            image: file_attachment,
+                            main: false
+                          }
+              };
+    console.log("We're about to actually upload ", options);
+    return Upload.upload(options);
+  };
+
+
+  $scope.uploadImageHopefully = function(formData) { //formData is file_attachment from the page from down by the submit form
+
+    console.log("form data from the page inside uploadImageHopefully, ", formData)
+    return sendImagePayload(formData, "POST", "foodscapes/" + scape_id + "/pictures.json");
+  }
+  // var editImageHopefully = function(formData, recordId) {
+  //   return sendPayload(formData, "PUT", "my_resources/" + picture_id + ".json");
+  // }
+
+
+  
+// END IMAGE STUFF
+
+
  
   $scope.checkAuth = function(){
     $http.get('/the_current_user.json').then(
         function(response){
-          console.log("current user from following", response);
+          // console.log("current user from following", response);
           $scope.current_user = response.data;
           $scope.loadFoodscape($window);
 
@@ -45,7 +89,7 @@ angular.module( 'ngBoilerplate.edit-garden', [
       var resData = response.data;
       
       if (resData.foodscape.user_id == $scope.current_user.id){
-        console.log("worked: ", response);
+        // console.log("worked: ", response);
         resData = resData.foodscape;
         
         $scope.scapeName = resData.name;
@@ -54,7 +98,6 @@ angular.module( 'ngBoilerplate.edit-garden', [
 
         // For produce checkboxes. Arrange to go onto the page.
         var produce = angular.fromJson(resData.produce);
-        console.log("Produce of five" , produce);
         $scope.growingText = produce[5].growingText;
 
         for(var i = 0; i < 6; i++){
@@ -113,10 +156,11 @@ angular.module( 'ngBoilerplate.edit-garden', [
   //                   "text":"I'm not sure yet",
   //                     "bool":false}];
 
-  $scope.submitGardenForm = function(scapeName, growingText, address1, address2, city, state, zip, goals, extraGoals, otherDetails){
+  $scope.submitGardenForm = function(scapeName, growingText, address1, address2, city, state, zip, goals, extraGoals, otherDetails, file_attachment){
+
+    $scope.uploadImageHopefully(file_attachment)
 
 
-    console.log("Goals!! ", goals);
     // if(scapeInfo){ // make sure it's not blank
        var goalsAndNeeds = goals;
 
@@ -148,10 +192,10 @@ angular.module( 'ngBoilerplate.edit-garden', [
                 "other_details": otherDetails
               }};
 
-      console.log("This is what I passed through to edit! ", data);
+      // console.log("This is what I passed through to edit! ", data);
       $http.put('/foodscapes/' + scape_id + '.json', data)
-      .success(function(data, status, headers){
-        console.log("put success! ", data)
+      .success(function(data, status /*,  headers */){
+        // console.log("put success! ", data)
         $window.location.href = '/UI/index.html#/foodscapes/' + scape_id;
 
       })

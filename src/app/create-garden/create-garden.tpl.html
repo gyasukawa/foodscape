@@ -185,6 +185,8 @@
               <textarea ng-model="scape.shareText" class="form-control" placeholder="Tell us more about your interest in sharing your foodscape"></textarea>
             </div>
 
+            <!-- START PHOTOS -->
+
           <h4 class="question">5. Please upload up to 3 images of your foodscape (Optional). You can also do this later when editing your profile.</h4>
 
           <div class="row">
@@ -206,8 +208,11 @@
           </div>
 
           <div class="upload-button-container" align="right">
-            <buttonc class="btn get-started-btn">Upload</buttonc>
+            <button class="btn get-started-btn" ngf-select="uploadFiles($files)" multiple
+          accept="image/*" ngf-max-height="1000" >Upload</button>
           </div>
+
+          <!-- END PHOTOS -->
 
           <h4 class="question">6. What else would you like us to know about your foodscape? (Optional)</h4>
           <div class="input-container">

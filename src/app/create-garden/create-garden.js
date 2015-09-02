@@ -16,7 +16,39 @@ angular.module( 'ngBoilerplate.create-garden', [
   });
 })
 
-.controller( 'CreateGardenCtrl', [ "$scope", "$http", "$window", "Upload", function ( $scope , $http, $window, Upload) {
+.controller( 'CreateGardenCtrl', [ "$scope", "$http", "$window", "Upload", "$timeout", function ( $scope , $http, $window, Upload, $timeout) {
+
+
+  //IMAGE STUFF
+
+  $scope.uploadFiles = function(files) {
+    console.log("UPLOADING A FILE, BROSKI");
+    $scope.files = files;
+    angular.forEach(files, function(file) {
+      if (file && !file.$error) {
+        file.upload = Upload.upload({
+              url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+              file: file
+        });
+
+        file.upload.then(function (response) {
+          $timeout(function () {
+            console.log("RESPONDEVOUX success! ", response);
+            file.result = response.data;
+          });
+        }, function (response) {
+          console.log("RESPONDEVOUX", response);
+          if (response.status > 0)
+            $scope.errorMsg = response.status + ': ' + response.data;
+        });
+
+        file.upload.progress(function (evt) {
+          file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+        });
+      }
+    });
+  }
+// END IMAGE STUFF
 
 // for the ng-repeat for the veggie bools
   $scope.plants = [{  "id":1

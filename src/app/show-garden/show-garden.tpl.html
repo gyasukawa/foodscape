@@ -92,7 +92,7 @@
                   {{extraProduce}}
 
                   <div class="info-title">Goals/Needs</div>
-                  <div ng-repeat="goal in myGoals">
+                  <div ng-repeat="goal in myGoals track by $index">
                     I would like to {{goal}}.
                   </div>
                   {{extraGoal}}

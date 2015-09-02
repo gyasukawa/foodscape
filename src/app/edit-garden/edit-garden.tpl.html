@@ -88,7 +88,12 @@
           </div>
 
           <div class="upload-button-container" align="right">
-            <buttonc class="btn get-started-btn">Upload</buttonc>
+            <div class="form-group">
+              <label>Attachment</label>
+              <input type="file" ngf-select ng-model="file_attachment" />
+            </div>
+            <!-- <button class="btn get-started-btn" ngf-select="uploadFiles($files)" multiple
+          accept="image/*" ngf-max-height="1000" >Upload</button> -->
           </div>
 
           <h4 class="question">6. What else would you like us to know about your foodscape? (Optional)</h4>
@@ -98,7 +103,7 @@
 
           <div align="right" class="buttons-container">
            <!-- <button class="btn btn-large get-started-btn">Save</button> -->
-            <button ng-click="submitGardenForm(scapeName, growingText, address1, address2, city, state, zip, goals, extraGoals, otherDetails)" class="btn btn-large get-started-btn">Save All</button> 
+            <button ng-click="submitGardenForm(scapeName, growingText, address1, address2, city, state, zip, goals, extraGoals, otherDetails, file_attachment)" class="btn btn-large get-started-btn">Save All</button> 
           </div>
         </div>
       </div>
