@@ -11,7 +11,7 @@ class Foodscape < ActiveRecord::Base
 
   accepts_nested_attributes_for :updates
 
-  attr_accessible :slug, :name
+  attr_accessor :slug, :name
   validates_presence_of :slug
 
   def to_param
