@@ -127,12 +127,24 @@ angular.module( 'ngBoilerplate.show-garden', [
       if(updateArray[0]){
         $scope.statusBar = updateArray[0].content;
       }
-        }, function(response){
+    }, function(response){
       console.log("no updates");
     });
-  }
+  }// end pull updates function
   // Pulls updates when the page loads
   pullUpdates();
+
+    // PULL PHOTOS
+  var pullPhotos = function(){
+    $http.get("/foodscapes/" + scape_id  + "/pictures/1.json").then(function(response){
+        console.log(" IMAGE RESPONSE ", response);
+        // var image = response.data;
+
+    }, function(response){
+      console.log("no updates");
+    });
+  } //end pull photos
+  pullPhotos();
 
 
 ////////// END GET REQUESTS TO PUT THINGS ON SHOW PAGE //////////////
