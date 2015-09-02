@@ -16,8 +16,10 @@ class FoodscapesController < ApplicationController
   def show
     @host = User.find(@foodscape.user_id)
     @following = false
-    if Subscription.exists?(:user_id => current_user.id, :foodscape_id => @foodscape.id)
-      @following = true
+    if user_signed_in?
+      if Subscription.exists?(:user_id => current_user.id, :foodscape_id => @foodscape.id)
+        @following = true
+      end
     end
     @followers = []
     subscriptions = Subscription.where(foodscape_id: @foodscape.id)
