@@ -10,4 +10,11 @@ class Foodscape < ActiveRecord::Base
   validates_uniqueness_of :user_id, message: "Cannot create more than one foodscape!"
 
   accepts_nested_attributes_for :updates
+
+  attr_accessible :slug, :name
+  validates_presence_of :slug
+
+  def to_param
+    slug
+  end
 end
