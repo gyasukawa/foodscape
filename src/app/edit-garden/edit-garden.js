@@ -26,40 +26,56 @@ angular.module( 'ngBoilerplate.edit-garden', [
 
   //IMAGE STUFF
 
-  var sendImagePayload = function(formData, method, url) {
-
-    console.log("url", url)
-    console.log("We're about to format the form data ", formData);
-    var file_attachment, options, ref, ref1;
-    file_attachment = (ref = formData) != null ? ref : [];
-    // console.log("file attachment ", file_attachment)
-    // console.log("file.type REALLY", file_attachment.type);
-    // var theType = file_attachment.type;
+  // var sendImagePayload = function(formData, method, url) {
 
 
+    $scope.uploadFile = function (file) {
+      // console.log(":::::FILES ", file);
+      // for (var i = 0; i < files.length; i++) {
+          // var file = files[i];
+          console.log("FILE::::: ", file);
+          $scope.upload = Upload.upload({
+              url: '/foodscapes/' + scape_id + '/pictures.json',
+              method: 'POST',
+              fields: { main : false },
+              file: file,
+              fileFormDataName: 'picture[image]'
+          });
+      // }
+    }
+
+  //   console.log("url", url)
+  //   console.log("We're about to format the form data ", formData);
+  //   var file_attachment, options, ref, ref1;
+  //   file_attachment = (ref = formData) != null ? ref : [];
+  //   // console.log("file attachment ", file_attachment)
+  //   // console.log("file.type REALLY", file_attachment.type);
+  //   // var theType = file_attachment.type;
 
 
-    options = { headers: {'Content-Type': undefined },
-                url: url,
-                method: method,
-                picture : {
-                            image: file_attachment,
-                            main: false
-                          }
-              };
-    console.log("We're about to actually upload ", options);
-    return Upload.upload(options);
-  };
 
 
-  $scope.uploadImageHopefully = function(formData) { //formData is file_attachment from the page from down by the submit form
+  //   options = { headers: {'Content-Type': undefined },
+  //               url: url,
+  //               method: method,
+  //               picture : {
+  //                           image: file_attachment,
+  //                           main: false
+  //                         }
+  //             };
+  //   console.log("We're about to actually upload ", options);
+  //   return Upload.upload(options);
+  // };
 
-    console.log("form data from the page inside uploadImageHopefully, ", formData)
-    return sendImagePayload(formData, "POST", "foodscapes/" + scape_id + "/pictures.json");
-  }
-  // var editImageHopefully = function(formData, recordId) {
-  //   return sendPayload(formData, "PUT", "my_resources/" + picture_id + ".json");
+
+  // $scope.uploadImageHopefully = function(formData) { //formData is file_attachment from the page from down by the submit form
+
+  //   console.log("form data from the page inside uploadImageHopefully, ", formData)
+  //   return sendImagePayload(formData, "POST", "foodscapes/" + scape_id + "/pictures.json");
   // }
+  // // var editImageHopefully = function(formData, recordId) {
+  // //   return sendPayload(formData, "PUT", "my_resources/" + picture_id + ".json");
+  // // }
 
 
   
@@ -158,8 +174,10 @@ angular.module( 'ngBoilerplate.edit-garden', [
 
   $scope.submitGardenForm = function(scapeName, growingText, address1, address2, city, state, zip, goals, extraGoals, otherDetails, file_attachment){
 
-    $scope.uploadImageHopefully(file_attachment)
+    // $scope.uploadImageHopefully(file_attachment)
 
+    console.log("about to scope.upload hopefully");
+    $scope.uploadFile(file_attachment);
 
     // if(scapeInfo){ // make sure it's not blank
        var goalsAndNeeds = goals;
