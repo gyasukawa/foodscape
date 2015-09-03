@@ -208,8 +208,12 @@
           </div>
 
           <div class="upload-button-container" align="right">
-            <button class="btn get-started-btn" ngf-select="uploadFiles($files)" multiple
-          accept="image/*" ngf-max-height="1000" >Upload</button>
+            <div class="form-group">
+              <label>Attachment</label>
+              <input type="file" ngf-select ng-model="scape.file_attachment" />
+            </div>
+            <!-- <button class="btn get-started-btn" ngf-select="uploadFiles($files)" multiple
+          accept="image/*" ngf-max-height="1000" >Upload</button> -->
           </div>
 
           <!-- END PHOTOS -->

@@ -21,33 +21,33 @@ angular.module( 'ngBoilerplate.create-garden', [
 
   //IMAGE STUFF
 
-  $scope.uploadFiles = function(files) {
-    console.log("UPLOADING A FILE, BROSKI");
-    $scope.files = files;
-    angular.forEach(files, function(file) {
-      if (file && !file.$error) {
-        file.upload = Upload.upload({
-              url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-              file: file
-        });
+  // $scope.uploadFiles = function(files, scape_id) {
+  //   console.log("UPLOADING A FILE, BROSKI");
+  //   $scope.files = files;
+  //   angular.forEach(files, function(file) {
+  //     if (file && !file.$error) {
+  //       file.upload = Upload.upload({
+  //             url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+  //             file: file
+  //       });
 
-        file.upload.then(function (response) {
-          $timeout(function () {
-            console.log("RESPONDEVOUX success! ", response);
-            file.result = response.data;
-          });
-        }, function (response) {
-          console.log("RESPONDEVOUX", response);
-          if (response.status > 0)
-            $scope.errorMsg = response.status + ': ' + response.data;
-        });
+  //       file.upload.then(function (response) {
+  //         $timeout(function () {
+  //           console.log("RESPONDEVOUX success! ", response);
+  //           file.result = response.data;
+  //         });
+  //       }, function (response) {
+  //         console.log("RESPONDEVOUX", response);
+  //         if (response.status > 0)
+  //           $scope.errorMsg = response.status + ': ' + response.data;
+  //       });
 
-        file.upload.progress(function (evt) {
-          file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
-        });
-      }
-    });
-  }
+  //       file.upload.progress(function (evt) {
+  //         file.progress = Math.min(100, parseInt(100.0 * evt.loaded / evt.total));
+  //       });
+  //     }
+  //   });
+  // }
 // END IMAGE STUFF
 
 // for the ng-repeat for the veggie bools
@@ -101,9 +101,28 @@ angular.module( 'ngBoilerplate.create-garden', [
                     "text":"I'm not sure yet",
                       "bool":false}];
 
+  // IMAGE UPLOAD
+  $scope.uploadFile = function (file, scape_id) {
+      // console.log(":::::FILES ", file);
+      // for (var i = 0; i < files.length; i++) {
+          // var file = files[i];
+    console.log("FILE::::: ", file);
+    $scope.upload = Upload.upload({
+        url: '/foodscapes/' + scape_id + '/pictures.json',
+        method: 'POST',
+        fields: { 'picture[main]' : false },
+        file: file,
+        fileFormDataName: 'picture[image]'
+    });
+      // }
+  }
+  // END IMAGE UPLOAD
+
   $scope.submitGardenForm = function(scapeInfo){
 
     if(scapeInfo){ // make sure it's not blank
+
+      
 
       // formatting goals and needs data
       var goalsAndNeeds = $scope.goals;
@@ -140,6 +159,10 @@ angular.module( 'ngBoilerplate.create-garden', [
       }).success(function(data, status, headers, config) {
           $scope.data = data;
           console.log("This is what I passed through!", data);
+
+          if(scapeInfo.file_attachment){
+            $scope.uploadFile(scapeInfo.file_attachment, data.id);
+          }
           $window.location.href = '/UI/index.html#/foodscapes/' + data.id;
 
           // $scope.$apply(function() { $location.path("/new-garden"); });
