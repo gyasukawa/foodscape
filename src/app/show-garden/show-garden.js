@@ -112,7 +112,7 @@ angular.module( 'ngBoilerplate.show-garden', [
             $scope.gardenImages.push(upData[i].url);
           }
         if ($scope.gardenImages.length == 0){
-          $scope.gardenImages = ["https://s3-us-west-1.amazonaws.com/foodscape/pictures/images/000/000/006/original/profilepic.jpg"]
+          $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"];
         }
 
         // $scope.updates = updateArray;
