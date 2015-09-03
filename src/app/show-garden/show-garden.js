@@ -121,6 +121,7 @@ angular.module( 'ngBoilerplate.show-garden', [
         // }
       }, function(response){
         console.log("no photos");
+        $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"];
       });
     }// end pull updates function
     pullPhotos();
