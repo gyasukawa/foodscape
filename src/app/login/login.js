@@ -48,7 +48,7 @@ var checkAuth = function(){
       }).success(function(data, status, headers, config) {
           $scope.data = data;
           console.log("logged in!", data);
-          // $window.location.reload();
+          $window.location.reload();
 
           // checkAuth();
 

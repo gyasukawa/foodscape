@@ -71,7 +71,7 @@ angular.module( 'ngBoilerplate.show-garden', [
         $scope.myGoals.push(theText);
       }
     }
-    $scope.extraGoal = goalsAndNeeds[4].text;
+    $scope.extraGoal = goalsAndNeeds[4] ? goalsAndNeeds[4].text : "";
 
     //Get correct username for this!!
     $scope.username = response.data.host.name;
