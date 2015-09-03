@@ -108,8 +108,7 @@ angular.module( 'ngBoilerplate.show-garden', [
             // photoUrl += photo_id;
             // photoUrl += "/original/"
             // photoUrl += upData[i].image_file_name;
-
-            $scope.gardenImages.push(upData[i].url);
+            $scope.gardenImages.push(upData[i].image_url);
           }
         if ($scope.gardenImages.length == 0){
           $scope.gardenImages = ["https://s3-us-west-1.amazonaws.com/foodscape/pictures/images/000/000/006/original/profilepic.jpg"]
@@ -127,7 +126,7 @@ angular.module( 'ngBoilerplate.show-garden', [
 
 
 
-    
+
 // DEFAULT ROTATING PHOTO
     //["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"]
     // ["assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
@@ -225,7 +224,7 @@ $scope.edit = function(){
   var makeUpdateEmail = function(update){
     var userName = current_user.name;
 
-   
+
 
     console.log("makeUpdateEmail username:: ", userName);
     //

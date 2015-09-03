@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   delete 'foodscapes/:id/unfollow' => 'foodscapes#unfollow', as: :unfollow
   get 'the_current_user' => 'users#the_current_user', as: :the_current_user
 
+  get 'foodscapes/:foodscape_id/pictures/:id/url' => 'pictures#url', as: :url
+
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :foodscapes do
     resources :updates
