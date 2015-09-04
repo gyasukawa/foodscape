@@ -39,7 +39,7 @@ class PicturesController < ApplicationController
   # PATCH/PUT /foodscapes/:foodscape_id/pictures/:id
   # PATCH/PUT /foodscapes/:foodscape_id/pictures/:id.json
   def update
-    if @picture.update(update_params)
+    if @picture.update(picture_params)
       head :no_content
     else
       render json: @picture.errors, status: :unprocessable_entity
