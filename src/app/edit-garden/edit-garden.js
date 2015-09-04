@@ -102,7 +102,7 @@ angular.module( 'ngBoilerplate.edit-garden', [
         $scope.address2 = resData.address_line_2;
         $scope.city = resData.city;
         $scope.state = resData.state;
-        $scope.zip = resData.zip;
+        $scope.zip = resData.zip_code;
 
         // GET GOALS
         var myGoals = angular.fromJson(resData.goalsneeds);
