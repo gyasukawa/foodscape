@@ -63,7 +63,6 @@
           <h2> {{scapeName}} </h2>
           <p>{{statusBar}}</p>
 
-          <div class="fb-share-button" data-href="{{scapeURL}}" data-layout="button"></div>
           <!-- These buttons show up when the user has not followed this person's page or is not logged in -->
           <button ng-show="userFollowing" class="btn get-started-btn" ng-click="unfollowConfirm()">Unfollow</button>
           <!-- <button ng-hide="usersScape" class="btn message-btn">Share Profile</button> -->
@@ -89,7 +88,9 @@
               <!-- ? -->
               <img class="profile-pic" ng-src="{{avatarUrl}}">
             <!-- </div> -->
-            {{username}}
+            <div id="showUsername"> {{username}}</div>
+          </br>
+              <div class="fb-share-button" data-href="{{scapeURL}}" data-layout="button"></div>
             <!-- <img src="#" width="100px"> -->
             <!-- This button shows up when this is somebody else's page -->
             <button ng-show="showMessageButton" ng-click='message()' class="btn message-btn">Message</button>
