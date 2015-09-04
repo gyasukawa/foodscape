@@ -1,34 +1,40 @@
 
 <div class="signup-page garden-page new-garden-page">
   <div class="container-fluid">
-    <!-- This is the message box that pops up when you click message -->
+    <!-- These are each different modal windows -->
     <modal-dialog show='modalShown'>
+    <!-- This is the message box that pops up when you click message -->
       <div ng-show="showMessage" class="message-box">
         <h1>Send a message to {{scapeName}}!</h1>
+        This will pass along your email address.
         <textarea ng-model="messageText">Write a message here.</textarea>
         <button ng-click="send(messageText)" class="btn get-started-btn">Send</button>
       </div>
+      <!-- This gets triggered when you click send -->
       <div ng-show="sent" class="thank-box">
         <h1>Thank you!</h1>
         <p> Your message to {{username}} has been sent. </p>
         <button ng-click="toggleModal()" class="btn get-started-btn">Okay</button>
       </div>
+      <!-- This gets opened after a user follows somoene -->
       <div ng-show="showFollow" class="follow-confirm">
         <h1> You are now following {{scapeName}}. </h1>
         <button ng-click="toggleModal()" class="btn get-started-btn">Okay</button>
       </div>
+      <!-- This gets opened when a user clicks "unfollow" in order to make sure the user actually wants to unfollow that foodscape -->
       <div ng-show="unfollowConfirmBox" class="follow-confirm">
         <h1> Are you sure you want to unfollow {{scapeName}}? </h1>
         <p> You will no longer get updates from {{scapeName}} and will not be able to view {{scapeName}} without a direct link. </p>
         <button ng-click="unfollow()" class="btn get-started-btn">Yes</button>
         <button ng-click="toggleModal()" class="btn get-started-btn">Cancel</button>
       </div>
+      <!-- This gets opened when a user says that they did, in fact, want to unfollow a foodscape -->
       <div ng-show="unfollowedMessage" class="follow-confirm">
         <h1> You are no longer following {{scapeName}}. </h1>
         <button ng-click="toggleModal()" class="btn get-started-btn">Okay</button>
       </div>
     </modal-dialog>
-  <!-- end message box -->
+  <!-- end message box contents -->
 
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -36,7 +42,7 @@
         <div class="profile-bar">
           <h2> {{scapeName}} </h2>
           <p>{{statusBar}}</p>
-          
+
           <div class="fb-share-button" data-href="{{scapeURL}}" data-layout="button"></div>
           <!-- These buttons show up when the user has not followed this person's page or is not logged in -->
           <button ng-show="userFollowing" class="btn get-started-btn" ng-click="unfollowConfirm()">Unfollow</button>

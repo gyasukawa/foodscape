@@ -41,6 +41,18 @@ angular.module( 'ngBoilerplate.edit-garden', [
       // }
     }
 
+    $scope.uploadAvatar = function (file) {
+      console.log("FILE::::: ", file);
+      $scope.upload = Upload.upload({
+          url: '/users/' + $scope.current_user.id + "/avatar.json" , // slash what
+          method: 'PATCH',
+          file: file,
+          fileFormDataName: 'user[avatar]'
+      });
+    }
+
+    //avatar image
+
 // END IMAGE STUFF
 
 
