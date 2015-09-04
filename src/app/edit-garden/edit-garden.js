@@ -19,69 +19,24 @@ angular.module( 'ngBoilerplate.edit-garden', [
 
 .controller( 'EditGardenCtrl', [ "$scope", "$http", "$stateParams", "$window", "$location" , "Upload", "$timeout", function ( $scope , $http, $stateParams, $window, $location, Upload, $timeout ) {
   // console.log("TO THE WINDOW!" ,$window);
-
-  $scope.checkAuth = function(){
-    $http.get('/the_current_user.json').then(
-        function(response){
-          // console.log("current user from following", response);
-          $scope.current_user = response.data;
-          $scope.loadFoodscape($window);
-
-        }, function(response){
-        console.log("nope from app.js current user ", response);
-        $scope.current_user = null;
-      });
-  }
-
- $scope.checkAuth();
-
-  var scape_id = $stateParams.scapeId;
-
   $scope.current_user;
-  console.log("edit page current user:: ", current_user);
-
-  //IMAGE STUFF
-
-    $scope.uploadFile = function (file) {
-      // console.log(":::::FILES ", file);
-      // for (var i = 0; i < files.length; i++) {
-          // var file = files[i];
-          console.log("FILE::::: ", file);
-          $scope.upload = Upload.upload({
-              url: '/foodscapes/' + scape_id + '/pictures.json',
-              method: 'POST',
-              fields: { 'picture[main]' : false },
-              file: file,
-              fileFormDataName: 'picture[image]'
-          });
-      // }
-    }
-
-    $scope.uploadAvatar = function (file) {
-      console.log("FILE::::: ", file);
-      $scope.upload = Upload.upload({
-          url: '/users/' + $scope.current_user.id + "/avatar.json" , // slash what
-          method: 'PATCH',
-          file: file,
-          fileFormDataName: 'user[avatar]'
-      });
-    }
-
-    //avatar image
-
-// END IMAGE STUFF
-
-
   $scope.plants = [];
-  $scope.loadFoodscape = function($window){
+
+
+  $scope.loadFoodscape = function($window, current_user){
 
     // GET GET GET GET GET
     $http.get('/foodscapes/' + scape_id + '.json').then(function(response){
-      var resData = response.data;
+      var resData = angular.fromJson(response.data);
+        resData = angular.fromJson(resData.foodscape);
 
-      if (resData.foodscape.user_id == $scope.current_user.id){
+        console.log("resData cause I need the host", resData);
+
+
+      console.log("foodscape host:: ", resData.user_id, "current_user id :: ", current_user.id);
+
+      if (resData.user_id == current_user.id){
         // console.log("worked: ", response);
-        resData = resData.foodscape;
 
         $scope.scapeName = resData.name;
 
@@ -122,6 +77,61 @@ angular.module( 'ngBoilerplate.edit-garden', [
     }); /// END GET
   }
 
+  $scope.checkAuth = function(){
+    $http.get('/the_current_user.json').then(
+        function(response){
+          // console.log("current user from following", response);
+          $scope.current_user = response.data;
+          $scope.loadFoodscape($window, $scope.current_user);
+
+        }, function(response){
+        console.log("nope from app.js current user ", response);
+        $scope.current_user = null;
+      });
+  }
+
+  $scope.checkAuth();
+
+
+  var scape_id = $stateParams.scapeId;
+
+
+  console.log("edit page current user:: ", $scope.current_user);
+
+  //IMAGE STUFF
+
+    $scope.uploadFile = function (file) {
+      // console.log(":::::FILES ", file);
+      // for (var i = 0; i < files.length; i++) {
+          // var file = files[i];
+          console.log("FILE::::: ", file);
+          $scope.upload = Upload.upload({
+              url: '/foodscapes/' + scape_id + '/pictures.json',
+              method: 'POST',
+              fields: { 'picture[main]' : false },
+              file: file,
+              fileFormDataName: 'picture[image]'
+          });
+      // }
+    }
+
+    $scope.uploadAvatar = function (file) {
+      console.log("Avatar FILE::::: ", file);
+      $scope.upload = Upload.upload({
+          url: '/users/' + $scope.current_user.id + "/avatar.json" , // slash what
+          method: 'PATCH',
+          file: file,
+          fileFormDataName: 'user[avatar]'
+      });
+    }
+
+    //avatar image
+
+// END IMAGE STUFF
+
+
+ 
+
 
   $scope.isSelected = [];
 
@@ -135,12 +145,20 @@ angular.module( 'ngBoilerplate.edit-garden', [
   };
 
 
-  $scope.submitGardenForm = function(scapeName, growingText, address1, address2, city, state, zip, goals, extraGoals, otherDetails, file_attachment){
+  $scope.submitGardenForm = function(scapeName, growingText, address1, address2, city, state, zip, goals, extraGoals, otherDetails, file_attachment, avatar){
 
     // $scope.uploadImageHopefully(file_attachment)
 
     console.log("about to scope.upload hopefully");
-    $scope.uploadFile(file_attachment);
+
+    if(file_attachment){
+      console.log("uploading photo")
+      $scope.uploadFile(file_attachment);
+    }
+    if(avatar){
+      console.log("uploading avatar")
+      $scope.uploadAvatar(avatar);
+    }
 
     // if(scapeInfo){ // make sure it's not blank
        var goalsAndNeeds = goals;
