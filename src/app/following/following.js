@@ -43,7 +43,9 @@ angular.module( 'ngBoilerplate.following', [
     var foodscapeData = angular.fromJson(subscribedFoodscapes.foodscapes);
     console.log(foodscapeData);
     $scope.foodscapes = [];
+
     for(var i = 0; i < foodscapeData.length; i++){
+          console.log("IMAGE URL?? ", foodscapeData[i].pictures[0].image_url);
       var scape_id = foodscapeData[i].foodscape_id;
 
      var followedScape = {
