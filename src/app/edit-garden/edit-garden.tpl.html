@@ -70,7 +70,7 @@
           <h4 class="question">4. What are your goals for your foodscape?</h4>
             <div class="radio-input">
               <!-- I'm changing this to an ng-repeat so that I can concat the texts into a "goals and needs" variable to put into the goalsneeds part of the db -->
-              <div ng-repeat="goal in goals" class="radio">
+              <div ng-repeat="goal in goals track by $index" class="radio">
                 <label>
                   <input ng-model="goal.bool" type="checkbox" name="signupRadio" ng-checked="goal.bool">
                  {{goal.text}}
@@ -104,7 +104,7 @@
           <div class="upload-button-container" align="right">
             <div class="form-group">
               <label>Attachment</label>
-              <input class="btn btn-large get-started-btn" type="file" ngf-select ng-model="file_attachment" />
+              <input type="file" ngf-select ng-model="file_attachment" />
             </div>
             <!-- <button class="btn get-started-btn" ngf-select="uploadFiles($files)" multiple
           accept="image/*" ngf-max-height="1000" >Upload</button> -->
