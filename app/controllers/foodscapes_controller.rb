@@ -26,7 +26,7 @@ class FoodscapesController < ApplicationController
     subscriptions.each do |sub|
       @followers << User.find(sub.user_id)
     end
-    render json: {foodscape: @foodscape, current_user: current_user, user_signed_in?: user_signed_in?, user_session: user_session, host: @host, following: @following, followers: @followers}
+    render json: {foodscape: @foodscape.to_json(:include => [:updates, :pictures]), current_user: current_user, user_signed_in?: user_signed_in?, user_session: user_session, host: @host, following: @following, followers: @followers}
   end
 
 
