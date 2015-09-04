@@ -83,7 +83,7 @@ angular.module( 'ngBoilerplate', [
   var checkAuth = function(){
     $http.get('/the_current_user.json').then(
       function(response){
-        console.log("current user from app.js ", response);
+        // console.log("current user from app.js ", response);
         $scope.current_user = response.data;
       $scope.userLoggedIn = true;
       $scope.userLoggedOut = false;
@@ -142,7 +142,7 @@ angular.module( 'ngBoilerplate', [
           // data: {}
       }).success(function(data, status, headers, config) {
           $scope.data = data;
-          console.log("Successfully logged out, we think")
+          // console.log("Successfully logged out, we think")
           // $scope.$apply(function() { $location.path("/new-garden"); });
           $window.location.href = '/UI/index.html#/login';
           checkAuth();

@@ -27,7 +27,7 @@ angular.module( 'ngBoilerplate.signup', [
   //             "password_confirmation":"hellodave"}};
 $scope.error_message = false;
   $scope.signUp = function(the_user){
-    console.log("trying to work");
+    // console.log("trying to work");
 
     var data = {user: {"name": the_user.name,
               "email": the_user.email,
@@ -35,9 +35,9 @@ $scope.error_message = false;
               "password_confirmation": the_user.password_confirmation,
               "zip_code": the_user.zip_code}};
     $scope.redirect_path = the_user.radio;
-    console.log("redirect path?", $scope.redirect_path);
+    // console.log("redirect path?", $scope.redirect_path);
 
-    console.log("This is what I passed through! Aren't you proud? ", data);
+    // console.log("This is what I passed through! Aren't you proud? ", data);
 
     $http({
         url: "/users.json",
@@ -62,15 +62,15 @@ $scope.error_message = false;
   $scope.auth = function(event) {
     event.preventDefault();
 
-    console.log("trying to execute Facebook OAuth");
+    // console.log("trying to execute Facebook OAuth");
 
     $http({
       url: "/users/auth/facebook",
       method: "POST"
     }).success(function(status, headers, config) {
-      console.log("success!")
+      // console.log("success!")
     }).error(function(status, headers, config) {
-      console.log("failure...")
+      // console.log("failure...")
       $scope.error_message = true;
     });
 
