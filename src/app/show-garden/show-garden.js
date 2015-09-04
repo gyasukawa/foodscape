@@ -30,8 +30,9 @@ angular.module( 'ngBoilerplate.show-garden', [
   //This request gets the information for this specific foodscape
   $http.get('/foodscapes/' + scape_id + '.json').then(function(response){
 
-    var resData = response.data.foodscape;
+    var resData = angular.fromJson(response.data.foodscape);
     console.log("RESponse: ", response);
+    console.log("ResData: ", resData);
 
     for(var i = 0; i < response.data.followers.length; i++){
       $scope.followerEmails.push({"email" : response.data.followers[i].email});
@@ -63,14 +64,17 @@ angular.module( 'ngBoilerplate.show-garden', [
 
     //Loading foodscape data onto page//////////////////
     var goalsAndNeeds = angular.fromJson(resData.goalsneeds);
+    console.log("PLEASE WORK", goalsAndNeeds);
     $scope.myGoals = [];
-    for(var i = 0; i < 4; i++){
-      if(goalsAndNeeds[i].bool){
-        var theText = goalsAndNeeds[i].text;
-        theText = theText.toLowerCase();
-        $scope.myGoals.push(theText);
+    // if(goalsAndNeeds){
+      for(var i = 0; i < 4; i++){
+        if(goalsAndNeeds[i].bool){
+          var theText = goalsAndNeeds[i].text;
+          theText = theText.toLowerCase();
+          $scope.myGoals.push(theText);
+        }
       }
-    }
+    // }
 
     // FIX THIS!!
     $scope.extraGoal = goalsAndNeeds[4] ? goalsAndNeeds[4].text : "";
