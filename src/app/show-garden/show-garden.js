@@ -71,16 +71,67 @@ angular.module( 'ngBoilerplate.show-garden', [
         $scope.myGoals.push(theText);
       }
     }
-    $scope.extraGoal = goalsAndNeeds[4].text;
+
+    // FIX THIS!!
+    $scope.extraGoal = goalsAndNeeds[4] ? goalsAndNeeds[4].text : "";
 
     //Get correct username for this!!
     $scope.username = response.data.host.name;
 
 
     // Pulls from our random veggie pix
-    $scope.avatarUrl = current_user.avatar_url; //change to current_user.avatar_file_name with any other S3 specifications
+    $scope.avatarUrl = response.data.host.avatar_url; //change to current_user.avatar_file_name with any other S3 specifications
     $scope.scapeName = resData.name;
-    $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"]
+
+    $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"];
+
+
+
+  var pullPhotos = function(){
+      $http.get("/foodscapes/" + scape_id + "/pictures.json").then(function(response){
+          console.log("PICTURES RESPONSE ", response);
+          var upData = response.data;
+          // console.log("updates: ", upData);
+          $scope.gardenImages = [];
+          // Backwards to put the updates in reverse chron order
+          for(var i = upData.length-1; i > -1; i--){
+
+            // var photoUrl = "https://s3-us-west-1.amazonaws.com/foodscape/pictures/images/"
+
+            // var photo_id = upData[i].id;
+
+            // if(photo_id > 999){
+            //   if(photo_id > 999999){
+
+            //   } else{
+
+            //   }
+            // }
+            // photoUrl += photo_id;
+            // photoUrl += "/original/"
+            // photoUrl += upData[i].image_file_name;
+            $scope.gardenImages.push(upData[i].image_url);
+          }
+        if ($scope.gardenImages.length == 0){
+          $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"];
+        }
+
+        // $scope.updates = updateArray;
+        // if(updateArray[0]){
+        //   $scope.statusBar = updateArray[0].content;
+        // }
+      }, function(response){
+        console.log("no photos");
+        $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"];
+      });
+    }// end pull updates function
+    pullPhotos();
+
+
+
+
+// DEFAULT ROTATING PHOTO
+    //["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"]
     // ["assets/images/community-1.jpeg","assets/images/community-3.jpeg"];
     // This stuff goes in the white box under the orange labels
     $scope.location = resData.city;
@@ -176,7 +227,7 @@ $scope.edit = function(){
   var makeUpdateEmail = function(update){
     var userName = current_user.name;
 
-   
+
 
     console.log("makeUpdateEmail username:: ", userName);
     //

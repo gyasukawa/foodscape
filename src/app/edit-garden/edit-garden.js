@@ -93,7 +93,7 @@ angular.module( 'ngBoilerplate.edit-garden', [
 
         // GET GOALS
         var myGoals = angular.fromJson(resData.goalsneeds);
-        $scope.extraGoals = myGoals[4].text;
+        $scope.extraGoals = myGoals[4]? myGoals[4].text : "";
         $scope.goals = [];
         for(var i = 0; i < 4; i++){
           $scope.goals.push(myGoals[i]);

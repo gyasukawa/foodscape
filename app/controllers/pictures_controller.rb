@@ -2,7 +2,7 @@ class PicturesController < ApplicationController
   before_filter :intercept_html_requests
   layout false
   respond_to :json
-  before_action :set_picture, only: [:show, :edit, :update, :destroy]
+  before_action :set_picture, only: [:show, :edit, :update, :destroy, :url]
 
   # GET /foodscapes/:foodscape_id/pictures
   # GET /foodscapes/:foodscape_id/pictures.json
@@ -15,6 +15,12 @@ class PicturesController < ApplicationController
   # GET /foodscapes/:foodscape_id/pictures/:id.json
   def show
     render json: @picture
+  end
+
+  # GET /foodscapes/:foodscape_id/pictures/:id/url
+  # GET /foodscapes/:foodscape_id/pictures/:id/url.json
+  def url
+    URI.join(request.url, @picture.image.url)
   end
 
   # POST /foodscapes/:foodscape_id/pictures

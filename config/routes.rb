@@ -19,11 +19,14 @@ Rails.application.routes.draw do
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
+  patch '/users/:id/avatar' => 'devise/registrations#update'
   get '/sign_out' => 'devise/sessions#destroy'
   get 'users/:id/following' => 'users#following', as: :following
   post 'foodscapes/:id/follow' => 'foodscapes#follow', as: :follow
   delete 'foodscapes/:id/unfollow' => 'foodscapes#unfollow', as: :unfollow
   get 'the_current_user' => 'users#the_current_user', as: :the_current_user
+
+  get 'foodscapes/:foodscape_id/pictures/:id/url' => 'pictures#url', as: :url
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :foodscapes do

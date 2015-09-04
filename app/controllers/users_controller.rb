@@ -63,7 +63,7 @@ class UsersController < ApplicationController
     p @subscriptions
     p @foodscapes
     p @hosts
-    render json: {subscriptions: @subscriptions, hosts: @hosts, foodscapes: @foodscapes.to_json(:include => [:updates])}
+    render json: {subscriptions: @subscriptions, hosts: @hosts, foodscapes: @foodscapes.to_json(:include => [:updates, :pictures])}
   end
 
   # ### Current User custom route ###
