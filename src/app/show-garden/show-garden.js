@@ -71,6 +71,8 @@ angular.module( 'ngBoilerplate.show-garden', [
         $scope.myGoals.push(theText);
       }
     }
+
+    // FIX THIS!!
     $scope.extraGoal = goalsAndNeeds[4] ? goalsAndNeeds[4].text : "";
 
     //Get correct username for this!!
@@ -81,7 +83,7 @@ angular.module( 'ngBoilerplate.show-garden', [
     $scope.avatarUrl = current_user.avatar_url; //change to current_user.avatar_file_name with any other S3 specifications
     $scope.scapeName = resData.name;
 
-    $scope.gardenImages = ["https://s3-us-west-1.amazonaws.com/foodscape/pictures/images/000/000/006/original/profilepic.jpg"]
+    $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"];
 
 
 
