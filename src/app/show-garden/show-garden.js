@@ -31,8 +31,8 @@ angular.module( 'ngBoilerplate.show-garden', [
   $http.get('/foodscapes/' + scape_id + '.json').then(function(response){
 
     var resData = angular.fromJson(response.data.foodscape);
-    console.log("RESponse: ", response);
-    console.log("ResData: ", resData);
+    // console.log("RESponse: ", response);
+    // console.log("ResData: ", resData);
 
     for(var i = 0; i < response.data.followers.length; i++){
       $scope.followerEmails.push({"email" : response.data.followers[i].email});
@@ -48,7 +48,7 @@ angular.module( 'ngBoilerplate.show-garden', [
     $scope.userNotFollowing = false;
     $scope.showMessageButton = false;
     //AUTH STUFF
-    console.log("here is the current user", current_user);
+    // console.log("here is the current user", current_user);
     if (current_user){
       console.log("The IDs, scape and then user ", resData.user_id , current_user.id);
       if(current_user.id == resData.user_id){
@@ -64,7 +64,7 @@ angular.module( 'ngBoilerplate.show-garden', [
 
     //Loading foodscape data onto page//////////////////
     var goalsAndNeeds = angular.fromJson(resData.goalsneeds);
-    console.log("PLEASE WORK", goalsAndNeeds);
+    // console.log("PLEASE WORK", goalsAndNeeds);
     $scope.myGoals = [];
     // if(goalsAndNeeds){
       for(var i = 0; i < 4; i++){
@@ -82,7 +82,7 @@ angular.module( 'ngBoilerplate.show-garden', [
 
 
     // Pulls from our random veggie pix
-    console.log("avatar url maybe ", response.data.host.avatar_url);
+    // console.log("avatar url maybe ", response.data.host.avatar_url);
     $scope.avatarUrl = (response.data.host.avatar_url != "/images/original/missing.png")? response.data.host.avatar_url : $scope.avatarUrl = defaultProfilePhotos[randomNum]; //change to current_user.avatar_file_name with any other S3 specifications
     $scope.scapeName = resData.name;
 
@@ -92,7 +92,7 @@ angular.module( 'ngBoilerplate.show-garden', [
 
   var pullPhotos = function(){ // take this out of the greater function
       $http.get("/foodscapes/" + scape_id + "/pictures.json").then(function(response){
-          console.log("PICTURES RESPONSE ", response);
+          // console.log("PICTURES RESPONSE ", response);
           var upData = response.data;
           // console.log("updates: ", upData);
           $scope.gardenImages = [];
@@ -109,7 +109,7 @@ angular.module( 'ngBoilerplate.show-garden', [
         //   $scope.statusBar = updateArray[0].content;
         // }
       }, function(response){
-        console.log("no photos");
+        // console.log("no photos");
         $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"];
       });
     }// end pull updates function
@@ -140,7 +140,7 @@ angular.module( 'ngBoilerplate.show-garden', [
     $scope.otherDetails = resData.other_details;
 
   }, function(response){
-    console.log("nope");
+    // console.log("nope");
     //Need to add error handling here
   });
 
@@ -196,7 +196,7 @@ angular.module( 'ngBoilerplate.show-garden', [
                   // }];
 
 $scope.edit = function(){
-  console.log("I'm clicking edit ", scape_id);
+  // console.log("I'm clicking edit ", scape_id);
   $window.location.href = '/UI/index.html#/foodscapes/edit/' + scape_id;
 
 }
@@ -264,9 +264,9 @@ $scope.edit = function(){
 
   var makeMessageEmail = function(message){
     var userName = current_user.name;
-    console.log("makeMessageEmail username:: ", userName);
+    // console.log("makeMessageEmail username:: ", userName);
     //
-    console.log("current user email", current_user.email);
+    // console.log("current user email", current_user.email);
     var params = {
         "message": {
             "from_email":"admin@myfoodscape.com",
@@ -305,25 +305,25 @@ $scope.edit = function(){
             //     ] allxiecleary@gmail.com,grace.yasukawa@gmail.com,iring.ma@gmail.com
         }
     };
-    console.log("PARAMS:: ", params);
+    // console.log("PARAMS:: ", params);
     return params;
   } // end makeUpdateEmail function
 
   var makeShareEmail = function(emails, message){
 
     var emailArray = emails.split(",");
-    console.log("email array, pre objectification: ", emailArray);
+    // console.log("email array, pre objectification: ", emailArray);
     var emailParams = [];
     for(var i = 0; i < emailArray.length; i++){
       emailParams.push({"email" : emailArray[i]});
     }
 
-    console.log("Here are the email addresses", emailParams);
+    // console.log("Here are the email addresses", emailParams);
 
     var userName = current_user.name;
-    console.log("makeMessageEmail username:: ", userName);
+    // console.log("makeMessageEmail username:: ", userName);
     //
-    console.log("current user email", current_user.email);
+    // console.log("current user email", current_user.email);
     var params = {
         "message": {
             "from_email":"admin@myfoodscape.com",
@@ -335,7 +335,7 @@ $scope.edit = function(){
             "track_clicks": true
         }
     };
-    console.log("PARAMS:: ", params);
+    // console.log("PARAMS:: ", params);
     return params;
   } // end makeShareEmail function
 
@@ -354,7 +354,7 @@ $scope.edit = function(){
 
   // Add posting updates
   $scope.postIt = function(post){
-    console.log("trying to work ", scape_id);
+    // console.log("trying to work ", scape_id);
 
     if (post.text != ""){
       var data = {update: {
@@ -398,7 +398,7 @@ $scope.edit = function(){
   $scope.message = function(){
     $scope.toggleModal();
     $scope.showMessage = true;
-    console.log("show message ", $scope.showMessage);
+    // console.log("show message ", $scope.showMessage);
   };
   // for the message box to show the already sent thank you message
   $scope.send = function(messageText){
@@ -486,7 +486,7 @@ $scope.edit = function(){
  // Lightbox stuff -- there is a custom directive for the lightbox in app.js
   $scope.modalShown = false;
   $scope.toggleModal = function() {
-    console.log("toggling modal");
+    // console.log("toggling modal");
     $scope.modalShown = !$scope.modalShown;
     $scope.sent = false;
     $scope.showFollow = false;

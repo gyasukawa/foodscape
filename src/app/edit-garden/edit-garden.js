@@ -30,10 +30,10 @@ angular.module( 'ngBoilerplate.edit-garden', [
       var resData = angular.fromJson(response.data);
         resData = angular.fromJson(resData.foodscape);
 
-        console.log("resData cause I need the host", resData);
+        // console.log("resData cause I need the host", resData);
 
 
-      console.log("foodscape host:: ", resData.user_id, "current_user id :: ", current_user.id);
+      // console.log("foodscape host:: ", resData.user_id, "current_user id :: ", current_user.id);
 
       if (resData.user_id == current_user.id){
         // console.log("worked: ", response);
@@ -85,7 +85,7 @@ angular.module( 'ngBoilerplate.edit-garden', [
           $scope.loadFoodscape($window, $scope.current_user);
 
         }, function(response){
-        console.log("nope from app.js current user ", response);
+        // console.log("nope from app.js current user ", response);
         $scope.current_user = null;
       });
   }
@@ -96,7 +96,7 @@ angular.module( 'ngBoilerplate.edit-garden', [
   var scape_id = $stateParams.scapeId;
 
 
-  console.log("edit page current user:: ", $scope.current_user);
+  // console.log("edit page current user:: ", $scope.current_user);
 
   //IMAGE STUFF
 
@@ -104,7 +104,7 @@ angular.module( 'ngBoilerplate.edit-garden', [
       // console.log(":::::FILES ", file);
       // for (var i = 0; i < files.length; i++) {
           // var file = files[i];
-          console.log("FILE::::: ", file);
+          // console.log("FILE::::: ", file);
           $scope.upload = Upload.upload({
               url: '/foodscapes/' + scape_id + '/pictures.json',
               method: 'POST',
@@ -137,11 +137,11 @@ angular.module( 'ngBoilerplate.edit-garden', [
 
 
   $scope.toggleClass = function (the_id) {
-    console.log(the_id);
-    console.log($scope.plants[the_id]);
+    // console.log(the_id);
+    // console.log($scope.plants[the_id]);
     var plantObj = $scope.plants[the_id];
     plantObj.selected == "selected"? plantObj.selected = "": plantObj.selected = "selected";
-     console.log($scope.plants);
+     // console.log($scope.plants);
   };
 
 
@@ -149,14 +149,14 @@ angular.module( 'ngBoilerplate.edit-garden', [
 
     // $scope.uploadImageHopefully(file_attachment)
 
-    console.log("about to scope.upload hopefully");
+    // console.log("about to scope.upload hopefully");
 
     if(file_attachment){
-      console.log("uploading photo")
+      // console.log("uploading photo")
       $scope.uploadFile(file_attachment);
     }
     if(avatar){
-      console.log("uploading avatar")
+      // console.log("uploading avatar")
       $scope.uploadAvatar(avatar);
     }
 

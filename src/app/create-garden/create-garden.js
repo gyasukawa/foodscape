@@ -81,11 +81,11 @@ angular.module( 'ngBoilerplate.create-garden', [
         $scope.isSelected = [];
 
   $scope.toggleClass = function (the_id) {
-    console.log(the_id);
-    console.log($scope.plants[the_id]);
+    // console.log(the_id);
+    // console.log($scope.plants[the_id]);
     var plantObj = $scope.plants[the_id];
     plantObj.selected == "selected"? plantObj.selected = "": plantObj.selected = "selected";
-     console.log($scope.plants);
+     // console.log($scope.plants);
   };
 
   $scope.goals = [{ "id":"1",
@@ -106,7 +106,7 @@ angular.module( 'ngBoilerplate.create-garden', [
       // console.log(":::::FILES ", file);
       // for (var i = 0; i < files.length; i++) {
           // var file = files[i];
-    console.log("FILE::::: ", file);
+    // console.log("FILE::::: ", file);
     $scope.upload = Upload.upload({
         url: '/foodscapes/' + scape_id + '/pictures.json',
         method: 'POST',
@@ -132,10 +132,10 @@ angular.module( 'ngBoilerplate.create-garden', [
 
       // Doing mostly the same stuff with the produce grown
       var produce = $scope.plants;
-      console.log("Scapeinfo.growingText:: ",scapeInfo.growingText);
+      // console.log("Scapeinfo.growingText:: ",scapeInfo.growingText);
       var growText = {"growingText": scapeInfo.growingText};
       produce.push(growText);
-      console.log("Produce to send to db", produce);
+      // console.log("Produce to send to db", produce);
       produce = JSON.stringify(produce);
 
       var data = {foodscape: {"name": scapeInfo.name,
@@ -156,7 +156,7 @@ angular.module( 'ngBoilerplate.create-garden', [
           data: data
       }).success(function(data, status, headers, config) {
           $scope.data = data;
-          console.log("This is what I passed through!", data);
+          // console.log("This is what I passed through!", data);
 
           if(scapeInfo.file_attachment){
             $scope.uploadFile(scapeInfo.file_attachment, data.id);

@@ -22,12 +22,12 @@
 var checkAuth = function(){
     $http.get('/the_current_user.json').then(
       function(response){
-        console.log("current user from app.js ", response);
+        // console.log("current user from app.js ", response);
         $scope.current_user = response.data;
         $window.location.href = '/UI/index.html#/home';
 
       }, function(response){
-      console.log("nope from app.js current user ", response);
+      // console.log("nope from app.js current user ", response);
       $scope.current_user = null;
     });
   }
@@ -47,7 +47,7 @@ var checkAuth = function(){
           data: data
       }).success(function(data, status, headers, config) {
           $scope.data = data;
-          console.log("logged in!", data);
+          // console.log("logged in!", data);
           $window.location.reload();
 
           // checkAuth();
@@ -60,7 +60,7 @@ var checkAuth = function(){
           $scope.error_message = true;
           // $scope.error_message = "One or more of these fields is incorrect. Please make sure your email is valid and unique and that your passwords match."
           $scope.status = status;
-          console.log("not logged in");
+          // console.log("not logged in");
       });
   };
 });

@@ -24,12 +24,12 @@ angular.module( 'ngBoilerplate.following', [
   $scope.checkAuth = function(){
     $http.get('/the_current_user.json').then(
         function(response){
-          console.log("current user from following", response);
+          // console.log("current user from following", response);
           $scope.current_user = response.data;
           $scope.loadFollowing();
 
         }, function(response){
-        console.log("nope from app.js current user ", response);
+        // console.log("nope from app.js current user ", response);
         $scope.current_user = null;
       });
   }
@@ -42,7 +42,7 @@ angular.module( 'ngBoilerplate.following', [
             method: "GET",
             data: {}
         }).success(function(data, status, headers) {
-           console.log("photo data ", data);
+           // console.log("photo data ", data);
 
            var url = data[0].image_url;
 
@@ -60,16 +60,16 @@ angular.module( 'ngBoilerplate.following', [
 
   $scope.loadFoodscapeData = function(subscribedFoodscapes){
     var subscribedFoodscapes = angular.fromJson(subscribedFoodscapes);
-    console.log("subscribedfoodscapes:: ", subscribedFoodscapes);
+    // console.log("subscribedfoodscapes:: ", subscribedFoodscapes);
 
     var foodscapeData = angular.fromJson(subscribedFoodscapes.foodscapes);
-    console.log("foodscapeData", foodscapeData);
+    // console.log("foodscapeData", foodscapeData);
     $scope.foodscapes = [];
 
     for(var i = 0; i < foodscapeData.length; i++){
           // console.log("IMAGE URL?? ", foodscapeData[i].pictures[0].image_url);
       var scape_id = foodscapeData[i].id;
-      console.log(scape_id);
+      // console.log(scape_id);
 
       // console.log("image url to be put in object", img_url);
 
@@ -128,12 +128,12 @@ angular.module( 'ngBoilerplate.following', [
     $scope.toggleModal();
     $scope.showMessage = true;
     $scope.toScapeHost = scapeHost;
-    console.log("to scapehost", scapeHost);
-    console.log("show message ", $scope.showMessage);
+    // console.log("to scapehost", scapeHost);
+    // console.log("show message ", $scope.showMessage);
   };
     // for the message box to show the already sent thank you message
   $scope.send = function(messageText){
-    console.log(messageText);
+    // console.log(messageText);
     var messageParams = makeMessageEmail(messageText);
     sendTheMail(messageParams);
 
@@ -146,7 +146,7 @@ angular.module( 'ngBoilerplate.following', [
   $scope.unfollow_id = null;
   $scope.unfollowConfirm = function(foodscape){
     $scope.scapeName = scapeHost.title;
-    console.log(foodscape.scape_id);
+    // console.log(foodscape.scape_id);
     $scope.toggleModal();
     $scope.unfollowConfirmBox = true;
     $scope.unfollow_id = foodscape.scape_id;
@@ -162,7 +162,7 @@ angular.module( 'ngBoilerplate.following', [
           data: {}
       }).success(function(data, status, headers, config) {
           $scope.data = data;
-          console.log("Successfully unfollowed")
+          // console.log("Successfully unfollowed")
           // $scope.$apply(function() { $location.path("/new-garden"); });
           $scope.loadFollowing();
       }).error(function(data, status, headers, config) {
@@ -174,7 +174,7 @@ angular.module( 'ngBoilerplate.following', [
   // Lightbox stuff -- there is a custom directive for the lightbox in app.js
   $scope.modalShown = false;
   $scope.toggleModal = function() {
-    console.log("toggling modal");
+    // console.log("toggling modal");
     $scope.modalShown = !$scope.modalShown;
     $scope.sent = false;
     $scope.showFollow = false;
@@ -192,11 +192,11 @@ angular.module( 'ngBoilerplate.following', [
 
   var makeMessageEmail = function(message){
 
-    console.log("message rescipient", $scope.messageRecipient);
+    // console.log("message rescipient", $scope.messageRecipient);
     var userName = $scope.current_user.name;
-    console.log("makeMessageEmail from username:: ", userName);
-    console.log("to email", $scope.messageRecipient.email);
-    console.log("from email", $scope.current_user.email);
+    // console.log("makeMessageEmail from username:: ", userName);
+    // console.log("to email", $scope.messageRecipient.email);
+    // console.log("from email", $scope.current_user.email);
     //
     var params = {
         "message": {
@@ -236,7 +236,7 @@ angular.module( 'ngBoilerplate.following', [
                 ]
         }
     };
-    console.log("PARAMS:: ", params);
+    // console.log("PARAMS:: ", params);
     return params;
   } // end makeUpdateEmail function
 
@@ -244,9 +244,9 @@ angular.module( 'ngBoilerplate.following', [
   // Send the email!
 
       m.messages.send(params, function(res) {
-          console.log("email response, " , res);
+          // console.log("email response, " , res);
       }, function(err) {
-          console.log("error:: ", err);
+          // console.log("error:: ", err);
       });
   }
 
