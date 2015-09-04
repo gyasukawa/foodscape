@@ -36,6 +36,28 @@ angular.module( 'ngBoilerplate.following', [
 
 
   $scope.foodscapes = [];
+  var loadThePhotos = function(scape_id, i){
+    $http({
+            url: "/foodscapes/" + scape_id + "/pictures.json",
+            method: "GET",
+            data: {}
+        }).success(function(data, status, headers) {
+           console.log("photo data ", data);
+
+           var url = data[0].image_url;
+
+           $scope.foodscapes[i].img = url;
+            // $scope.data = data;
+            // $scope.$apply(function() { $location.path("/new-garden"); });
+            console.log("inside the get url", url);
+            return url;
+        }).error(function(data, status, headers) {
+          console.log('no photo!');
+            $scope.status = status;
+            return "assets/images/Foodscape-DefaultPhoto-Cartoon.jpg";
+        });
+  }
+
   $scope.loadFoodscapeData = function(subscribedFoodscapes){
     var subscribedFoodscapes = angular.fromJson(subscribedFoodscapes);
     console.log("subscribedfoodscapes:: ", subscribedFoodscapes);
@@ -45,20 +67,23 @@ angular.module( 'ngBoilerplate.following', [
     $scope.foodscapes = [];
 
     for(var i = 0; i < foodscapeData.length; i++){
-          console.log("IMAGE URL?? ", foodscapeData[i].pictures[0].image_url);
+          // console.log("IMAGE URL?? ", foodscapeData[i].pictures[0].image_url);
       var scape_id = foodscapeData[i].id;
       console.log(scape_id);
+
+      // console.log("image url to be put in object", img_url);
 
      var followedScape = {
       "title": foodscapeData[i].name
       ,"location": foodscapeData[i].city
       ,"status": subscribedFoodscapes.hosts[i].name //this is the host name, not the status. Duh. Needs to be changed eventually after we don't need another get request to do it.
-      ,"img":foodscapeData[i].pictures[0].image_url
+      // ,"img": img_url //foodscapeData[i].pictures[0].image_url
       ,"url":"/UI/index.html#/foodscapes/" + scape_id
       , "scape_id": scape_id
       ,"host_email": subscribedFoodscapes.hosts[i].email
       }
      $scope.foodscapes.push(followedScape);
+     loadThePhotos(scape_id, i);
     }
   }
 
