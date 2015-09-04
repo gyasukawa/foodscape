@@ -212,6 +212,7 @@ angular.module( 'ngBoilerplate.show-garden', [
                   // }];
 
 $scope.edit = function(){
+  console.log("I'm clicking edit ", scape_id);
   $window.location.href = '/UI/index.html#/foodscapes/edit/' + scape_id;
 
 }

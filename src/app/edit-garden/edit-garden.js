@@ -20,9 +20,25 @@ angular.module( 'ngBoilerplate.edit-garden', [
 .controller( 'EditGardenCtrl', [ "$scope", "$http", "$stateParams", "$window", "$location" , "Upload", "$timeout", function ( $scope , $http, $stateParams, $window, $location, Upload, $timeout ) {
   // console.log("TO THE WINDOW!" ,$window);
 
+  $scope.checkAuth = function(){
+    $http.get('/the_current_user.json').then(
+        function(response){
+          // console.log("current user from following", response);
+          $scope.current_user = response.data;
+          $scope.loadFoodscape($window);
+
+        }, function(response){
+        console.log("nope from app.js current user ", response);
+        $scope.current_user = null;
+      });
+  }
+
+ $scope.checkAuth();
+
   var scape_id = $stateParams.scapeId;
 
   $scope.current_user;
+  console.log("edit page current user:: ", current_user);
 
   //IMAGE STUFF
 
@@ -56,21 +72,6 @@ angular.module( 'ngBoilerplate.edit-garden', [
 // END IMAGE STUFF
 
 
-
-  $scope.checkAuth = function(){
-    $http.get('/the_current_user.json').then(
-        function(response){
-          // console.log("current user from following", response);
-          $scope.current_user = response.data;
-          $scope.loadFoodscape($window);
-
-        }, function(response){
-        console.log("nope from app.js current user ", response);
-        $scope.current_user = null;
-      });
-  }
-
- $scope.checkAuth();
   $scope.plants = [];
   $scope.loadFoodscape = function($window){
 
