@@ -66,6 +66,16 @@ class UsersController < ApplicationController
     render json: {subscriptions: @subscriptions, hosts: @hosts, foodscapes: @foodscapes.to_json(:include => [:updates, :pictures])}
   end
 
+  # PATCH /users/:id/avatar
+  def update_avatar
+    @user = User.find(params[:id])
+    if @user.update_attribute(:avatar, params[:user][:avatar])
+      head :no_content
+    else
+      render json: @user.errors, status: :unprocessable_entity
+    end
+
+  end
   # ### Current User custom route ###
 
   # GET /the_current_user
@@ -85,4 +95,8 @@ class UsersController < ApplicationController
     def user_params
       params.require(:user).permit(:name, :email, :password, :zip_code, :avatar)
     end
+
+    # def avatar_params
+    #   params.require(:user).permit(:avatar, :created_at, :updated_at)
+    # end
 end
