@@ -282,47 +282,68 @@ $scope.edit = function(){
     var userName = current_user.name;
     console.log("makeMessageEmail username:: ", userName);
     //
+    console.log("current user email", current_user.email);
     var params = {
         "message": {
             "from_email":"admin@myfoodscape.com",
             "to":[{"email":"iring.ma@gmail.com"},{"email":"grace.yasukawa@gmail.com"},{"email":"allxiecleary@gmail.com"}], // This needs to be subscribers
             "subject": "Message from " + userName+"!",
-            "html": "<h4>You have message from " + userName + ".</h4><p>" + message + "</p><br> You can reply using their email (for now): <a href='"+ current_user.email +"'>foodscape</a></br>",//I'm going to actually put the link to the foodscape in the email
+            "html": "<h4>You have message from " + userName + ".</h4><p>" + message + "</p><br> You can reply using their email (for now): <a href='"+ current_user.email +"'>" + current_user.email + "</a></br>",
             "autotext": true,
             "track_opens": true,
-            "track_clicks": true,
-            "merge_vars": [{
-                "rcpt": "iring.ma@gmail.com",
-                "vars": [
-                            {
-                            "name": "HOST",
-                            "content": "Mary"
-                            },
-                            {
-                            "name": "NAME",
-                            "content": "Irene"
-                            }
-                        ]
-                },
-                {
-                "rcpt": "grace.yasukawa@gmail.com",
-                "vars": [
-                            {
-                            "name": "HOST",
-                            "content": "Mary"
-                            },
-                            {
-                            "name": "NAME",
-                            "content": "Grace"
-                            }
-                        ]
-                }
-                ]
+            "track_clicks": true //,
+            // "merge_vars": [{
+            //     "rcpt": "iring.ma@gmail.com",
+            //     "vars": [
+            //                 {
+            //                 "name": "HOST",
+            //                 "content": "Mary"
+            //                 },
+            //                 {
+            //                 "name": "NAME",
+            //                 "content": "Irene"
+            //                 }
+            //             ]
+            //     },
+            //     {
+            //     "rcpt": "grace.yasukawa@gmail.com",
+            //     "vars": [
+            //                 {
+            //                 "name": "HOST",
+            //                 "content": "Mary"
+            //                 },
+            //                 {
+            //                 "name": "NAME",
+            //                 "content": "Grace"
+            //                 }
+            //             ]
+            //     }
+            //     ]
         }
     };
     console.log("PARAMS:: ", params);
     return params;
   } // end makeUpdateEmail function
+
+    var makeShareEmail = function(emails, message){
+    var userName = current_user.name;
+    console.log("makeMessageEmail username:: ", userName);
+    //
+    console.log("current user email", current_user.email);
+    var params = {
+        "message": {
+            "from_email":"admin@myfoodscape.com",
+            "to":[{"email":"iring.ma@gmail.com"},{"email":"grace.yasukawa@gmail.com"},{"email":"allxiecleary@gmail.com"}], // This needs to be subscribers
+            "subject": "Message from " + userName+"!",
+            "html": "<h4>You have message from " + userName + ".</h4><p>" + message + "</p><br> You can reply using their email (for now): <a href='"+ current_user.email +"'>" + current_user.email + "</a></br>",
+            "autotext": true,
+            "track_opens": true,
+            "track_clicks": true
+        }
+    };
+    console.log("PARAMS:: ", params);
+    return params;
+  } // end makeShareEmail function
 
   function sendTheMail(params) {
   // Send the email!
@@ -374,6 +395,8 @@ $scope.edit = function(){
   $scope.showFollow = false;
   $scope.unfollowConfirmBox = false;
   $scope.unfollowedMessage = false;
+  $scope.shareInput = false;
+  $scope.sentShare = false;
 
 
 /////// This is for when you want to send a message
@@ -386,11 +409,13 @@ $scope.edit = function(){
   // for the message box to show the already sent thank you message
   $scope.send = function(messageText){
     // This is where the message is put together and then actually sent
-    var messageParams = makeMessageEmail(messageText);
-    sendTheMail(messageParams);
-    //and then show the thank you box.
-    $scope.showMessage = false;
-    $scope.sent = true;
+    if(messageText){
+      var messageParams = makeMessageEmail(messageText);
+      sendTheMail(messageParams);
+      //and then show the thank you box.
+      $scope.showMessage = false;
+      $scope.sent = true;
+    }
   };
 
 ////// This shows up to confirm that you've followed someone
@@ -448,6 +473,20 @@ $scope.edit = function(){
     $scope.unfollowedMessage = true;
   };
 
+  $scope.shareScape = function(){
+    $scope.toggleModal();
+    $scope.shareInput = true;
+  }
+
+  $scope.shared = function(emails, message){
+    if(emails){
+      var messageParams = makeShareEmail(emails, message);
+      sendTheMail(messageParams);
+      //and then show the thank you box.
+      $scope.shareInput = false;
+      $scope.sentShare = true;
+    }
+  }
 
  // Lightbox stuff -- there is a custom directive for the lightbox in app.js
   $scope.modalShown = false;
@@ -459,6 +498,8 @@ $scope.edit = function(){
     $scope.showMessage = false;
     $scope.unfollowConfirmBox = false;
     $scope.unfollowedMessage = false;
+    $scope.shareInput = false;
+    $scope.sentShare = false;
   };
 
   //  End modals!

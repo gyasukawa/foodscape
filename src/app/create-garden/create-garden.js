@@ -122,8 +122,6 @@ angular.module( 'ngBoilerplate.create-garden', [
 
     if(scapeInfo){ // make sure it's not blank
 
-      
-
       // formatting goals and needs data
       var goalsAndNeeds = $scope.goals;
       //add the additional text as a final object in the array
