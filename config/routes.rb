@@ -19,7 +19,7 @@ Rails.application.routes.draw do
 
   # Example of named route that can be invoked with purchase_url(id: product.id)
   #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-  patch '/users/:id/avatar' => 'users#update_avatar'
+  patch '/users/:id/avatar' => 'users#update_avatar', as: :update_avatar
   get '/sign_out' => 'devise/sessions#destroy'
   get 'users/:id/following' => 'users#following', as: :following
   post 'foodscapes/:id/follow' => 'foodscapes#follow', as: :follow

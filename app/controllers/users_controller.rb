@@ -68,10 +68,11 @@ class UsersController < ApplicationController
 
   # PATCH /users/:id/avatar
   def update_avatar
-    if @avatar.update(avatar_params)
+    @user = User.find(params[:id])
+    if @user.update_attribute(:avatar, params[:user][:avatar])
       head :no_content
     else
-      render json: @avatar.errors, status: :unprocessable_entity
+      render json: @user.errors, status: :unprocessable_entity
     end
 
   end
@@ -95,7 +96,7 @@ class UsersController < ApplicationController
       params.require(:user).permit(:name, :email, :password, :zip_code, :avatar)
     end
 
-    def avatar_params
-      params.require(:user).permit(:avatar, :created_at, :updated_at)
-    end
+    # def avatar_params
+    #   params.require(:user).permit(:avatar, :created_at, :updated_at)
+    # end
 end
