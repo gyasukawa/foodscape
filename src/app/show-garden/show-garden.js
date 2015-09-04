@@ -99,21 +99,6 @@ angular.module( 'ngBoilerplate.show-garden', [
           $scope.gardenImages = [];
           // Backwards to put the updates in reverse chron order
           for(var i = upData.length-1; i > -1; i--){
-
-            // var photoUrl = "https://s3-us-west-1.amazonaws.com/foodscape/pictures/images/"
-
-            // var photo_id = upData[i].id;
-
-            // if(photo_id > 999){
-            //   if(photo_id > 999999){
-
-            //   } else{
-
-            //   }
-            // }
-            // photoUrl += photo_id;
-            // photoUrl += "/original/"
-            // photoUrl += upData[i].image_file_name;
             $scope.gardenImages.push(upData[i].image_url);
           }
         if ($scope.gardenImages.length == 0){
@@ -190,16 +175,16 @@ angular.module( 'ngBoilerplate.show-garden', [
   pullUpdates();
 
     // PULL PHOTOS
-  var pullPhotos = function(){
-    $http.get("/foodscapes/" + scape_id  + "/pictures/1.json").then(function(response){
-        console.log(" IMAGE RESPONSE ", response);
-        // var image = response.data;
+  // var pullPhotos = function(){
+  //   $http.get("/foodscapes/" + scape_id  + "/pictures/1.json").then(function(response){
+  //       console.log(" IMAGE RESPONSE ", response);
+  //       // var image = response.data;
 
-    }, function(response){
-      console.log("no updates");
-    });
-  } //end pull photos
-  pullPhotos();
+  //   }, function(response){
+  //     console.log("no updates");
+  //   });
+  // } //end pull photos
+  // pullPhotos();
 
 
 ////////// END GET REQUESTS TO PUT THINGS ON SHOW PAGE //////////////

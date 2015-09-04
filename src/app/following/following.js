@@ -37,6 +37,8 @@ angular.module( 'ngBoilerplate.following', [
 
   $scope.foodscapes = [];
   $scope.loadFoodscapeData = function(subscribedFoodscapes){
+    var subscribedFoodscapes = angular.fromJson(subscribedFoodscapes);
+    console.log("subscribedfoodscapes:: ", subscribedFoodscapes);
 
     var foodscapeData = angular.fromJson(subscribedFoodscapes.foodscapes);
     console.log(foodscapeData);
@@ -48,7 +50,7 @@ angular.module( 'ngBoilerplate.following', [
       "title": foodscapeData[i].name
       ,"location": foodscapeData[i].city
       ,"status": subscribedFoodscapes.hosts[i].name //this is the host name, not the status. Duh. Needs to be changed eventually after we don't need another get request to do it.
-      ,"img":"./assets/images/community-2.png"
+      ,"img":foodscapeData[i].pictures[0].image_url
       ,"url":"/UI/index.html#/foodscapes/" + scape_id
       , "scape_id": scape_id
       ,"host_email": subscribedFoodscapes.hosts[i].email
@@ -91,6 +93,8 @@ angular.module( 'ngBoilerplate.following', [
   $scope.messageRecipient = null;
 /////// This is for when you want to send a message
   $scope.message = function(scapeHost){
+    console.log(scapeHost);
+    $scope.hostName = scapeHost.status;
     $scope.messageRecipient = scapeHost;
 
     $scope.toggleModal();
@@ -113,6 +117,7 @@ angular.module( 'ngBoilerplate.following', [
   //////// This shows up to ask if you're sure you want to unfollow someone
   $scope.unfollow_id = null;
   $scope.unfollowConfirm = function(foodscape){
+    $scope.scapeName = scapeHost.title;
     console.log(foodscape.scape_id);
     $scope.toggleModal();
     $scope.unfollowConfirmBox = true;
