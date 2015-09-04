@@ -66,6 +66,15 @@ class UsersController < ApplicationController
     render json: {subscriptions: @subscriptions, hosts: @hosts, foodscapes: @foodscapes.to_json(:include => [:updates, :pictures])}
   end
 
+  # PATCH /users/:id/avatar
+  def update_avatar
+    if @avatar.update(avatar_params)
+      head :no_content
+    else
+      render json: @avatar.errors, status: :unprocessable_entity
+    end
+
+  end
   # ### Current User custom route ###
 
   # GET /the_current_user
@@ -84,5 +93,9 @@ class UsersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def user_params
       params.require(:user).permit(:name, :email, :password, :zip_code, :avatar)
+    end
+
+    def avatar_params
+      params.require(:user).permit(:avatar, :created_at, :updated_at)
     end
 end
