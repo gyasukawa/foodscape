@@ -99,21 +99,6 @@ angular.module( 'ngBoilerplate.show-garden', [
           $scope.gardenImages = [];
           // Backwards to put the updates in reverse chron order
           for(var i = upData.length-1; i > -1; i--){
-
-            // var photoUrl = "https://s3-us-west-1.amazonaws.com/foodscape/pictures/images/"
-
-            // var photo_id = upData[i].id;
-
-            // if(photo_id > 999){
-            //   if(photo_id > 999999){
-
-            //   } else{
-
-            //   }
-            // }
-            // photoUrl += photo_id;
-            // photoUrl += "/original/"
-            // photoUrl += upData[i].image_file_name;
             $scope.gardenImages.push(upData[i].image_url);
           }
         if ($scope.gardenImages.length == 0){
@@ -190,16 +175,16 @@ angular.module( 'ngBoilerplate.show-garden', [
   pullUpdates();
 
     // PULL PHOTOS
-  var pullPhotos = function(){
-    $http.get("/foodscapes/" + scape_id  + "/pictures/1.json").then(function(response){
-        console.log(" IMAGE RESPONSE ", response);
-        // var image = response.data;
+  // var pullPhotos = function(){
+  //   $http.get("/foodscapes/" + scape_id  + "/pictures/1.json").then(function(response){
+  //       console.log(" IMAGE RESPONSE ", response);
+  //       // var image = response.data;
 
-    }, function(response){
-      console.log("no updates");
-    });
-  } //end pull photos
-  pullPhotos();
+  //   }, function(response){
+  //     console.log("no updates");
+  //   });
+  // } //end pull photos
+  // pullPhotos();
 
 
 ////////// END GET REQUESTS TO PUT THINGS ON SHOW PAGE //////////////
@@ -318,14 +303,24 @@ $scope.edit = function(){
             //                 }
             //             ]
             //     }
-            //     ]
+            //     ] allxiecleary@gmail.com,grace.yasukawa@gmail.com,iring.ma@gmail.com
         }
     };
     console.log("PARAMS:: ", params);
     return params;
   } // end makeUpdateEmail function
 
-    var makeShareEmail = function(emails, message){
+  var makeShareEmail = function(emails, message){
+
+    var emailArray = emails.split(",");
+    console.log("email array, pre objectification: ", emailArray);
+    var emailParams = [];
+    for(var i = 0; i < emailArray.length; i++){
+      emailParams.push({"email" : emailArray[i]});
+    }
+
+    console.log("Here are the email addresses", emailParams);
+
     var userName = current_user.name;
     console.log("makeMessageEmail username:: ", userName);
     //
@@ -333,9 +328,9 @@ $scope.edit = function(){
     var params = {
         "message": {
             "from_email":"admin@myfoodscape.com",
-            "to":[{"email":"iring.ma@gmail.com"},{"email":"grace.yasukawa@gmail.com"},{"email":"allxiecleary@gmail.com"}], // This needs to be subscribers
-            "subject": "Message from " + userName+"!",
-            "html": "<h4>You have message from " + userName + ".</h4><p>" + message + "</p><br> You can reply using their email (for now): <a href='"+ current_user.email +"'>" + current_user.email + "</a></br>",
+            "to": emailParams, //hopefully what the user passed in.
+            "subject":  userName + " shared a foodscape with you!",
+            "html": "<h4>" + userName + " shared the foodscape " + $scope.scapeName + ".</h4><p>" + message + "</p><br> Check it out here: <a href='http://myfoodscape.com/UI/index.html#/foodscapes"+ scape_id + "'>" + $scope.scapeName + "</a></br>",
             "autotext": true,
             "track_opens": true,
             "track_clicks": true
@@ -480,6 +475,7 @@ $scope.edit = function(){
 
   $scope.shared = function(emails, message){
     if(emails){
+      console.log("emails in shared", emails);
       var messageParams = makeShareEmail(emails, message);
       sendTheMail(messageParams);
       //and then show the thank you box.

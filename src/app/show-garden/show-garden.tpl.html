@@ -21,8 +21,9 @@
       <div ng-show="shareInput" class="message-box">
         <h1>Share this foodscape!</h1>
         Enter email addresses separated by commas.
-        <textarea ng-model="shareEmails">Write email addresses here separated by commas.</textarea>
-        <textarea ng-model="shareMessage">Write a message here.</textarea>
+        <textarea class="emailEntry" ng-model="shareEmails">Write email addresses here separated by commas.</textarea>
+        Add a message.
+        <textarea class="shareMessage" ng-model="shareMessage"></textarea>
         <button ng-click="shared(shareEmails, shareMessage)" class="btn get-started-btn">Send</button>
       </div>
       <!-- This gets triggered when you click send for share -->
