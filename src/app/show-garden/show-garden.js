@@ -75,16 +75,15 @@ angular.module( 'ngBoilerplate.show-garden', [
         }
       }
     // }
-
-    // FIX THIS!!
     $scope.extraGoal = goalsAndNeeds[4] ? goalsAndNeeds[4].text : "";
 
-    //Get correct username for this!!
+
     $scope.username = response.data.host.name;
 
 
     // Pulls from our random veggie pix
-    $scope.avatarUrl = response.data.host.avatar_url; //change to current_user.avatar_file_name with any other S3 specifications
+    console.log("avatar url maybe ", response.data.host.avatar_url);
+    $scope.avatarUrl = (response.data.host.avatar_url != "/images/original/missing.png")? response.data.host.avatar_url : $scope.avatarUrl = defaultProfilePhotos[randomNum]; //change to current_user.avatar_file_name with any other S3 specifications
     $scope.scapeName = resData.name;
 
     $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"];
