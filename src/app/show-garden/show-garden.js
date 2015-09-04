@@ -87,7 +87,7 @@ angular.module( 'ngBoilerplate.show-garden', [
 
 
 
-  var pullPhotos = function(){
+  var pullPhotos = function(){ // take this out of the greater function
       $http.get("/foodscapes/" + scape_id + "/pictures.json").then(function(response){
           console.log("PICTURES RESPONSE ", response);
           var upData = response.data;
@@ -239,34 +239,34 @@ $scope.edit = function(){
             "html": "<h4>You have an update from " + userName + "'s Foodscape</h4><p>" + update + "</p><br>Please visit the <a href='http://myfoodscape.com'>foodscape</a> to see more details</br>",//I'm going to actually put the link to the foodscape in the email
             "autotext": true,
             "track_opens": true,
-            "track_clicks": true,
-            "merge_vars": [{
-                "rcpt": "iring.ma@gmail.com",
-                "vars": [
-                            {
-                            "name": "HOST",
-                            "content": "Mary"
-                            },
-                            {
-                            "name": "NAME",
-                            "content": "Irene"
-                            }
-                        ]
-                },
-                {
-                "rcpt": "grace.yasukawa@gmail.com",
-                "vars": [
-                            {
-                            "name": "HOST",
-                            "content": "Mary"
-                            },
-                            {
-                            "name": "NAME",
-                            "content": "Grace"
-                            }
-                        ]
-                }
-                ]
+            "track_clicks": true //,
+            // "merge_vars": [{
+            //     "rcpt": "iring.ma@gmail.com",
+            //     "vars": [
+            //                 {
+            //                 "name": "HOST",
+            //                 "content": "Mary"
+            //                 },
+            //                 {
+            //                 "name": "NAME",
+            //                 "content": "Irene"
+            //                 }
+            //             ]
+            //     },
+            //     {
+            //     "rcpt": "grace.yasukawa@gmail.com",
+            //     "vars": [
+            //                 {
+            //                 "name": "HOST",
+            //                 "content": "Mary"
+            //                 },
+            //                 {
+            //                 "name": "NAME",
+            //                 "content": "Grace"
+            //                 }
+            //             ]
+            //     }
+            //     ]
         }
     };
     console.log("PARAMS:: ", params);
