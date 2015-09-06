@@ -107,7 +107,7 @@ angular.module( 'ngBoilerplate', [
           method: "GET",
           data: {}
       }).success(function(data, status, headers, config) {
-          console.log("all foodscampes, maybe ", data);
+          // console.log("all foodscampes, maybe ", data);
           //This is going to have a dedicated route
           //called foodscapes/by_user/:userID or something soon
           //to avoid dumbass for loops.
