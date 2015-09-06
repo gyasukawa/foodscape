@@ -51,7 +51,7 @@ angular.module( 'ngBoilerplate.show-garden', [
     //AUTH STUFF
     // console.log("here is the current user", current_user);
     if (current_user){
-      console.log("The IDs, scape and then user ", resData.user_id , current_user.id);
+      // console.log("The IDs, scape and then user ", resData.user_id , current_user.id);
       if(current_user.id == resData.user_id){
         $scope.usersScape = true;
       } else if(usFoll){//current_user is following the foodscape
