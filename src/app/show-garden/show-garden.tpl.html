@@ -3,7 +3,7 @@
     <meta property="og:title" content="Foodscape" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://www.myfoodscape.com" />
-    <meta property="og:image" content="assets/images/Foodscape-DefaultPhoto-Cartoon.jpg" />
+    <meta property="og:image" content="{{avatarUrl}}" />
     <meta property="og:description" content="Checkout my foodscape!">
 <!-- end meta tags -->
 </head>
@@ -34,7 +34,7 @@
         Add a message.
         <textarea class="shareMessage" ng-model="shareMessage"></textarea>
         <button ng-click="shared(shareEmails, shareMessage)" class="btn get-started-btn">Send</button>
-        <div class="fb-share-button" data-href="www.google.com" data-layout="button"></div>
+        <div class="fb-share-button" data-href="" data-layout="button"></div>
       </div>
       <!-- This gets triggered when you click send for share -->
       <div ng-show="sentShare" class="thank-box">
@@ -100,7 +100,7 @@
             <!-- </div> -->
             <div id="showUsername"> {{username}}</div>
           </br>
-              <div class="fb-share-button" data-href="{{scapeURL}}" data-layout="button"></div>
+
             <!-- <img src="#" width="100px"> -->
             <!-- This button shows up when this is somebody else's page -->
             <button ng-show="showMessageButton" ng-click='message()' class="btn message-btn">Message</button>
