@@ -61,6 +61,6 @@
     "ng-file-upload": "^7.0.15"
   },
   "scripts": {
-    "postinstall": "./node_modules/bower/bin/bower install && ./node_modules/grunt-cli/bin/grunt build --force"
+    "postinstall": "./node_modules/bower/bin/bower install && ./node_modules/bower/bin/bower install angular-carousel#0.3.12 && ./node_modules/grunt-cli/bin/grunt build --force"
   }
 }
