@@ -4,14 +4,12 @@
   "devDependencies": {
     "angular": "~1.4.*",
     "bootstrap": "~3.1",
-    "angular-carousel": "~0.3.12",
     "angular-bootstrap": "~0.10.0",
     "angular-ui-router": "~0.2"
   },
   "dependencies": {
     "angular": "~1.4.*",
     "bootstrap": "~3.1",
-    "angular-carousel": "~0.3.12",
     "angular-bootstrap": "~0.10.0",
     "angular-ui-router": "~0.2",
     "angular-cookie": "~4.0.9",
