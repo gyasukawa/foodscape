@@ -89,7 +89,7 @@ angular.module( 'ngBoilerplate', [
       $scope.userLoggedOut = false;
 
       }, function(response){
-      console.log("nope from app.js current user ", response);
+      // console.log("nope from app.js current user ", response);
       $scope.userLoggedOut = true;
       $scope.userLoggedIn = false;
       $scope.current_user = null;
