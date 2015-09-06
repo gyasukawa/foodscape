@@ -1,6 +1,7 @@
 angular.module( 'ngBoilerplate.show-garden', [
   'ui.router',
-  'ui.bootstrap'
+  'ui.bootstrap',
+  'angular-carousel'
 ])
 
 .config(function config( $stateProvider ) {
