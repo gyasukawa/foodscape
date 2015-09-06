@@ -8,7 +8,7 @@ bundle exec rake db:setup
 npm install
 ```
 
-We've included a script that runs `bower install` and `grunt build --force` in our package.json file so that npm install should run all 3 commands. Currently the `--force` flag is required because `Gruntfile.js` appears to ignore options like `laxcommas` for unknown reasons.
+We've included a script that runs `bower install` and `grunt build --force` in our `package.json` file so that `npm install` should run all 3 commands. Currently the `--force` flag is required because `Gruntfile.js` appears to ignore options like `laxcommas` for unknown reasons.
 
 ## Configure AWS S3
 grab `AWS_SECRET_ACCESS_KEY` and `AWS_ACCESS_KEY_ID` from Heroku (heroku config -a scape-dev)
