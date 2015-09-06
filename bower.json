@@ -20,5 +20,8 @@
     "angular-cookies": "~1.4.*",
     "ng-file-upload": "~7.0.15",
     "ng-file-upload-shim": "~7.0.15"
+  },
+  "resolutions": {
+    "angular-carousel": "~0.3.12"
   }
 }
