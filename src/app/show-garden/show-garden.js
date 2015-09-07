@@ -20,6 +20,7 @@ angular.module( 'ngBoilerplate.show-garden', [
 
 .controller( 'ShowGardenCtrl', function ShowGardenCtrl( $scope, $http, $stateParams, $location, $window ) {
 
+
   var scape_id = $stateParams.scapeId; //grabs the scape that we want
 
   var current_user; // inits a current_user variable so that we can use it outside the http request
@@ -31,8 +32,10 @@ angular.module( 'ngBoilerplate.show-garden', [
   //This request gets the information for this specific foodscape
   $http.get('/foodscapes/' + scape_id + '.json').then(function(response){
 
+    $scope.hostEmail = response.data.host.email;
+
     var resData = angular.fromJson(response.data.foodscape);
-    // console.log("RESponse: ", response);
+    console.log("RESponse: ", response);
     // console.log("ResData: ", resData);
 
     for(var i = 0; i < response.data.followers.length; i++){
@@ -271,7 +274,7 @@ $scope.edit = function(){
     var params = {
         "message": {
             "from_email":"admin@myfoodscape.com",
-            "to":[{"email":"iring.ma@gmail.com"},{"email":"grace.yasukawa@gmail.com"},{"email":"allxiecleary@gmail.com"}], // This needs to be subscribers
+            "to":[{"email": $scope.hostEmail}], // This needs to be subscribers
             "subject": "Message from " + userName+"!",
             "html": "<h4>You have message from " + userName + ".</h4><p>" + message + "</p><br> You can reply using their email (for now): <a href='"+ current_user.email +"'>" + current_user.email + "</a></br>",
             "autotext": true,
