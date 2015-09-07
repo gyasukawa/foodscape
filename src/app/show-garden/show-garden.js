@@ -330,7 +330,7 @@ $scope.edit = function(){
             "from_email":"admin@myfoodscape.com",
             "to": emailParams, //hopefully what the user passed in.
             "subject":  userName + " shared a foodscape with you!",
-            "html": "<h4>" + userName + " shared the foodscape " + $scope.scapeName + ".</h4><p>" + message + "</p><br> Check it out here: <a href='http://myfoodscape.com/UI/index.html#/foodscapes"+ scape_id + "'>" + $scope.scapeName + "</a></br>",
+            "html": "<h4>" + userName + " shared the foodscape " + $scope.scapeName + ".</h4><p>" + message + "</p><br> Check it out here: <a href='http://myfoodscape.com/UI/index.html#/foodscapes/"+ scape_id + "'>" + $scope.scapeName + "</a></br>",
             "autotext": true,
             "track_opens": true,
             "track_clicks": true
