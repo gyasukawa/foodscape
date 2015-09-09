@@ -49,7 +49,7 @@ angular.module( 'ngBoilerplate.show-garden', [
     var usFoll = response.data.following;
     $scope.usersScape = false;
     $scope.userFollowing = false;
-    $scope.userNotFollowing = false;
+    $scope.userNotFollowing = true;
     $scope.showMessageButton = false;
     //AUTH STUFF
     // console.log("here is the current user", current_user);
@@ -418,10 +418,14 @@ $scope.edit = function(){
 
 ////// This shows up to confirm that you've followed someone
   $scope.follow = function (){
-    $scope.toggleModal();
-    $scope.showFollow = true;
-    $scope.userFollowing = true;
-    $scope.userNotFollowing = false;
+    if (current_user) {
+      $scope.toggleModal();
+      $scope.showFollow = true;
+      $scope.userFollowing = true;
+      $scope.userNotFollowing = false;
+    } else {
+      $window.location.href = '/UI/index.html#/login';
+    };
 
     // this is the data to send when following someone
     var data = {
