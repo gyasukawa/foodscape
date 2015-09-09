@@ -49,7 +49,7 @@ angular.module( 'ngBoilerplate.show-garden', [
     var usFoll = response.data.following;
     $scope.usersScape = false;
     $scope.userFollowing = false;
-    $scope.userNotFollowing = false;
+    $scope.userNotFollowing = true;
     $scope.showMessageButton = false;
     //AUTH STUFF
     // console.log("here is the current user", current_user);
@@ -57,12 +57,13 @@ angular.module( 'ngBoilerplate.show-garden', [
       // console.log("The IDs, scape and then user ", resData.user_id , current_user.id);
       if(current_user.id == resData.user_id){
         $scope.usersScape = true;
+        $scope.userNotFollowing = false;
       } else if(usFoll){//current_user is following the foodscape
         $scope.showMessageButton = true;
         $scope.userFollowing = true;
+        $scope.userNotFollowing = false;
       } else{
         $scope.showMessageButton = true;
-        $scope.userNotFollowing = true;
       }
     }
 
@@ -418,10 +419,14 @@ $scope.edit = function(){
 
 ////// This shows up to confirm that you've followed someone
   $scope.follow = function (){
-    $scope.toggleModal();
-    $scope.showFollow = true;
-    $scope.userFollowing = true;
-    $scope.userNotFollowing = false;
+    if (current_user) {
+      $scope.toggleModal();
+      $scope.showFollow = true;
+      $scope.userFollowing = true;
+      $scope.userNotFollowing = false;
+    } else {
+      $window.location.href = '/UI/index.html#/login';
+    };
 
     // this is the data to send when following someone
     var data = {
