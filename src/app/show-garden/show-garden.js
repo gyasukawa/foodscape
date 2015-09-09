@@ -57,12 +57,13 @@ angular.module( 'ngBoilerplate.show-garden', [
       // console.log("The IDs, scape and then user ", resData.user_id , current_user.id);
       if(current_user.id == resData.user_id){
         $scope.usersScape = true;
+        $scope.userNotFollowing = false;
       } else if(usFoll){//current_user is following the foodscape
         $scope.showMessageButton = true;
         $scope.userFollowing = true;
+        $scope.userNotFollowing = false;
       } else{
         $scope.showMessageButton = true;
-        $scope.userNotFollowing = true;
       }
     }
 
