@@ -76,7 +76,40 @@ $scope.error_message = false;
 
   };
 
+  // Mandrill Send Confirmation
+  var m = new mandrill.Mandrill('55zOecDadI2ajt-66mNoXQ');
+  var params = {
+    "template_name": "Thanks for signing up - send to Foodscape hosts after sign up",
+    "template_content": [
+        {
+            "name": "example name",
+            "content": "example content"
+        }
+    ],
 
+    "message": {
+        "from_email":"admin@myfoodscape.com",
+        "to":[{"email":"iring.ma@gmail.com"}],
+        "subject": "Subject line",
+        "text": "text in the message"
+    }
+  };
+
+  function sendTheMail() {
+    // Send the email!
+
+    m.messages.sendTemplate(params, function(res) {
+        log(res);
+    }, function(err) {
+        log(err);
+    });
+  }
+  // End Mandrill setup
+
+  $scope.send = function(){
+    // This is where the confirmation actually sent
+      sendTheMail();
+  };
 
 }]) // end controller
 
