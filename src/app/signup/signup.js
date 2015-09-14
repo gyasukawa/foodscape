@@ -49,7 +49,7 @@ $scope.error_message = false;
           $window.location.href = '/UI/index.html#/foodscape/new';
 
         }else{
-          $window.location.href = '/UI/index.html#/home';
+          $window.location.href = '/UI/index.html#/thank-you';
         }
         // $scope.$apply(function() { $location.path("/new-garden"); });
     }).error(function(data, status, headers, config) {
