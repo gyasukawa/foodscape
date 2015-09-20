@@ -3,7 +3,7 @@
 ## Installation
 
 ```sh
-bundle install
+bundle install (OSX Yosemite may require ARCHFLAGS="-arch x86_64" bundle install)
 bundle exec rake db:setup
 npm install
 ```
