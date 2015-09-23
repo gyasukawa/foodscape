@@ -11,6 +11,7 @@ angular.module( 'ngBoilerplate', [
   'ngBoilerplate.create-garden',
   'ngBoilerplate.edit-garden',
   'ngBoilerplate.following',
+  'ngBoilerplate.terms',
   'ui.router',
   'angular-carousel',
   'ngFileUpload'
