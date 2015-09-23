@@ -102,6 +102,8 @@ angular.module( 'ngBoilerplate', [
   }
 
   $scope.myFoodscape = function(){
+
+    console.log("clicked my foodscape");
     $http({
       url: "/foodscapes.json",
           method: "GET",
@@ -111,18 +113,21 @@ angular.module( 'ngBoilerplate', [
           //This is going to have a dedicated route
           //called foodscapes/by_user/:userID or something soon
           //to avoid dumbass for loops.
+
           if(data.length > 0){
+            console.log("daaata", data, data.length);
+
             for(var i = 0; i < data.length; i++){
               if (data[i].user_id === $scope.current_user.id){
-                var thisUserFoodscape = i;
-                $window.location.href = '/UI/index.html#/foodscapes/' + (i+1);
+                var thisUserFoodscape = data[i].id;
+                $window.location.href = '/UI/index.html#/foodscapes/' + thisUserFoodscape;
                 return i;
-              } else {
-                $window.location.href = '/UI/index.html#/foodscape/new';
-
               }
             }
+            //only gets here if there wasn't the correct id
+            $window.location.href = '/UI/index.html#/foodscape/new';
           } else {
+            console.log("rendering new cause the data doesn't exist");
             $window.location.href = '/UI/index.html#/foodscape/new';
           }
       }).error(function(data, status, headers, config) {
