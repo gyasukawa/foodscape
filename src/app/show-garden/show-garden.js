@@ -103,11 +103,17 @@ angular.module( 'ngBoilerplate.show-garden', [
           $scope.gardenImages = [];
           // Backwards to put the updates in reverse chron order
           for(var i = upData.length-1; i > -1; i--){
-            $scope.gardenImages.push(upData[i].image_url);
+            // $scope.gardenImages.push(upData[i].image_url);
+            $scope.gardenImages.push({"url" : upData[i].image_url,
+              "id": i });
+
           }
         if ($scope.gardenImages.length == 0){
           $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"];
         }
+        $scope.carouselIndex = 0;
+        $scope.slides = $scope.gardenImages;
+
 
         // $scope.updates = updateArray;
         // if(updateArray[0]){
@@ -117,6 +123,7 @@ angular.module( 'ngBoilerplate.show-garden', [
         // console.log("no photos");
         $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"];
       });
+
     }// end pull updates function
     pullPhotos();
 
