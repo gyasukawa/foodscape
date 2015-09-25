@@ -14,7 +14,7 @@ angular.module( 'ngBoilerplate.show-garden', [
         templateUrl: 'show-garden/show-garden.tpl.html'
       }
     },
-    data:{ pageTitle: 'Show Garden' }
+    data:{ pageTitle: 'Foodscape' }
   });
 })
 

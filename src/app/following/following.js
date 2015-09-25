@@ -13,7 +13,7 @@ angular.module( 'ngBoilerplate.following', [
         templateUrl: 'following/following.tpl.html'
       }
     },
-    data:{ pageTitle: 'Following' }
+    data:{ pageTitle: 'Subscriptions' }
   });
 
 })

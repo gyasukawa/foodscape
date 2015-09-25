@@ -13,7 +13,7 @@ angular.module( 'ngBoilerplate.edit-garden', [
         templateUrl: 'edit-garden/edit-garden.tpl.html'
       }
     },
-    data:{ pageTitle: 'Edit Garden' }
+    data:{ pageTitle: 'Edit Foodscape' }
   });
 })
 
