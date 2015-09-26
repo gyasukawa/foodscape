@@ -90,11 +90,27 @@ input, button, textarea {
       margin-top: 15px;
 
       .btn.get-started-btn {
+        margin-top: 0px;
         padding: 5px;
         border-width: 5px;
         width: 100%;
         background-color: #f5a623;
         border-color: #B57812;
+
+        a{
+          color: white;
+          text-decoration: none;
+        }
+
+        &:hover {
+          border-color: #a26c10;
+          background: #dc951f;
+          a{
+            color: white;
+            text-decoration: none;
+          }
+
+        }
       }
 
     }
@@ -169,6 +185,8 @@ input, button, textarea {
   .transition(all);
 
   &:hover {
+    border-bottom: 8px solid #cfc7ac;
+    background: #e7dec0;
 
   }
 
