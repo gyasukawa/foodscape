@@ -5,6 +5,6 @@ if Rails.env.development? or Rails.env.test?
   STRIPE_PUBLIC_KEY = 'pk_test_iSaMmOJAG3WTHIQRLshk9ekL'
 elsif Rails.env.production?
   # Grab the Stripe API Key from server config. Do not hardcode it here or commit it!
-  Stripe.api_key = Rails.ENV["STRIPE_SECRET_KEY"]
-  STRIPE_PUBLIC_KEY = Rails.ENV["STRIPE_PUBLIC_KEY"]
+  Stripe.api_key = ENV["STRIPE_SECRET_KEY"]
+  STRIPE_PUBLIC_KEY = ENV["STRIPE_PUBLIC_KEY"]
 end
