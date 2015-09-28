@@ -28,12 +28,19 @@
 
     <!-- compiled CSS -->
     <link rel="stylesheet" type="text/css" href="assets/ngbp-0.3.2.css" />
+    
+    <!-- Stripe payments stuff -->
     <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <script>
-      Stripe.setPublishableKey('pk_test_iSaMmOJAG3WTHIQRLshk9ekL'); // Public_Key for testing
-      //Stripe.setPublishableKey('pk_live_iZiRbGshdaU5qrNByzyRiIiD'); // Real public key (production)
-      console.log('Stripe:', Stripe);
-    </script>
+    <% if Rails.env.production? %>
+      <script>
+        Stripe.setPublishableKey('pk_live_iZiRbGshdaU5qrNByzyRiIiD'); // Real public key (production)
+      </script>
+    <% else %>
+      <script>
+        Stripe.setPublishableKey('pk_test_iSaMmOJAG3WTHIQRLshk9ekL'); // Public key for testing
+      </script>
+    <% end if %>
+
 
     <!-- compiled JavaScript -->
     <script type="text/javascript" src="vendor/angular/angular.js"></script>
