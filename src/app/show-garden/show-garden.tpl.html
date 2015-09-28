@@ -118,6 +118,7 @@
 
           <!-- These buttons show up when the user has not followed this person's page or is not logged in -->
           <button ng-show="userFollowing" class="btn get-started-btn" ng-click="unfollowConfirm()">Unfollow</button>
+          <button ng-show="userFollowing" ng-click="showPaymentModal()" class="btn get-started-btn">Join ($15/mo)</button>
           <!-- <button ng-hide="usersScape" class="btn message-btn">Share Profile</button> -->
 
           <!-- This button shows up when the user is following this person already...ask if there needs to be a share button here, too -->
@@ -125,7 +126,6 @@
 
           <!-- These buttons show up when this this is the user's page and they are logged in -->
           <button ng-click="shareScape()" class="btn get-started-btn">Share</button>
-          <button ng-click="showPaymentModal()" class="btn get-started-btn">Join ($15/mo)</button>
           <button ng-show="usersScape" ng-click="edit()" class="btn message-btn">Edit Foodscape</button>
         </div>
       </div>
