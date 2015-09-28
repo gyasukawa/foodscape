@@ -5,22 +5,28 @@ class ChargesController < ApplicationController
   def create
     
     @payment_amount_in_cents = params[:payment_amount_in_cents] # Amount IN CENTS, NOT DOLLARS
-    @stripe_token = params[:stripe_token]
+    @stripe_card_token = params[:stripe_token]
     @user_id = current_user.id
     @email = current_user.email
+    # For the MVP, we just assume that we should always use the $15/mo plan
+    @stripe_plan_id = 'garden-subscription-15'
 
     customer = Stripe::Customer.create(
       email: @email,
-      card:  @stripe_token
-      #plan:
+      source:  @stripe_card_token,
+      # card: @stripe_card_token,
+      plan:  @stripe_plan_id
     )
 
-    charge = Stripe::Charge.create(
-      :customer    => customer.id,
-      :amount      => @payment_amount_in_cents,
-      :description => "user_id: #{@user_id}",
-      :currency    => 'usd'
-    )
+    customer.subscriptions.create(plan: @stripe_plan_id)
+
+    # charge = Stripe::Charge.create(
+    #   :customer    => customer.id,
+    #   :plan        => @stripe_plan_id,
+    #   # :amount      => @payment_amount_in_cents,
+    #   :description => "user_id: #{@user_id}",
+    #   :currency    => 'usd'
+    # )
 
     render json: {success: "Payment was successfully processed!"}
 
