@@ -29,6 +29,19 @@
 
     <!-- compiled CSS -->
     <link rel="stylesheet" type="text/css" href="assets/ngbp-0.3.2.css" />
+    
+    <!-- Stripe payments stuff -->
+    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+    <% if Rails.env.production? %>
+      <script>
+        Stripe.setPublishableKey('pk_live_iZiRbGshdaU5qrNByzyRiIiD'); // Real public key (production)
+      </script>
+    <% else %>
+      <script>
+        Stripe.setPublishableKey('pk_test_iSaMmOJAG3WTHIQRLshk9ekL'); // Public key for testing
+      </script>
+    <% end if %>
+
 
     <!-- compiled JavaScript -->
     <script type="text/javascript" src="vendor/angular/angular.js"></script>
@@ -55,6 +68,7 @@
     <script type="text/javascript" src="https://mandrillapp.com/api/docs/js/mandrill.js"></script>
     <script src="vendor/ng-file-upload-shim/ng-file-upload-shim.min.js"></script> <!-- for no html5 browsers support -->
     <script src="vendor/ng-file-upload/ng-file-upload.min.js"></script>
+    <script src="vendor/angular-payments/lib/angular-payments.min.js"></script>
 
     <!-- <link href="/UI/vendor/angular-carousel/dist/angular-carousel.css" rel="stylesheet" type="text/css" /> -->
 

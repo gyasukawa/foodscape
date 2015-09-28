@@ -1,10 +1,11 @@
 angular.module( 'ngBoilerplate.show-garden', [
   'ui.router',
   'ui.bootstrap',
-  'angular-carousel'
+  'angular-carousel',
+  'angularPayments'
 ])
 
-.config(function config( $stateProvider ) {
+.config(function config( $stateProvider) {
   $stateProvider.state( 'show-garden', {
     // Going to need to mess with this URL in order to have the individual one to show.
     url: '/foodscapes/:scapeId',
@@ -35,7 +36,7 @@ angular.module( 'ngBoilerplate.show-garden', [
     $scope.hostEmail = response.data.host.email;
 
     var resData = angular.fromJson(response.data.foodscape);
-    console.log("RESponse: ", response);
+    console.log("Response: ", response);
     // console.log("ResData: ", resData);
 
     for(var i = 0; i < response.data.followers.length; i++){
@@ -499,6 +500,46 @@ $scope.edit = function(){
     }
   }
 
+  // Payment modal stuff ========================================================
+  $scope.showPaymentModal = function(){
+    $scope.toggleModal();
+    $scope.shouldShowPaymentForm = true;
+    // FIXIT - get the payment amount...
+    $scope.paymentAmountInDollars = 15.00;
+  }
+
+  $scope.getStripeToken = function(status, response) {
+    console.log('handling Stripe payment...');
+    if(response.error) {
+      console.log('Error!  There was an error processing your payment: ', response.error);
+      $window.alert('Error!  There was an error processing your payment: '+response.error);
+    } else {
+      console.log('Got Stripe token!');
+      // got stripe token, now store it.
+      $scope.stripeToken = response.id;
+      $scope.shouldShowPaymentForm = false; // Hide the credit card form
+      $scope.shouldShowPaymentConfirmation = true; // Show the payment confirmation form.
+    }
+  }
+
+  $scope.confirmStripePaymentAndCharge = function() {
+    var paymentAmountInCents = $scope.paymentAmountInDollars * 100;
+    data = {stripe_token: $scope.stripeToken, payment_amount_in_cents: paymentAmountInCents};
+    $http({
+          url: "/charges",
+          method: "POST",
+          data: data
+      }).success(function(data, status, headers, config) {
+          $scope.data = data;
+          $scope.shouldShowPaymentConfirmation = false; // Hide the confirmation form.
+          $scope.shouldShowPaymentThankYou = true; // Show the thank you form.
+      }).error(function(data, status, headers, config) {
+          console.log('There was an error submitting this request to the server!');
+          $scope.error_message = true;
+          $scope.status = status;
+      });
+  }
+
  // Lightbox stuff -- there is a custom directive for the lightbox in app.js
   $scope.modalShown = false;
   $scope.toggleModal = function() {
@@ -511,7 +552,12 @@ $scope.edit = function(){
     $scope.unfollowedMessage = false;
     $scope.shareInput = false;
     $scope.sentShare = false;
+    $scope.shouldShowPaymentForm = false; // Hide the credit card form
+    $scope.shouldShowPaymentConfirmation = false;
+    $scope.shouldShowPaymentThankYou = false;
   };
+
+
 
   //  End modals!
 

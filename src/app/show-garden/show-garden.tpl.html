@@ -47,7 +47,46 @@
         <button ng-click="toggleModal()" class="btn get-started-btn">Okay</button>
       </div>
 
-
+      <!-- This gets triggered when you click the payment button -->
+      <div ng-show="shouldShowPaymentForm" class="payment-box">
+        <div class="stripe-form-container">
+          <p class="lead text-center"> Submit your payment information </p>
+          <form class="stripe-payment-form form-inline" stripe-form="getStripeToken" name="stripeForm">
+            <!-- The payments-format and payments-validate directives below come from the angular-payments plugin-->
+              <div class="form-group" ng-class="{'has-success': stripeForm.card.$valid, 'has-error': stripeForm.card.$invalid}">
+                <label for="">Card number</label>
+                <input ng-model="number" placeholder="1234-1234-1234-1234" payments-format="card" payments-validate="card" class="form-control" name="card"/>
+              </div>
+            <div class="form-group" ng-class="{'has-success': stripeForm.expiry.$valid, 'has-error': stripeForm.expiry.$invalid}">
+              <label for="">Expiration</label>
+              <input ng-model="expiry" placeholder="01/2017" payments-format="expiry" payments-validate="expiry" class="form-control" name="expiry"/>
+            </div>
+            <div class="form-group" ng-class="{'has-success': stripeForm.cvc.$valid, 'has-error': stripeForm.cvc.$invalid}">
+              <label for="">CVC</label>
+              <input ng-model="cvc" placeholder="123" payments-format="cvc" payments-validate="cvc" class="form-control" name="cvc" ng-class="{'has-error': stripeForm.cvc.$invalid}"/>
+            </div>
+            <p class="text-center">
+              <button type="submit" class="btn btn-success">Submit</button>
+            </p>
+          </form>
+        </div>
+      </div>
+      <!-- Payments step 2.  We have the stripe token.  Now verify other stuff...-->
+      <div ng-show="shouldShowPaymentConfirmation" class="stripe-payment-confirmation-form-container">
+        <form class="form-inline stripe-payment-confirmation-form">
+          <p class="lead text-center">You want to charge ${{paymentAmountInDollars}} to your card, correct?</p>
+          <p class="text-center">
+            <button type="submit" class="btn btn-success" ng-click="confirmStripePaymentAndCharge()">Confirm Payment</button>
+          </p>
+        </form>
+      </div>
+      <!-- Payments step 3: thank you! -->
+      <div ng-show="shouldShowPaymentThankYou" class="stripe-payment-thank-you-container">
+        <p class="lead text-center"> Thank you! Your payment of ${{paymentAmountInDollars}} has been charged to your card. Now you can start enjoying delicious, fresh, and local produce!</p>
+        <p class="text-center">
+          <button class="btn btn-default" ng-click="toggleModal()">Close</button>
+        </p>
+      </div>
 
 
       <!-- This gets opened after a user follows somoene -->
@@ -86,6 +125,7 @@
 
           <!-- These buttons show up when this this is the user's page and they are logged in -->
           <button ng-click="shareScape()" class="btn get-started-btn">Share</button>
+          <button ng-click="showPaymentModal()" class="btn get-started-btn">Join ($15/mo)</button>
           <button ng-show="usersScape" ng-click="edit()" class="btn message-btn">Edit Foodscape</button>
         </div>
       </div>
@@ -170,7 +210,6 @@
 
                 <!-- This button shows up when this is someone else's profile -->
                 <button ng-show="showMessageButton" ng-click='message()' class="btn message-btn">Message</button>
-
 
                 <!-- This button shows up if the user follows this person -->
                 <button ng-show="userFollowing" ng-click="unfollowConfirm()" class="btn get-started-btn">Unfollow</button>

@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   get 'the_current_user' => 'users#the_current_user', as: :the_current_user
 
   get 'foodscapes/:foodscape_id/pictures/:id/url' => 'pictures#url', as: :url
+  post '/charges' => 'charges#create'
 
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :foodscapes do
