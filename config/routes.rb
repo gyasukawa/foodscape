@@ -28,6 +28,8 @@ Rails.application.routes.draw do
 
   get 'foodscapes/:foodscape_id/pictures/:id/url' => 'pictures#url', as: :url
 
+  post '/users/:id/janrain_token' => 'users#janrain_token', as: :janrain_token
+
   # Example resource route (maps HTTP verbs to controller actions automatically):
   resources :foodscapes do
     resources :updates
