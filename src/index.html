@@ -29,19 +29,20 @@
 
     <!-- compiled CSS -->
     <link rel="stylesheet" type="text/css" href="assets/ngbp-0.3.2.css" />
-    
-    <!-- Stripe payments stuff -->
-    <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-    <% if Rails.env.production? %>
-      <script>
-        Stripe.setPublishableKey('pk_live_iZiRbGshdaU5qrNByzyRiIiD'); // Real public key (production)
-      </script>
-    <% else %>
-      <script>
-        Stripe.setPublishableKey('pk_test_iSaMmOJAG3WTHIQRLshk9ekL'); // Public key for testing
-      </script>
-    <% end if %>
 
+    <!-- Stripe payments stuff -->
+    <script type="text/javascript" src="https://js.stripe.com/v2/">
+
+      var checkEnv = function() {
+        if ($window.location.hostname == 'scape-dev.herokuapp.com') {
+          Stripe.setPublishableKey('pk_live_iZiRbGshdaU5qrNByzyRiIiD'); // Real public key (production)
+        } else {
+          Stripe.setPublishableKey('pk_test_iSaMmOJAG3WTHIQRLshk9ekL'); // Public key for testing
+        }
+      };
+      checkEnv();
+
+    </script>
 
     <!-- compiled JavaScript -->
     <script type="text/javascript" src="vendor/angular/angular.js"></script>
