@@ -9,6 +9,9 @@ gem 'rack-mount', " ~> 0.7.2"
 # for update model emails
 gem 'mandrill-api'
 
+# For Stripe payments
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+
 # For photo upload
 gem "paperclip", "~> 4.3"
 gem "aws-sdk", '< 2.0'
