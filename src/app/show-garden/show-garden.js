@@ -1,3 +1,4 @@
+/*global $ */
 angular.module( 'ngBoilerplate.show-garden', [
   'ui.router',
   'ui.bootstrap',
@@ -103,14 +104,16 @@ angular.module( 'ngBoilerplate.show-garden', [
           // console.log("updates: ", upData);
           $scope.gardenImages = [];
           // Backwards to put the updates in reverse chron order
-          for(var i = upData.length-1; i > -1; i--){
+          for(var i = upData.length-1, eqPosition = 0; i > -1; i--, eqPosition++){
+            var widthBool = true;
             // $scope.gardenImages.push(upData[i].image_url);
             $scope.gardenImages.push({"url" : upData[i].image_url,
-              "id": i });
+              "id": i, "wide": widthBool });
 
           }
+
         if ($scope.gardenImages.length == 0){
-          $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"];
+          $scope.gardenImages = [{"url": "assets/images/Foodscape-DefaultPhoto-Cartoon.jpg", "wide" : true}];
         }
         $scope.carouselIndex = 0;
         $scope.slides = $scope.gardenImages;
@@ -125,8 +128,14 @@ angular.module( 'ngBoilerplate.show-garden', [
         $scope.gardenImages = ["assets/images/Foodscape-DefaultPhoto-Cartoon.jpg"];
       });
 
-    }// end pull updates function
-    pullPhotos();
+  }// end pull updates function
+  pullPhotos();
+
+  $scope.imgClass = function(image){
+    return gardenImages.wide;
+
+    // ng-class="{gardenImage.wide ? 'wide-image' : 'tall-image'}"
+  }
 
 
 
